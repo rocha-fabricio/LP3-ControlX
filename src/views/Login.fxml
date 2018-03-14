@@ -1,8 +1,21 @@
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.GridPane?>
+<?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<GridPane fx:controller="controls.Login"
-          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
-</GridPane>
+<?import javafx.scene.effect.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="224.0" prefWidth="315.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controls.Login">
+   <children>
+      <Pane layoutX="5.0" layoutY="3.0" prefHeight="217.0" prefWidth="306.0" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="3.0">
+         <children>
+            <PasswordField layoutX="68.0" layoutY="112.0" />
+            <Label id="lbSenha" layoutX="134.0" layoutY="97.0" text="Senha" />
+            <Label id="lbLogin" layoutX="135.0" layoutY="28.0" text="Login" />
+            <TextField id="txLogin" layoutX="68.0" layoutY="43.0" />
+            <Button id="btEntrar" layoutX="126.0" layoutY="165.0" mnemonicParsing="false" text="Entrar" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
