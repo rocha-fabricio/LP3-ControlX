@@ -1,11 +1,12 @@
 package models;
 
 import java.util.List;
+import java.util.ArrayList;
 
 public class Categoria {
     private String nome;
     private int id;
-    //private List<Produto> produtos = new List<Produto>(); Lista é assim mermo?
+    private List<Produto> produtos = new ArrayList<Produto>(); // Lista é assim mermo?
 
     //GET and SET
     //-------x----------------x--------
@@ -23,14 +24,12 @@ public class Categoria {
         this.id = id;
     }
     //-------x----------------x--------
-    /*
     public List<Produto> getProdutos(){
         return this.produtos;
     }
     public void setProdutos(List<Produto> produtos){
         this.produtos = produtos;
     }
-    */
     //-------x----------------x--------
     //Construtores
     //-------x----------------x--------

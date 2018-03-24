@@ -57,7 +57,7 @@ public class Produto {
     //-------x----------------x--------
     /*
     public String getPicPath(){
-        return this.PicPath;
+        return this.picPath;
     }
     public void setPicPath(String picPath){
         this.picPath = picPath;
