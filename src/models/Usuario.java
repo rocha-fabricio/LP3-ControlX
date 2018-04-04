@@ -17,7 +17,7 @@ public class Usuario {
     private String bairro;
     private String cidade;
     private String estado;
-    private String cargo;
+    //private String cargo;
     private String login;
     private String senha;
     //private String picPath;
@@ -122,12 +122,12 @@ public class Usuario {
         this.estado = estado;
     }
     //-------x----------------x--------
-    public String getCargo(){
+    /*public String getCargo(){
         return this.cargo;
     }
     public void setCargo(String cargo){
         this.cargo = cargo;
-    }
+    }*/
     //-------x----------------x--------
     public String getLogin(){
         return this.login;
@@ -154,7 +154,7 @@ public class Usuario {
     //-------x----------------x--------
     //Construtores
     //-------x----------------x--------
-    public Usuario(int id, String nome, long cpf, char sexo, Date dataNasc, String telefone1, String telefone2, long cep, String num, String rua, String comp, String bairro, String cidade, String estado, String cargo, String login, String senha)
+    public Usuario(int id, String nome, long cpf, char sexo, Date dataNasc, String telefone1, String telefone2, long cep, String num, String rua, String comp, String bairro, String cidade, String estado, String login, String senha)
     {
         this.id = id;
         this.nome = nome;
@@ -170,12 +170,8 @@ public class Usuario {
         this.bairro = bairro;
         this.cidade = cidade;
         this.estado = estado;
-        this.cargo = cargo;
         this.login = login;
         this.senha = senha;
     }
     //-------x----------------x--------
-    public Usuario(){
-
-    }
 }
