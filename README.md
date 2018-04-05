@@ -13,12 +13,16 @@ classe PRODUTO
     double qtd;
     String tipoUn;
     double estoqueMin;
-//    
+    
+//   
+
 classe CATEGORIA    
     String nome;
     int id;
     List<Produto> produtos = new ArrayList<Produto>();
+  
 //
+
 classe FORNECEDOR
     String nome;
     int id;
@@ -32,7 +36,9 @@ classe FORNECEDOR
     String bairro;
     String cidade;
     String estado;
+    
 //    
+
  classe COMPRA
     int id;
     String usuario;
@@ -42,14 +48,18 @@ classe FORNECEDOR
     Date dataCompra;   //LocalDateTime
     Date dataEntrega;
     Date dataFinal;
+  
  //
+ 
  classe VENDA
     int id;
     String usuario;
     double valor;
     List<Produto> produtos = new ArrayList<Produto>();
     Date data;
+  
  //
+ 
  classe USUARIO **CRIAR CLASSES DOS CARGOS HERDANDO A CLASSE USUARIO**
     int id;
     String nome;
@@ -67,4 +77,5 @@ classe FORNECEDOR
     String estado;
     String login;
     String senha;
+    
   //
