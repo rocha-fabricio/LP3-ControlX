@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Categoria {
     private String nome;
     private int id;
-    private List<Produto> produtos = new ArrayList<Produto>(); // Lista é assim mermo?
+    private List<Produto> produtos = new ArrayList<Produto>();
 
     //GET and SET
     //-------x----------------x--------

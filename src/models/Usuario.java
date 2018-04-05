@@ -17,7 +17,6 @@ public class Usuario {
     private String bairro;
     private String cidade;
     private String estado;
-    //private String cargo;
     private String login;
     private String senha;
     //private String picPath;
