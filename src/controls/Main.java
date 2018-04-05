@@ -1,4 +1,4 @@
-package views;
+package controls;
 
 import DAO.ProdutoDAO;
 import javafx.application.Application;
@@ -39,7 +39,7 @@ public class Main extends Application {
                 System.out.println("-----x-----x-----x-----x-----x-----x-----x-----x-----");
             System.out.println("\t\t\t\t\tControlX v1.1");
             System.out.print("------x-----x-----x----- MENU -----x-----x-----x-----");
-            System.out.print("\n1 - Adicionar Fornecedor\t2 - Adicionar Categoria" +
+            System.out.print("\n1 - Adicionar Fornecedor\t2 - Adicionar Categoria de Produto" +
                     "\n3 - Adicionar Produto\n-----x-----x-----x-----x-----x-----x-----x-----x-----\n4 - Listar Fornecedores" +
                     "\t5 - Listar Categorias\n6 - Listar Produtos");
             System.out.print("\n-----x-----x-----x-----x-----x-----x-----x-----x-----\n0 - Sair" +
