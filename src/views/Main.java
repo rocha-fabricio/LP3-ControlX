@@ -1,5 +1,6 @@
 package views;
 
+import DAO.ProdutoDAO;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -8,6 +9,9 @@ import javafx.stage.Stage;
 import models.Categoria;
 import models.Fornecedor;
 import models.Produto;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import javax.swing.*;
@@ -15,6 +19,8 @@ import javax.swing.*;
 public class Main extends Application {
     static int idForn = 0;
     static int idCat = 0;
+    static int idProd = 0;
+    static ProdutoDAO prodDAO = new DAO.ProdutoDAO();
     @Override
     public void start(Stage primaryStage) throws Exception{
         /*
@@ -25,15 +31,23 @@ public class Main extends Application {
         primaryStage.show();
         */
 
-        System.out.println("\t\t ControlX v1.1");
-        System.out.println("\t\t MENU");
-        System.out.print("\n1 - Adicionar Fornecedor\t2 - Adicionar Categoria" +
-                "\n3 - Adicionar Produto");
-        System.out.print("\nSELECAO: ");
-        Scanner scan = new Scanner(System.in);
-        int select = scan.nextInt();
+
         boolean sair = true;
         while(sair) {
+
+            for (int i = 0; i < 5; ++i)
+                System.out.println("-----x-----x-----x-----x-----x-----x-----x-----x-----");
+            System.out.println("\t\t\t\t\tControlX v1.1");
+            System.out.print("------x-----x-----x----- MENU -----x-----x-----x-----");
+            System.out.print("\n1 - Adicionar Fornecedor\t2 - Adicionar Categoria" +
+                    "\n3 - Adicionar Produto\n-----x-----x-----x-----x-----x-----x-----x-----x-----\n4 - Listar Fornecedores" +
+                    "\t5 - Listar Categorias\n6 - Listar Produtos");
+            System.out.print("\n-----x-----x-----x-----x-----x-----x-----x-----x-----\n0 - Sair" +
+                    "\n   -----x-----x-----CONTROLX v1.0-----x-----x-----");
+            System.out.print("\nSELECAO: ");
+            Scanner scan = new Scanner(System.in);
+            int select = scan.nextInt();
+
             switch (select) {
                 case 0:
                     sair = false;
@@ -56,26 +70,56 @@ public class Main extends Application {
                     break;
                 case 2:         //ADD CATEGORIA
                     Categoria c1 = new Categoria();
+                    System.out.print("-----* ADICIONAR CATEGORIA *-----");
                     c1.setId(idCat++);
                     System.out.print("\nID:" + c1.getId() + "\n");
 
                     System.out.print("Nome: ");
                     c1.setNome(scan.next());
                     break;
+                case 3:         //ADD PRODUTO
+                    Produto p1 = new Produto();
+                    System.out.print("-----* ADICIONAR PRODUTO *-----");
+                    p1.setId(idProd++);
+                    System.out.print("\nID:" + p1.getId() + "\n");
+
+                    System.out.print("Nome: ");
+                    p1.setNome(scan.next());
+
+                    System.out.print("Preco: ");
+                    p1.setPreco(scan.nextDouble());
+
+                    System.out.print("Quantidade: ");
+                    p1.setQtd(scan.nextDouble());
+
+                    System.out.print("Tipo Un: ");
+                    p1.setTipoUn(scan.next());
+
+                    System.out.print("Estoque Minimo: ");
+                    p1.setEstoqueMin(scan.nextDouble());
+
+
+                    prodDAO.add(p1);
+                    //p1.setForn(f);
+                    //p1.setCat(c);
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    break;
+                case 6:
+                    List<Produto> prods = prodDAO.listAll();
+                    for(Produto p : prods) {
+                        System.out.println("ID: " + p.getId() +  " || Nome: " + p.getNome() + " || R$" + p.getPreco() + " || " + p.getQtd() + " " + p.getTipoUn() + " || Estoque Min: " + p.getEstoqueMin());
+                    }
+
+                    System.in.read();
+                    break;
+                default:
+                    break;
             }
         }
-
-        Categoria c1 = new Categoria();
-
-
-        Fornecedor f1 = new Fornecedor();
-
-        Produto p1 = new Produto();
-        p1.setNome("Yakult");
-        p1.setPreco(10.99);
-        p1.setId(1);
-        p1.setCat(c1);
-
+        System.exit(0);
     }
 
 
