@@ -1,4 +1,4 @@
-# LP3-ControlX
+# LP3-ControlX Java
 
 Carlos Silva - Fabricio Rocha - Gustavo Nunes
 
