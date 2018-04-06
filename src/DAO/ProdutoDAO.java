@@ -14,7 +14,7 @@ public class ProdutoDAO {
     public void up(Produto p){
 
     }
-     public List<Produto> listAll() { ;
+     public List<Produto> listAll() {
          return prods;
     }
     public void del(Produto p){   // ou pelo id, public void del(int id)
