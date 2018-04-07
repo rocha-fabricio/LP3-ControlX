@@ -1,6 +1,9 @@
 package controls;
 
+import DAO.CategoriaDAO;
+import DAO.FornecedorDAO;
 import DAO.ProdutoDAO;
+import DAO.UsuarioDAO;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -20,7 +23,12 @@ public class Main extends Application {
     static int idForn = 0;
     static int idCat = 0;
     static int idProd = 0;
+
     static ProdutoDAO prodDAO = new DAO.ProdutoDAO();
+    static CategoriaDAO catDAO = new DAO.CategoriaDAO();
+    static FornecedorDAO fornDAO = new DAO.FornecedorDAO();
+    static UsuarioDAO userDAO = new DAO.UsuarioDAO();
+
     @Override
     public void start(Stage primaryStage) throws Exception{
         /*
@@ -39,8 +47,10 @@ public class Main extends Application {
                 System.out.println("-----x-----x-----x-----x-----x-----x-----x-----x-----");
             System.out.println("\t\t\t\t\tControlX v1.1");
             System.out.print("------x-----x-----x----- MENU -----x-----x-----x-----");
-            System.out.print("\n1 - Adicionar Fornecedor\t2 - Adicionar Categoria de Produto" +
-                    "\n3 - Adicionar Produto\n-----x-----x-----x-----x-----x-----x-----x-----x-----\n4 - Listar Fornecedores" +
+            System.out.print("\n1 - Adicionar Fornecedor\t" +
+                    "2 - Adicionar Categoria de Produto" +
+                    "\n3 - Adicionar Produto\n-----x-----x-----x-----x-----x-----x-----x-----x-----\n" +
+                    "4 - Listar Fornecedores" +
                     "\t5 - Listar Categorias\n6 - Listar Produtos");
             System.out.print("\n-----x-----x-----x-----x-----x-----x-----x-----x-----\n0 - Sair" +
                     "\n   -----x-----x-----CONTROLX v1.0-----x-----x-----");
@@ -67,6 +77,8 @@ public class Main extends Application {
                     System.out.print("Cidade: ");
                     f1.setCidade(scan.next());
                     //IMPLEMENTAR O RESTO DEPOIS
+
+                    fornDAO.add(f1);
                     break;
                 case 2:         //ADD CATEGORIA
                     Categoria c1 = new Categoria();
@@ -76,6 +88,8 @@ public class Main extends Application {
 
                     System.out.print("Nome: ");
                     c1.setNome(scan.next());
+
+                    catDAO.add(c1);
                     break;
                 case 3:         //ADD PRODUTO
                     Produto p1 = new Produto();
@@ -98,20 +112,30 @@ public class Main extends Application {
                     System.out.print("Estoque Minimo: ");
                     p1.setEstoqueMin(scan.nextDouble());
 
+                    fornDAO.listAll();
+                    System.out.println("Selecione o id do Fornecedor:");
+                    int id = scan.nextInt();
+                    p1.setForn(fornDAO.select(id));
+
+                    catDAO.listAll();
+                    System.out.println("Selecione o id da categoria:");
+                    id = scan.nextInt();
+                    p1.setCat(catDAO.select(id));
 
                     prodDAO.add(p1);
-                    //p1.setForn(f);
-                    //p1.setCat(c);
                     break;
                 case 4:
+                    fornDAO.listAll();
+
+                    System.in.read();
                     break;
                 case 5:
+                    catDAO.listAll();
+
+                    System.in.read();
                     break;
                 case 6:
-                    List<Produto> prods = prodDAO.listAll();
-                    for(Produto p : prods) {
-                        System.out.println("ID: " + p.getId() +  " || Nome: " + p.getNome() + " || R$" + p.getPreco() + " || " + p.getQtd() + " " + p.getTipoUn() + " || Estoque Min: " + p.getEstoqueMin());
-                    }
+                    prodDAO.listAll();
 
                     System.in.read();
                     break;

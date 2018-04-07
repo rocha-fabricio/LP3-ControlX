@@ -9,7 +9,9 @@ public class VenderDAO {
     static List<Venda> vendas = new ArrayList<Venda>();
 
     public void add(Venda v){
+
         vendas.add(v);
+
     }
     public void up(Venda v){
 
