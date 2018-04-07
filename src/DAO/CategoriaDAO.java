@@ -12,13 +12,13 @@ public class CategoriaDAO {
     public void add(Categoria c){
         cats.add(c);
     }
-    public void up(Produto c){
-
+    public void up(Categoria c){
+        cats.set(c.getId(), c);
     }
     public List<Categoria> listAll() {
         return cats;
     }
     public void del(Categoria c){   // ou pelo id, public void del(int id)
-
+        cats.remove(c.getId());
     }
 }

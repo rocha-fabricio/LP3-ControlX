@@ -12,12 +12,13 @@ public class ProdutoDAO {
         prods.add(p);
     }
     public void up(Produto p){
-
+        prods.set(p.getId(), p);
     }
      public List<Produto> listAll() {
-         return prods;
+
+        return prods;
     }
     public void del(Produto p){   // ou pelo id, public void del(int id)
-
+        prods.remove(p.getId());
     }
 }
