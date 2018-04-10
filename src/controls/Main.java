@@ -1,19 +1,14 @@
 package controls;
 
-import DAO.CategoriaDAO;
-import DAO.FornecedorDAO;
-import DAO.ProdutoDAO;
-import DAO.UsuarioDAO;
+import DAO.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import models.Categoria;
-import models.Compra;
-import models.Fornecedor;
-import models.Produto;
+import models.*;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -29,6 +24,8 @@ public class Main extends Application {
     static CategoriaDAO catDAO = new DAO.CategoriaDAO();
     static FornecedorDAO fornDAO = new DAO.FornecedorDAO();
     static UsuarioDAO userDAO = new DAO.UsuarioDAO();
+    static ComprarDAO compraDAO = new DAO.ComprarDAO();
+    static VenderDAO vendaDAO = new DAO.VenderDAO();
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -144,25 +141,45 @@ public class Main extends Application {
                     System.in.read();
                     break;
                 case 7: //Vender
+                    
+                    ArrayList<Produto> produtosv = new ArrayList<Produto>();
+                    Venda venda = new Venda();
+                    Produto prodv = new Produto();
                     prodDAO.listAll();
-
                     System.in.read();
+
+                    System.out.println("Digite o id do produto que deseja vender: ");
+                    for(int i = 1; i != 0; ){
+                        prodv.setId(scan.nextInt());
+                        prodDAO.read(prodv);
+                        produtosv.add(prodv);
+                        System.out.println("Para adicionar mais produtos digite 1, se ja terminou de adiconar digite 0");
+                        i = scan.nextInt();
+                    }
+
+                    venda.setProdutos(produtosv);
+                    vendaDAO.vender(venda);
+                    System.out.println("Produto(s) comprado(s) com sucesso!");
+                    System.in.read();
+
                     break;
                 case 8: //Comprar
-
+                    ArrayList<Produto> produtosc = new ArrayList<Produto>();
                     Compra compra = new Compra();
-                    Produto prod = new Produto();
+                    Produto prodc = new Produto();
                     prodDAO.listAll();
                     System.in.read();
 
                     System.out.println("Digite o id do produto que deseja Comprar estoque:");
                     for(int i = 1; i != 0; ) {
-                        prod.setId(scan.nextInt());
-                        prodDAO.read(prod);
-                        compra.setProdutos((List<Produto>) prod);
+                        prodc.setId(scan.nextInt());
+                        prodDAO.read(prodc);
+                        produtosc.add(prodc);
                         System.out.println("Para adicionar mais produtos digite 1, se ja terminou de adiconar digite 0");
                         i = scan.nextInt();
                     }
+                    compra.setProdutos(produtosc);
+                    compraDAO.comprar(compra);
                     System.out.println("Produto(s) comprado(s) com sucesso!");
                     System.in.read();
 

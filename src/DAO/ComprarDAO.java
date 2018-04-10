@@ -8,19 +8,21 @@ import java.util.List;
 
 public class ComprarDAO {
     static List<Compra> compras = new ArrayList<Compra>();
-    static List<Produto> produtos = new ArrayList<Produto>();
+    static List<Produto> prods = new ArrayList<Produto>();
 
     public void comprar(Compra c){
-        compras.add(c);
-
+        double total = 0;
         for(Produto p2 : c.getProdutos()) {
-            for (Produto p : produtos) {
+            total += p2.getPreco();
+            for (Produto p : prods) {
                 if(p.getId() == p2.getId()) {
                     p.setQtd(p.getQtd() + p2.getQtd());
                     break;
                 }
             }
         }
+        c.setValor(total);
+        compras.add(c);
     }
     public void read(Compra c){
 
