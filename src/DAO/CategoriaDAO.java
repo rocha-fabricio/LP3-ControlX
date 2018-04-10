@@ -26,7 +26,7 @@ public class CategoriaDAO {
         cats.remove(c.getId());
     }
 
-    public Categoria select(int id) {
+    public Categoria read(int id) {
         Categoria cat = new Categoria();
         cat.setId(id);
         for (Categoria c : cats) {

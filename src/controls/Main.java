@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import models.Categoria;
+import models.Compra;
 import models.Fornecedor;
 import models.Produto;
 
@@ -52,8 +53,11 @@ public class Main extends Application {
                     "\n3 - Adicionar Produto\n-----x-----x-----x-----x-----x-----x-----x-----x-----\n" +
                     "4 - Listar Fornecedores" +
                     "\t5 - Listar Categorias\n6 - Listar Produtos");
+            System.out.print("\n-----x-----x-----x-----x-----x-----x-----x-----x-----\n" +
+                    "7 - Vender" +
+                    "\t8 - Comprar");
             System.out.print("\n-----x-----x-----x-----x-----x-----x-----x-----x-----\n0 - Sair" +
-                    "\n   -----x-----x-----CONTROLX v1.0-----x-----x-----");
+                    "\n-----x-----x-----CONTROLX v1.0-----x-----x-----");
             System.out.print("\nSELECAO: ");
             Scanner scan = new Scanner(System.in);
             int select = scan.nextInt();
@@ -120,7 +124,7 @@ public class Main extends Application {
                     catDAO.listAll();
                     System.out.println("Selecione o id da categoria:");
                     id = scan.nextInt();
-                    p1.setCat(catDAO.select(id));
+                    p1.setCat(catDAO.read(id));
 
                     prodDAO.add(p1);
                     break;
@@ -138,6 +142,30 @@ public class Main extends Application {
                     prodDAO.listAll();
 
                     System.in.read();
+                    break;
+                case 7: //Vender
+                    prodDAO.listAll();
+
+                    System.in.read();
+                    break;
+                case 8: //Comprar
+
+                    Compra compra = new Compra();
+                    Produto prod = new Produto();
+                    prodDAO.listAll();
+                    System.in.read();
+
+                    System.out.println("Digite o id do produto que deseja Comprar estoque:");
+                    for(int i = 1; i != 0; ) {
+                        prod.setId(scan.nextInt());
+                        prodDAO.read(prod);
+                        compra.setProdutos((List<Produto>) prod);
+                        System.out.println("Para adicionar mais produtos digite 1, se ja terminou de adiconar digite 0");
+                        i = scan.nextInt();
+                    }
+                    System.out.println("Produto(s) comprado(s) com sucesso!");
+                    System.in.read();
+
                     break;
                 default:
                     break;
