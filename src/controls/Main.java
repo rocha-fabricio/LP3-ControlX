@@ -141,7 +141,7 @@ public class Main extends Application {
                     System.in.read();
                     break;
                 case 7: //Vender
-                    
+
                     ArrayList<Produto> produtosv = new ArrayList<Produto>();
                     Venda venda = new Venda();
                     Produto prodv = new Produto();
