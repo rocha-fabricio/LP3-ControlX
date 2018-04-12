@@ -146,11 +146,7 @@ public class Main extends Application {
                         System.out.print("\nID: ");
                         Produto prodv = prodDAO.read(scan.nextInt());
                         System.out.print("\nQTD de VENDA: ");
-                        double qtdVenda = scan.nextDouble();
-                        double qtdEstoque = prodv.getQtd();
-                        prodv.setQtd((qtdEstoque - qtdVenda));
-                        prodDAO.up(prodv);
-                        prodv.setQtd(qtdVenda);
+                        prodv.setQtd(scan.nextDouble());
                         produtosv.add(prodv);
                         System.out.println("Para vender mais produtos digite '1', para finalizar digite '0'");
                         i = scan.nextInt();
@@ -173,6 +169,8 @@ public class Main extends Application {
                     for(int j = 1; j != 0; ) {
                         prodc.setId(scan.nextInt());
                         prodDAO.read(prodc);
+                        System.out.println("Digite a quantidade:");
+                        prodc.setQtd(scan.nextInt());
                         produtosc.add(prodc);
                         System.out.println("Para adicionar mais produtos digite 1, se ja terminou de adiconar digite 0");
                         j = scan.nextInt();

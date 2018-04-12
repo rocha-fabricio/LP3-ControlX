@@ -8,19 +8,18 @@ import java.util.List;
 
 public class VendaDAO {
     static List<Venda> vendas = new ArrayList<Venda>();
-    //static List<Produto> prods = new ArrayList<Produto>();
+    static List<Produto> prods = ProdutoDAO.prods;
 
     public void vender(Venda v){
         double total = 0;
         for(Produto p : v.getProdutos()) {
             total += (p.getPreco() * p.getQtd());
             ProdutoDAO prodDAO = new ProdutoDAO();
-            /*for (Produto p : prods) {
+            for (Produto p2 : prods) {
                 if(p.getId() == p2.getId()) {
                     p.setQtd(p.getQtd() - p2.getQtd());
-                    break;
                 }
-            }*/
+            }
         }
         v.setValor(total);
         vendas.add(v);
