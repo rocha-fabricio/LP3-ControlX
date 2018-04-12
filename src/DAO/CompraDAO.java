@@ -6,7 +6,7 @@ import models.Produto;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ComprarDAO {
+public class CompraDAO {
     static List<Compra> compras = new ArrayList<Compra>();
     static List<Produto> prods = new ArrayList<Produto>();
 

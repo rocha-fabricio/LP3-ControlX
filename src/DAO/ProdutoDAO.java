@@ -14,17 +14,27 @@ public class ProdutoDAO {
         prods.add(p);
     }
 
-    public void up(Produto p) {
-        prods.set(p.getId(), p);
+    public void up(Produto pr) {
+        //prods.set(p.getId(), p);
+        for(Produto p : prods){
+            if(p.getId() == pr.getId()){
+                p.setQtd(pr.getQtd());
+                p.setEstoqueMin(pr.getEstoqueMin());
+                p.setForn(pr.getForn());
+                p.setTipoUn(pr.getTipoUn());
+                p.setCat(pr.getCat());
+                p.setNome(pr.getNome());
+                p.setPreco(pr.getPreco());
+            }
+        }
     }
 
-    public List<Produto> listAll() {
+    public void listAll() {
         for (Produto p : prods) {
             Fornecedor forn = p.getForn();
             Categoria cat = p.getCat();
             System.out.println("ID: " + p.getId() + " || Nome: " + p.getNome() + " || R$" + p.getPreco() + " || " + p.getQtd() + " " + p.getTipoUn() + " || Estoque Min: " + p.getEstoqueMin() + " || Fornecedor: " + forn.getNome() + " || Categoria: " + cat.getNome());
         }
-        return prods;
     }
 
     public void del(Produto p) {   // ou pelo id, public void del(int id)
@@ -39,5 +49,15 @@ public class ProdutoDAO {
             }
         }
         return p;
+    }
+
+    public Produto read(int id) {
+        for (Produto p : prods) {
+            if (p.getId() == id) {
+                return p;
+            }
+            return p;
+        }
+        return null;
     }
 }

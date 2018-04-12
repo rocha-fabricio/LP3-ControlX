@@ -9,7 +9,7 @@ public class Venda {
     private String usuario;
     private double valor;
     private List<Produto> produtos = new ArrayList<Produto>();
-    private Date data;
+    private Date data = new Date();
 
     //GET and SET
     //-------x----------------x--------

@@ -16,11 +16,12 @@ public class CategoriaDAO {
     public void up(Categoria c){
         cats.set(c.getId(), c);
     }
-    public List<Categoria> listAll() {
+
+
+    public void listAll() {
         for(Categoria c : cats){
-            System.out.println("ID: " + c.getId() + " || Nome: " + c.getNome());
+            System.out.println("ID: " + c.getId() + " || Categoria: " + c.getNome());
         }
-        return cats;
     }
     public void del(Categoria c){   // ou pelo id, public void del(int id)
         cats.remove(c.getId());

@@ -16,11 +16,10 @@ public class FornecedorDAO {
         forns.set(f.getId(), f);
     }
 
-    public List<Fornecedor> listAll() {
+    public void listAll() {
         for(Fornecedor f : forns){
-            System.out.println("ID: " + f.getId() + " || Nome: " + f.getNome());
+            System.out.println("ID: " + f.getId() + " || Fornecedor: " + f.getNome());
         }
-        return forns;
     }
 
     public void del(Fornecedor f) {   // ou pelo id, public void del(int id)
