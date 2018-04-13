@@ -48,7 +48,7 @@ public class ProdutoDAO {
                 return p;
             }
         }
-        return p;
+        return null;
     }
 
     public Produto read(int id) {
@@ -56,7 +56,6 @@ public class ProdutoDAO {
             if (p.getId() == id) {
                 return p;
             }
-            return p;
         }
         return null;
     }
