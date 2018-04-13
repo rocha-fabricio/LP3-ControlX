@@ -11,19 +11,13 @@ public class VendaDAO {
 
     public void vender(Venda v){
         double total = 0;
-        ProdutoDAO dao = new ProdutoDAO();
+        ProdutoDAO pDao = new ProdutoDAO();
         for(Produto p : v.getProdutos()){
-            Produto prod = new Produto();
-            Produto prod2 = dao.read(p.getId());
-            prod.setId(prod2.getId());
-            prod.setQtd(prod2.getQtd());
-            prod.setCat(prod2.getCat());
-            prod.setForn(prod2.getForn());
-            prod.setEstoqueMin(prod2.getEstoqueMin());
-            prod.setNome(prod2.getNome());
-            prod.setPreco(prod2.getPreco());
-            prod.setTipoUn(prod2.getTipoUn());
-            dao.up(prod);
+            for(Produto prods:ProdutoDAO.prods)
+                if(p.getId() == prods.getId())
+                    prods.setQtd(prods.getQtd() - p.getQtd());
+            // Produto prod = new Produto();
+            //Produto prod2 = pDao.read(p.getId());
             total += p.getPreco();
         }
 

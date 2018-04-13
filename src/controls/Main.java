@@ -143,10 +143,20 @@ public class Main extends Application {
                     int i = 1;
                     while(i == 1){
                         prodDAO.listAll();
+                        Produto prodv = new Produto(); // PRODUTO A SER INSERIDO NA LISTA DE VENDA
                         System.out.print("\nID: ");
-                        Produto prodv = prodDAO.read(scan.nextInt());
+                        Produto prode = prodDAO.read(scan.nextInt()); // PRODUTO COM VALORES DO ESTOQUE
                         System.out.print("\nQTD de VENDA: ");
-                        prodv.setQtd(scan.nextDouble());
+                        prodv.setQtd(scan.nextDouble());    //QUANTIDADE DE VENDA FICARA SALVA NESSA LISTA
+                        //
+                        prodv.setId(prode.getId());
+                        prodv.setCat(prode.getCat());
+                        prodv.setForn(prode.getForn());
+                        prodv.setEstoqueMin(prode.getEstoqueMin());
+                        prodv.setNome(prode.getNome());
+                        prodv.setPreco(prode.getPreco());
+                        prodv.setTipoUn(prode.getTipoUn());
+                        //
                         produtosv.add(prodv);
                         System.out.println("Para vender mais produtos digite '1', para finalizar digite '0'");
                         i = scan.nextInt();
