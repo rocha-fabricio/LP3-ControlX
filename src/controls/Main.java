@@ -168,6 +168,7 @@ public class Main extends Application {
                     System.out.println("Produto(s) vendido(s) com sucesso!");
                     System.in.read();
                     break;
+
                 case 8: //Comprar
                     ArrayList<Produto> produtosc = new ArrayList<Produto>();
                     Compra compra = new Compra();
