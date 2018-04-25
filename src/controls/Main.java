@@ -1,6 +1,7 @@
 package controls;
 
 import DAO.*;
+import database.Popular;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import models.*;
@@ -31,6 +32,13 @@ public class Main extends Application {
         primaryStage.show();
         */
 
+        //------------------------------------------------
+        //Populando Banco de Dados
+        Popular bd = new Popular(fornDAO, catDAO, prodDAO);
+        bd.popularFornecedor();
+        bd.popularCategoria();
+        bd.popularProduto();
+        //------------------------------------------------
 
         boolean sair = true;
         while(sair) {
