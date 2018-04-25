@@ -110,7 +110,7 @@ public class Main extends Application {
                     System.out.println("\t\t---x FORNECEDORES x---");
                     fornDAO.listAll();
                     System.out.print("\nID:");
-                    p1.setForn(fornDAO.select(scan.nextInt()));
+                    p1.setForn(fornDAO.read(scan.nextInt()));
 
 
                     System.out.println("Insira o ID da Categoria:");

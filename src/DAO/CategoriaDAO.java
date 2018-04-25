@@ -32,7 +32,9 @@ public class CategoriaDAO {
         cat.setId(id);
         for (Categoria c : cats) {
             if (c.getId() == id) {
-                cat = c;
+                cat.setId(c.getId());
+                cat.setNome(c.getNome());
+                cat.setProdutos(c.getProdutos());
                 return cat;
             }
         }

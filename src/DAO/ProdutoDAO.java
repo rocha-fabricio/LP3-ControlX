@@ -54,7 +54,14 @@ public class ProdutoDAO {
     public Produto read(int id) {
         for (Produto p : prods) {
             if (p.getId() == id) {
-                return p;
+                Produto prod = new Produto();
+                prod.setNome(p.getNome());
+                prod.setId(p.getId());
+                prod.setPreco(p.getPreco());
+                prod.setQtd(p.getQtd());
+                prod.setTipoUn(p.getTipoUn());
+                prod.setEstoqueMin(p.getEstoqueMin());
+                return prod;
             }
         }
         return null;

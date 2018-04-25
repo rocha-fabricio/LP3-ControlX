@@ -26,12 +26,24 @@ public class FornecedorDAO {
         forns.remove(f.getId());
     }
 
-    public Fornecedor select(int id) {
+    public Fornecedor read(int id) {
         Fornecedor forn = new Fornecedor();
         forn.setId(id);
         for (Fornecedor f : forns) {
             if (f.getId() == id) {
-                forn = f;
+                forn.setNome(f.getNome());
+                forn.setId(f.getId());
+                forn.setCnpj(f.getCnpj());
+                forn.setTelefone1(f.getTelefone1());
+                forn.setTelefone2(f.getTelefone2());
+                forn.setCep(f.getCep());
+                forn.setNum(f.getNum());
+                forn.setRua(f.getRua());
+                forn.setComp(f.getComp());
+                forn.setBairro(f.getBairro());
+                forn.setCidade(f.getCidade());
+                forn.setEstado(f.getEstado());
+
                 return forn;
             }
         }
