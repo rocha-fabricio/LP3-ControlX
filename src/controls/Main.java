@@ -1,6 +1,7 @@
 package controls;
 
 import DAO.*;
+import database.ConexaoMySQL;
 import database.Popular;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -39,6 +40,9 @@ public class Main extends Application {
         bd.popularCategoria();
         bd.popularProduto();
         //------------------------------------------------
+
+        ConexaoMySQL.getConexaoMySQL();
+
 
         boolean sair = true;
         while(sair) {
