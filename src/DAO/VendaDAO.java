@@ -12,12 +12,11 @@ public class VendaDAO {
 
     public void vender(Venda v){
         double total = 0;
-        ProdutoDAO pDao = new ProdutoDAO();
-        for(Produto p : v.getProdutos()){
-            for(Produto prods:ProdutoDAO.prods)
+        for(Produto p : v.getProdutos()){           //p é o Produto da Venda, com qtd de venda
+            for(Produto prods:ProdutoDAO.prods)     //prods é o Produto do estoque, com a qtd do estoque
                 if(p.getId() == prods.getId())
                     prods.setQtd(prods.getQtd() - p.getQtd());
-            total += p.getPreco();
+            total += (p.getPreco() * p.getQtd());
         }
 
         Date data = new Date(System.currentTimeMillis());
@@ -32,9 +31,14 @@ public class VendaDAO {
     public void listAll() {
         for(Venda v : vendas){
             System.out.println(
-                    "Id: " + v.getId() +
-                    "|| Valor: " + v.getValor() +
-                    "|| Data: " + v.getData());
+                    "ID: " + v.getId() +
+                    " || Valor: R$" + v.getValor() +
+                    " || Data: " + v.getData() +
+                   "\nProdutos:");
+            for(Produto p : v.getProdutos())
+                System.out.print(p.getNome() + "(" + p.getQtd() +" " + p.getTipoUn() + ") - ");
+            System.out.println("\n------------------------------");
+
         }
     }
     public void del(Venda v){   // ou pelo id, public void del(int id)

@@ -11,10 +11,11 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main extends Application {
-    static int idForn = 0;
-    static int idCat = 0;
-    static int idProd = 0;
-    static int idVenda = 0;
+    static int idForn = 10;
+    static int idCat = 10;
+    static int idProd = 10;
+    static int idVenda = 10;
+    static int idCompra = 10;
 
     static ProdutoDAO prodDAO = new DAO.ProdutoDAO();
     static CategoriaDAO catDAO = new DAO.CategoriaDAO();
@@ -188,7 +189,7 @@ public class Main extends Application {
                         System.out.print("\nID: ");
                         Produto prode = prodDAO.read(scan.nextInt()); // PRODUTO COM VALORES DO ESTOQUE
                         System.out.print("\nQTD de VENDA: ");
-                        prodv.setQtd(scan.nextDouble());    //QUANTIDADE DE VENDA FICARA SALVA NESSA LISTA
+                        prodv.setQtd(scan.nextDouble());    //QUANTIDADE DE VENDA FICARA SALVA NESSE OBJ
                         //
                         prodv.setId(prode.getId());
                         prodv.setCat(prode.getCat());
@@ -212,22 +213,32 @@ public class Main extends Application {
 
 
                 case 10:         //COMPRAR
-                    ArrayList<Produto> produtosc = new ArrayList<Produto>();
+                    List<Produto> produtosc = new ArrayList<Produto>();
                     Compra compra = new Compra();
-                    Produto prodc = new Produto();
-                    prodDAO.listAll();
-                    System.in.read();
+                    System.out.println("\t\t\tCOMPRAR");
 
-                    System.out.println("Digite o id do produto que deseja Comprar estoque:");
-                    for(int j = 1; j != 0; ) {
-                        prodc.setId(scan.nextInt());
-                        prodDAO.read(prodc);
-                        System.out.println("Digite a quantidade:");
-                        prodc.setQtd(scan.nextInt());
+                    int j = 1;
+                    while(j == 1 ) {
+                        prodDAO.listAll();
+                        Produto prodc = new Produto(); //PRODUTO A SER INSERIDO NA LISTA DE COMPRA
+                        System.out.print("\nID: ");
+                        Produto prodEstq = prodDAO.read(scan.nextInt()); // PRODUTO COM VALORES DO ESTOQUE
+                        System.out.print("\nQTD de Compra: ");
+                        prodc.setQtd(scan.nextDouble());                //QUANTIDADE DE COMPRA FICARA SALVA NESSE OBJ
+                        //
+                        prodc.setId(prodEstq.getId());
+                        prodc.setPreco(prodEstq.getPreco());
+                        prodc.setNome(prodEstq.getNome());
+                        prodc.setCat(prodEstq.getCat());
+                        prodc.setTipoUn(prodEstq.getTipoUn());
+                        prodc.setForn(prodEstq.getForn());
+                        prodc.setEstoqueMin(prodEstq.getEstoqueMin());
+                        //
                         produtosc.add(prodc);
-                        System.out.println("Para adicionar mais produtos digite 1, se ja terminou de adiconar digite 0");
+                        System.out.println("Para adicionar mais produtos digite '1', para finalizar digite '0'");
                         j = scan.nextInt();
                     }
+                    compra.setId(idCompra++);
                     compra.setProdutos(produtosc);
                     compraDAO.comprar(compra);
                     System.out.println("Produto(s) comprado(s) com sucesso!");

@@ -10,7 +10,7 @@ public class Compra {
     private double valor;
     private List<Produto> produtos = new ArrayList<Produto>();
     private int status;
-    private Date dataCompra;   //LocalDateTime
+    private Date data;   //LocalDateTime
     private Date dataEntrega;
     private Date dataFinal;
 
@@ -44,11 +44,11 @@ public class Compra {
         this.produtos = produtos;
     }
     //-------x----------------x--------
-    public Date getDataCompra(){
-        return this.dataCompra;
+    public Date getData(){
+        return this.data;
     }
-    public void setDataCompra(Date dataCompra){
-        this.dataCompra = dataCompra;
+    public void setData(Date data){
+        this.data = data;
     }
     //-------x----------------x--------
     public Date getDataEntrega(){
@@ -67,14 +67,14 @@ public class Compra {
     //-------x----------------x--------
     //Construtores
     //-------x----------------x--------
-    public Compra(int id, String usuario, double valor, List<Produto> produtos, int status, Date dataCompra, Date dataEntrega)
+    public Compra(int id, String usuario, double valor, List<Produto> produtos, int status, Date data, Date dataEntrega)
     {
         this.id = id;
         this.usuario = usuario;
         this.valor = valor;
         this.produtos = produtos;
         this.status = status;
-        this.dataCompra = dataCompra;
+        this.data = data;
         this.dataEntrega = dataEntrega;
     }
     //-------x----------------x--------
