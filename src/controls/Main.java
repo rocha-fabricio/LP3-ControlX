@@ -53,10 +53,11 @@ public class Main extends Application {
             System.out.print("------x-----x-----x----- MENU -----x-----x-----x----- \n-----x-----x-----x-----x ADICIONAR x-----x-----x-----x-----");
             System.out.print("\n1 - Adicionar Fornecedor\t2 - Adicionar Categoria de Produto" +
                     "\n3 - Adicionar Produto\n-----x-----x-----x-----x LISTAR x-----x-----x-----x-----\n" +
-                    "4 - Listar Fornecedores\t\t5 - Listar Categorias\n6 - Listar Produtos");
+                    "4 - Listar Fornecedores\t\t5 - Listar Categorias\n6 - Listar Produtos\t\t\t" +
+                    "7 - Listar Vendas\n8 - Listar Compras");
             System.out.print("\n-----x-----x-----x-----x-----x-----x-----x-----x-----\n" +
-                    "7 - Vender" +
-                    "\t\t\t\t\t8 - Comprar");
+                    "9 - Vender" +
+                    "\t\t\t\t\t10 - Comprar");
             System.out.print("\n-----x-----x-----x-----x-----x-----x-----x-----x-----\n0 - Sair" +
                     "\n-----x-----x-----CONTROLX v1.1-----x-----x-----");
             System.out.print("\nSELECAO: ");
@@ -162,7 +163,21 @@ public class Main extends Application {
                     break;
 
 
-                case 7:         //VENDER
+                case 7:         //LISTAR VENDAS
+                    vendaDAO.listAll();
+
+                    System.in.read();
+                    break;
+
+
+                case 8:         //LISTAR COMPRAS
+                    compraDAO.listAll();
+
+                    System.in.read();
+                    break;
+
+
+                case 9:         //VENDER
                     List<Produto> produtosv = new ArrayList<Produto>();
                     Venda venda = new Venda();
                     System.out.println("\t\t\tVENDER");
@@ -184,7 +199,7 @@ public class Main extends Application {
                         prodv.setTipoUn(prode.getTipoUn());
                         //
                         produtosv.add(prodv);
-                        System.out.println("Para vender mais produtos digite '1', para finalizar digite '0'");
+                        System.out.println("Para adicionar mais produtos digite '1', para finalizar digite '0'");
                         i = scan.nextInt();
                     }
                     venda.setId(idVenda++);
@@ -196,7 +211,7 @@ public class Main extends Application {
                     break;
 
 
-                case 8:         //COMPRAR
+                case 10:         //COMPRAR
                     ArrayList<Produto> produtosc = new ArrayList<Produto>();
                     Compra compra = new Compra();
                     Produto prodc = new Produto();
@@ -217,7 +232,6 @@ public class Main extends Application {
                     compraDAO.comprar(compra);
                     System.out.println("Produto(s) comprado(s) com sucesso!");
                     System.in.read();
-
                     break;
 
 

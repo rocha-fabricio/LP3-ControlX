@@ -4,6 +4,7 @@ import models.Produto;
 import models.Venda;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class VendaDAO {
@@ -16,11 +17,11 @@ public class VendaDAO {
             for(Produto prods:ProdutoDAO.prods)
                 if(p.getId() == prods.getId())
                     prods.setQtd(prods.getQtd() - p.getQtd());
-            // Produto prod = new Produto();
-            //Produto prod2 = pDao.read(p.getId());
             total += p.getPreco();
         }
 
+        Date data = new Date(System.currentTimeMillis());
+        v.setData(data);
         v.setValor(total);
         vendas.add(v);
     }
@@ -28,8 +29,13 @@ public class VendaDAO {
     public void up(Venda v){
 
     }
-    public List<Venda> listAll() {
-        return vendas;
+    public void listAll() {
+        for(Venda v : vendas){
+            System.out.println(
+                    "Id: " + v.getId() +
+                    "|| Valor: " + v.getValor() +
+                    "|| Data: " + v.getData());
+        }
     }
     public void del(Venda v){   // ou pelo id, public void del(int id)
 

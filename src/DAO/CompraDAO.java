@@ -4,6 +4,7 @@ import models.Compra;
 import models.Produto;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class CompraDAO {
@@ -21,15 +22,20 @@ public class CompraDAO {
                 }
             }
         }
+        Date data = new Date(System.currentTimeMillis());
+        c.setDataCompra(data);
         c.setValor(total);
         compras.add(c);
     }
     public void read(Compra c){
 
     }
-    public List<Compra> listAll() {
-
-        return compras;
+    public void listAll() {
+        for(Compra c : compras){
+            System.out.println("ID: " + c.getId() +
+                    "|| Valor: " + c.getValor() +
+                    "|| Data: " + c.getDataCompra());
+        }
     }
     public void del(Compra c){   // ou pelo id, public void del(int id)
 
