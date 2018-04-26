@@ -41,7 +41,7 @@ public class Main extends Application {
         bd.popularProduto();
         //------------------------------------------------
 
-        ConexaoMySQL.getConexaoMySQL();
+        //ConexaoMySQL.getConexaoMySQL();
 
 
         boolean sair = true;
@@ -67,6 +67,8 @@ public class Main extends Application {
                 case 0:
                     sair = false;
                     break;
+
+
                 case 1:         //ADD FORNECEDOR
                     Fornecedor f1 = new Fornecedor();
                     System.out.print("-----* ADICIONAR FORNECEDOR *-----");
@@ -85,6 +87,8 @@ public class Main extends Application {
 
                     fornDAO.add(f1);
                     break;
+
+
                 case 2:         //ADD CATEGORIA
                     Categoria c1 = new Categoria();
                     System.out.print("-----* ADICIONAR CATEGORIA *-----");
@@ -96,6 +100,8 @@ public class Main extends Application {
 
                     catDAO.add(c1);
                     break;
+
+
                 case 3:         //ADD PRODUTO
                     Produto p1 = new Produto();
                     System.out.print("-----* ADICIONAR PRODUTO *-----");
@@ -133,22 +139,30 @@ public class Main extends Application {
 
                     prodDAO.add(p1);
                     break;
-                case 4:
+
+
+                case 4:         //LISTAR FORNECEDORES
                     fornDAO.listAll();
 
                     System.in.read();
                     break;
-                case 5:
+
+
+                case 5:         //LISTAR CATEGORIAS
                     catDAO.listAll();
 
                     System.in.read();
                     break;
-                case 6:
+
+
+                case 6:         //LISTAR PRODUTOS
                     prodDAO.listAll();
 
                     System.in.read();
                     break;
-                case 7: //Vender
+
+
+                case 7:         //VENDER
                     List<Produto> produtosv = new ArrayList<Produto>();
                     Venda venda = new Venda();
                     System.out.println("\t\t\tVENDER");
@@ -181,7 +195,8 @@ public class Main extends Application {
                     System.in.read();
                     break;
 
-                case 8: //Comprar
+
+                case 8:         //COMPRAR
                     ArrayList<Produto> produtosc = new ArrayList<Produto>();
                     Compra compra = new Compra();
                     Produto prodc = new Produto();
@@ -204,6 +219,8 @@ public class Main extends Application {
                     System.in.read();
 
                     break;
+
+
                 default:
                     break;
             }
