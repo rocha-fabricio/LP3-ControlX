@@ -7,6 +7,7 @@ ControlX  ->  Sistema de controle de Estoque, Compra e Venda
 
 //
 classe PRODUTO
+
     String nome;
     int id;
     double preco;
@@ -16,7 +17,8 @@ classe PRODUTO
     
 //   
 
-classe CATEGORIA    
+classe CATEGORIA  
+
     String nome;
     int id;
     List<Produto> produtos = new ArrayList<Produto>();
@@ -24,6 +26,7 @@ classe CATEGORIA
 //
 
 classe FORNECEDOR
+
     String nome;
     int id;
     String cnpj;
@@ -40,6 +43,7 @@ classe FORNECEDOR
 //    
 
  classe COMPRA
+ 
     int id;
     String usuario;
     double valor;
@@ -52,6 +56,7 @@ classe FORNECEDOR
  //
  
  classe VENDA
+ 
     int id;
     String usuario;
     double valor;
@@ -60,7 +65,8 @@ classe FORNECEDOR
   
  //
  
- classe USUARIO **CRIAR CLASSES DOS CARGOS HERDANDO A CLASSE USUARIO**
+ classe USUARIO   **CRIAR CLASSES DOS CARGOS HERDANDO A CLASSE USUARIO**
+ 
     int id;
     String nome;
     long cpf;
