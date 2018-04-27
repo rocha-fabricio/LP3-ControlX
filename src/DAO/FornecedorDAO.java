@@ -13,7 +13,11 @@ public class FornecedorDAO {
     }
 
     public void up(Fornecedor f) {
+        System.out.print("Atualizando dados.");
+        System.out.print(" .");
+        System.out.println(" .");
         forns.set(f.getId(), f);
+        System.out.println("Fornecedor Atualizado com sucesso");
     }
 
     public void listAll() {
@@ -27,7 +31,9 @@ public class FornecedorDAO {
 
     public void del(Fornecedor f) {   // ou pelo id, public void del(int id)
         forns.remove(f.getId());
+        System.out.println("Fornecedor removido com sucesso.");
     }
+
 
     public Fornecedor read(int id) {
         Fornecedor forn = new Fornecedor();

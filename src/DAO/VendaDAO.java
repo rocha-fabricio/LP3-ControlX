@@ -10,6 +10,25 @@ import java.util.List;
 public class VendaDAO {
     static List<Venda> vendas = new ArrayList<Venda>();
 
+    public Venda read(int v){
+        Venda venda = new Venda();
+        venda.setId(v);
+        for(Venda x : vendas)
+        {
+            if(x.getId() == v)
+            {
+                venda.setData(x.getData());
+                venda.setProdutos(x.getProdutos());
+                venda.setValor(x.getValor());
+                venda.setUsuario(x.getUsuario());
+                return venda;
+            }
+            else
+                return null;
+        }
+        return venda;
+    }
+
     public void vender(Venda v){
         double total = 0;
         for(Produto p : v.getProdutos()){           //p é o Produto da Venda, com qtd de venda
@@ -33,9 +52,9 @@ public class VendaDAO {
             for(Venda v : vendas){
                 System.out.println(
                         "ID: " + v.getId() +
-                        " || Valor: R$" + v.getValor() +
-                        " || Data: " + v.getData() +
-                       "\nProdutos:");
+                                " || Valor: R$" + v.getValor() +
+                                " || Data: " + v.getData() +
+                                "\nProdutos:");
                 for(Produto p : v.getProdutos())
                     System.out.print(p.getNome() + "(" + p.getQtd() +" " + p.getTipoUn() + ") - ");
                 System.out.println("\n------------------------------");

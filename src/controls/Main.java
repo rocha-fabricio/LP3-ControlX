@@ -47,21 +47,32 @@ public class Main extends Application {
 
         boolean sair = true;
         while(sair) {
-
+            int id;
             for (int i = 0; i < 3; ++i)
                 System.out.println("-----x-----x-----x-----x-----x-----x-----x-----x-----");
             System.out.println("\t\t\t\t\tControlX v1.1");
-            System.out.print("------x-----x-----x----- MENU -----x-----x-----x----- \n-----x-----x-----x-----x ADICIONAR x-----x-----x-----x-----");
+            System.out.print("------x-----x-----x----- MENU -----x-----x-----x----- " +
+                    "\n-----x-----x-----x-----x ADICIONAR x-----x-----x-----x-----");
             System.out.print("\n1 - Adicionar Fornecedor\t2 - Adicionar Categoria de Produto" +
-                    "\n3 - Adicionar Produto\n-----x-----x-----x-----x LISTAR x-----x-----x-----x-----\n" +
+                    "\n3 - Adicionar Produto" +
+
+                    "\n-----x-----x-----x-----x EDITAR x-----x-----x-----x-----\n"
+                    + "11 - Editar Fornecedores\t\t 12 - Editar Categorias\n13 - Editar Produtos"
+
+                    + "\n-----x-----x-----x-----x REMOVER x-----x-----x-----x-----\n"
+                    + "16 - Remover Fornecedores\t\t 17 - Remover Categorias\n18 - Remover Produtos"
+
+                    + "\n-----x-----x-----x-----x LISTAR x-----x-----x-----x-----\n" +
                     "4 - Listar Fornecedores\t\t5 - Listar Categorias\n6 - Listar Produtos\t\t\t" +
                     "7 - Listar Vendas\n8 - Listar Compras");
+
             System.out.print("\n-----x-----x-----x-----x-----x-----x-----x-----x-----\n" +
                     "9 - Vender" +
                     "\t\t\t\t\t10 - Comprar");
             System.out.print("\n-----x-----x-----x-----x-----x-----x-----x-----x-----\n0 - Sair" +
                     "\n-----x-----x-----CONTROLX v1.1-----x-----x-----");
             System.out.print("\nSELECAO: ");
+
             Scanner scan = new Scanner(System.in);
             int select = scan.nextInt();
 
@@ -244,6 +255,121 @@ public class Main extends Application {
                     System.out.println("Produto(s) comprado(s) com sucesso!");
                     System.in.read();
                     break;
+
+                case 11:
+                    System.out.println("--------Listando Todos os Fornecedores-----------");
+                    fornDAO.listAll();
+                    System.out.println("\nDigite o id do Fornecedor:");
+                    id = scan.nextInt();
+
+                    //Dados a serem editados:
+                    Fornecedor fornUP = new Fornecedor();
+                    Fornecedor fornAUX = fornDAO.read(id);
+
+                    fornUP.setId(id);
+                    int aux = 1;
+                    while(aux == 1)
+                    {
+                        System.out.println("-----Opções de Edite -----");
+                        System.out.println("Deseja alterar o Nome? Se sim digite 1"
+                                + "\nDeseja alterar o Endereço? Se sim digite 2"
+                                + "\nDeseja alterar o telefone? Se sim digite 3");
+                        int e = scan.nextInt();
+
+                        if(e == 1)
+                        {
+                            System.out.println("Digite o Nome:");
+                            fornUP.setNome(scan.next());
+                            fornUP.setTelefone1(fornAUX.getTelefone1());
+                            fornUP.setTelefone2(fornAUX.getTelefone2());
+                            fornUP.setCnpj(fornAUX.getCnpj());
+                            fornUP.setCep(fornAUX.getCep());
+                            fornUP.setRua(fornAUX.getRua());
+                            fornUP.setNum(fornAUX.getNum());
+                            fornUP.setBairro(fornAUX.getBairro());
+                            fornUP.setCidade(fornAUX.getCidade());
+                            fornUP.setEstado(fornAUX.getEstado());
+
+                            fornAUX =  fornUP;
+
+                        }
+
+                        if(e == 2)
+                        {
+                            fornUP.setNome(fornAUX.getNome());
+                            fornUP.setTelefone1(fornAUX.getTelefone1());
+                            fornUP.setTelefone2(fornAUX.getTelefone2());
+                            fornUP.setCnpj(fornAUX.getCnpj());
+                            System.out.println("Digite o novo CEP:");
+                            fornUP.setCep(scan.nextLong());
+                            System.out.println("Rua:");
+                            fornUP.setRua(scan.next());
+                            System.out.println("Numero:");
+                            fornUP.setNum(scan.next());
+                            System.out.println("Bairro:");
+                            fornUP.setBairro(scan.next());
+                            System.out.println("Cidade:");
+                            fornUP.setCidade(scan.next());
+                            System.out.println("Estado:");
+                            fornUP.setEstado(scan.next());
+
+                            fornAUX =  fornUP;
+
+                        }
+
+                        if(e == 3)
+                        {
+                            fornUP.setNome(fornAUX.getNome());
+                            System.out.println("Digite o Telefone1:");
+                            fornUP.setTelefone1(scan.next());
+                            System.out.println("Digite o Telefone2:");
+                            fornUP.setTelefone2(scan.next());
+                            fornUP.setCnpj(fornAUX.getCnpj());
+                            fornUP.setCep(fornAUX.getCep());
+                            fornUP.setRua(fornAUX.getRua());
+                            fornUP.setNum(fornAUX.getNum());
+                            fornUP.setBairro(fornAUX.getBairro());
+                            fornUP.setCidade(fornAUX.getCidade());
+                            fornUP.setEstado(fornAUX.getEstado());
+
+
+                        }
+
+                        fornDAO.up(fornUP);
+                        System.out.println("Quer continuar modificando? Digite 1 para conitnuar, 0 para sair");
+                        aux = scan.nextInt();
+                    }
+
+
+                    break;
+
+                case 16:
+                    System.out.println("--------Listando Todos os Fornecedores-----------");
+                    fornDAO.listAll();
+                    System.out.println("\nDigite o id do Fornecedor:");
+                    id = scan.nextInt();
+                    fornDAO.del(fornDAO.read(id));
+                    System.in.read();
+                    break;
+
+                case 17:
+                    System.out.println("--------Listando Todas as Categorias-----------");
+                    catDAO.listAll();
+                    System.out.println("\nDigite o id da Categoria:");
+                    id = scan.nextInt();
+                    catDAO.del(catDAO.read(id));
+                    System.in.read();
+                    break;
+
+                case 18:
+                    System.out.println("----------Listando Todos os Produtos----------");
+                    prodDAO.listAll();
+                    System.out.println("\nDigite o id do Produto:");
+                    id = scan.nextInt();
+                    prodDAO.del(prodDAO.read(id));
+                    System.in.read();
+                    break;
+
 
 
                 default:

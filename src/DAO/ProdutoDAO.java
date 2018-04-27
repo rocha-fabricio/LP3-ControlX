@@ -42,6 +42,7 @@ public class ProdutoDAO {
 
     public void del(Produto p) {   // ou pelo id, public void del(int id)
         prods.remove(p.getId());
+        System.out.println("Produto removido com sucesso.");
     }
 
     public Produto read(Produto p) {
