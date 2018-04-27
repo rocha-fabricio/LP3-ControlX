@@ -6,6 +6,7 @@ ControlX  ->  Sistema de controle de Estoque, Compra e Venda
   ('Control' de Controle e 'X' como uma incógnita, uma variável, mostrando de que esse Software não tem uso especifico, é genérico na área)
 
 //
+
 classe PRODUTO
 
     String nome;
