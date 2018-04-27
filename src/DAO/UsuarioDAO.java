@@ -17,7 +17,6 @@ public class UsuarioDAO {
         users.set(u.getId(), u);
     }
     public List<Usuario> listAll() {
-
         return users;
     }
     public void del(Usuario u){   // ou pelo id, public void del(int id)

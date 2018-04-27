@@ -19,9 +19,12 @@ public class CategoriaDAO {
 
 
     public void listAll() {
-        for(Categoria c : cats){
-            System.out.println("ID: " + c.getId() + " || Categoria: " + c.getNome());
-        }
+        if(cats.size() > 0)
+            for(Categoria c : cats){
+                System.out.println("ID: " + c.getId() + " || Categoria: " + c.getNome());
+            }
+        else
+            System.out.println("Nenhuma categoria cadastrada.");
     }
     public void del(Categoria c){   // ou pelo id, public void del(int id)
         cats.remove(c.getId());

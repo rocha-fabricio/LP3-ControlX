@@ -30,11 +30,14 @@ public class ProdutoDAO {
     }
 
     public void listAll() {
-        for (Produto p : prods) {
-            Fornecedor forn = p.getForn();
-            Categoria cat = p.getCat();
-            System.out.println("ID: " + p.getId() + " || Nome: " + p.getNome() + " || R$" + p.getPreco() + " || " + p.getQtd() + " " + p.getTipoUn() + " || Estoque Min: " + p.getEstoqueMin() + " || Fornecedor: " + forn.getNome() + " || Categoria: " + cat.getNome());
-        }
+        if(prods.size() > 0)
+            for (Produto p : prods) {
+                Fornecedor forn = p.getForn();
+                Categoria cat = p.getCat();
+                System.out.println("ID: " + p.getId() + " || Nome: " + p.getNome() + " || R$" + p.getPreco() + " || " + p.getQtd() + " " + p.getTipoUn() + " || Estoque Min: " + p.getEstoqueMin() + " || Fornecedor: " + forn.getNome() + " || Categoria: " + cat.getNome());
+            }
+        else
+            System.out.println("Nenhum Produto cadastrado.");
     }
 
     public void del(Produto p) {   // ou pelo id, public void del(int id)

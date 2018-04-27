@@ -31,16 +31,19 @@ public class CompraDAO {
     }
 
     public void listAll() {
-        for (Compra c : compras) {
-            System.out.println(
-                    "ID: " + c.getId() +
-                            " || Valor: R$" + c.getValor() +
-                            " || Data: " + c.getData() +
-                            "\nProdutos:");
-            for (Produto p : c.getProdutos())
-                System.out.print(p.getNome() + "(" + p.getQtd() + " " + p.getTipoUn() + ") - ");
-            System.out.println("\n------------------------------");
-        }
+        if(compras.size() > 0)
+            for (Compra c : compras) {
+                System.out.println(
+                        "ID: " + c.getId() +
+                                " || Valor: R$" + c.getValor() +
+                                " || Data: " + c.getData() +
+                                "\nProdutos:");
+                for (Produto p : c.getProdutos())
+                    System.out.print(p.getNome() + "(" + p.getQtd() + " " + p.getTipoUn() + ") - ");
+                System.out.println("\n------------------------------");
+            }
+        else
+            System.out.println("Nenhuma compra feita.");
     }
         public void del(Compra c){   // ou pelo id, public void del(int id)
 

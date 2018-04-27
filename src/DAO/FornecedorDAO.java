@@ -17,9 +17,12 @@ public class FornecedorDAO {
     }
 
     public void listAll() {
-        for(Fornecedor f : forns){
-            System.out.println("ID: " + f.getId() + " || Fornecedor: " + f.getNome());
-        }
+        if(forns.size() > 0)
+            for(Fornecedor f : forns){
+                System.out.println("ID: " + f.getId() + " || Fornecedor: " + f.getNome());
+            }
+        else
+            System.out.println("Nenhum Fornecedor encontrado");
     }
 
     public void del(Fornecedor f) {   // ou pelo id, public void del(int id)

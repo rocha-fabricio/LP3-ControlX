@@ -29,17 +29,20 @@ public class VendaDAO {
 
     }
     public void listAll() {
-        for(Venda v : vendas){
-            System.out.println(
-                    "ID: " + v.getId() +
-                    " || Valor: R$" + v.getValor() +
-                    " || Data: " + v.getData() +
-                   "\nProdutos:");
-            for(Produto p : v.getProdutos())
-                System.out.print(p.getNome() + "(" + p.getQtd() +" " + p.getTipoUn() + ") - ");
-            System.out.println("\n------------------------------");
+        if(vendas.size() > 0)
+            for(Venda v : vendas){
+                System.out.println(
+                        "ID: " + v.getId() +
+                        " || Valor: R$" + v.getValor() +
+                        " || Data: " + v.getData() +
+                       "\nProdutos:");
+                for(Produto p : v.getProdutos())
+                    System.out.print(p.getNome() + "(" + p.getQtd() +" " + p.getTipoUn() + ") - ");
+                System.out.println("\n------------------------------");
 
-        }
+            }
+        else
+            System.out.println("Nenhuma venda feita.");
     }
     public void del(Venda v){   // ou pelo id, public void del(int id)
 
