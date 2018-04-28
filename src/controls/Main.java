@@ -339,9 +339,105 @@ public class Main extends Application {
                         System.out.println("Quer continuar modificando? Digite 1 para conitnuar, 0 para sair");
                         aux = scan.nextInt();
                     }
-
-
                     break;
+
+                case 12:
+                    System.out.println("--------Listando Todas as Categorias-----------");
+                    catDAO.listAll();
+                    System.out.println("\nDigite o id da Categoria:");
+                    id = scan.nextInt();
+
+                    Categoria catUP = new Categoria(), catAUX = catDAO.read(id);
+                    System.out.println("Novo nome para categoria:");
+                    catUP.setId(id);
+                    catUP.setNome(scan.next());
+                    catUP.setProdutos(catAUX.getProdutos());
+                    catDAO.up(catUP);
+                    System.in.read();
+                    break;
+
+                case 13:
+                    System.out.println("----------Listando Todos os Produtos----------");
+                    prodDAO.listAll();
+                    System.out.println("\nDigite o id do Produto:");
+                    id = scan.nextInt();
+
+                    Produto prodUP = new Produto(), prodAUX =  prodDAO.read(id);
+                    aux = 1;
+                    prodUP.setId(id);
+                    while(aux == 1) {
+                        System.out.println("-----Opções de Edite -----");
+                        System.out.println("Deseja alterar o Nome? Se sim digite 1"
+                               +"\nDeseja alterar o Fornecedor? Digite 2"
+                               +"\nDeseja alterar o Preço? Digite 3"
+                               +"\nDeseja alterar a Quantidade em estoque? Digite 4"
+                               +"\nDeseja alterar o Estoque MINIMO? Digite 5"
+                               +"\nDeseja alterar a Categoria? Digite 6");
+                        int e = scan.nextInt();
+
+                        if (e == 1) {
+                            System.out.println("Digite o NOVO Nome:");
+                            prodUP.setNome(scan.next());
+                        }else
+                            prodUP.setNome(prodAUX.getNome());
+
+                        if (e == 2) {
+                            System.out.println("--------Listando Todos os Fornecedores-----------");
+                            fornDAO.listAll();
+                            System.out.println("-------------------------------------------------");
+                            System.out.println("Digite o -ID- do NOVO Fornecedor:");
+                            int idF = scan.nextInt();
+                            prodUP.setForn(fornDAO.read(idF));
+                        } else
+                            prodUP.setForn(prodAUX.getForn());
+
+                        if (e == 3) {
+                            System.out.println("Novo Preço do Produto:");
+                            prodUP.setPreco(scan.nextDouble());
+                            System.out.println("Tipo Unitário:");
+                            prodUP.setTipoUn(scan.next());
+
+                        }else
+                            {
+                                prodUP.setPreco(prodAUX.getPreco());
+                                prodUP.setTipoUn(prodAUX.getTipoUn());
+                            }
+
+                        if(e == 4)
+                        {
+                            System.out.println("Nova Quantidade");
+                            prodUP.setQtd(scan.nextDouble());
+                        }else
+                            prodUP.setQtd(prodAUX.getQtd());
+
+                        if(e == 5)
+                        {
+                            System.out.println("Novo Estoque Minimo");
+                            prodUP.setEstoqueMin(scan.nextDouble());
+                        }else
+                            prodUP.setEstoqueMin(prodAUX.getEstoqueMin());
+
+                        if(e == 6)
+                        {
+                            System.out.println("--------Listando Todas as Categorias-----------");
+                            catDAO.listAll();
+                            System.out.println("------------------------------------------------");
+                            System.out.println("Digite o ID da nova Categoria:");
+                            int idC = scan.nextInt();
+                            prodUP.setCat(catDAO.read(idC));
+                        }else
+                            prodUP.setCat(prodAUX.getCat());
+
+
+                        System.out.println("Quer continuar modificando? Digite 1 para conitnuar, 0 para sair");
+                        aux = scan.nextInt();
+                        prodAUX = prodUP; //Atauliza o AUX para não perder os dados editados uma vez.
+                        if(aux == 0)// Só atualiza quando for sair do while.
+                            prodDAO.up(prodUP);
+                    }
+                    System.in.read();
+                    break;
+
 
                 case 16:
                     System.out.println("--------Listando Todos os Fornecedores-----------");

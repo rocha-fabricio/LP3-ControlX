@@ -27,6 +27,7 @@ public class ProdutoDAO {
                 p.setPreco(pr.getPreco());
             }
         }
+        System.out.println("Produto atualizado com sucesso.");
     }
 
     public void listAll() {
@@ -59,6 +60,7 @@ public class ProdutoDAO {
         for (Produto p : prods) {
             if (p.getId() == id) {
                 Produto prod = new Produto();
+                prod.setForn(p.getForn());
                 prod.setNome(p.getNome());
                 prod.setId(p.getId());
                 prod.setPreco(p.getPreco());

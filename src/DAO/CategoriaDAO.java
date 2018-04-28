@@ -18,6 +18,8 @@ public class CategoriaDAO {
     }
 
 
+
+
     public void listAll() {
         if(cats.size() > 0)
             for(Categoria c : cats){
