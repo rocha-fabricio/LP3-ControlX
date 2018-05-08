@@ -24,7 +24,6 @@ public class Main extends Application {
         Fornecedor forn = new Fornecedor();
         Categoria cat = new Categoria();
         Produto prod = new Produto();
-        prod.setId(1);
         prod.setQtd(3);
         prod.setEstoqueMin(1);
         prod.setForn(forn);
