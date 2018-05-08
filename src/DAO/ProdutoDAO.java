@@ -22,7 +22,7 @@ public class ProdutoDAO {
 
         try {
 
-            stmt = con.prepareStatement("INSERT INTO Produto (nome, preco, qtd, tipoUn, estoqueMin) VALUES ({0}, {1} )");
+            stmt = con.prepareStatement("INSERT INTO Produto (nome, preco, qtd, tipoUn, estoqueMin) VALUES (?, ?, ?, ?, ?);");
             stmt.setString(1, p.getNome());
             stmt.setDouble(2, p.getPreco());
             stmt.setDouble(3, p.getQtd());
