@@ -1,8 +1,14 @@
 package DAO;
 
+import connection.ConnectionFactory;
 import models.Categoria;
 import models.Fornecedor;
 import models.Produto;
+
+import javax.swing.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,8 +16,26 @@ public class ProdutoDAO {
 
     static List<Produto> prods = new ArrayList<Produto>();
 
-    public void add(Produto p) {
-        prods.add(p);
+    public void add(Produto p) throws ClassNotFoundException {
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+
+        try {
+
+            stmt = con.prepareStatement("INSERT INTO Produto (nome, preco, qtd, tipoUn, estoqueMin) VALUES ({0}, {1} )");
+            stmt.setString(1, p.getNome());
+            stmt.setDouble(2, p.getPreco());
+            stmt.setDouble(3, p.getQtd());
+            stmt.setString(4, p.getTipoUn());
+            stmt.setDouble(5, p.getEstoqueMin());
+
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt);
+        }
     }
 
     public void up(Produto pr) {
