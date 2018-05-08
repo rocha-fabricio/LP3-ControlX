@@ -1,17 +1,10 @@
 package controls;
 
-import DAO.*;
-import database.ConexaoMySQL;
-import database.Popular;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import models.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 
 public class Main extends Application {
 
