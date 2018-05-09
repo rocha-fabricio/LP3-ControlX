@@ -23,7 +23,7 @@ public class Login {
             Login.this.txtPassword.setText("");
             Main.stage.hide();
             Main.stage = primaryStage;
-            primaryStage.setScene(new Scene(root, 300, 250));
+            primaryStage.setScene(new Scene(root, 300, 400));
             primaryStage.setResizable(true);
             primaryStage.show();
 

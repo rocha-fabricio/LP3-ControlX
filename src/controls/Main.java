@@ -22,19 +22,6 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root, 300, 250));
         primaryStage.setResizable(false);
         primaryStage.show();
-
-        Fornecedor forn = new Fornecedor();
-        Categoria cat = new Categoria();
-        Produto prod = new Produto();
-        prod.setQtd(3);
-        prod.setEstoqueMin(1);
-        prod.setForn(forn);
-        prod.setNome("Pão");
-        prod.setPreco(10.00);
-        prod.setTipoUn("Un");
-        prod.setCat(cat);
-        ProdutoDAO dao = new ProdutoDAO();
-        dao.add(prod);
     }
 
     public static void main(String[] args) {
