@@ -73,7 +73,7 @@ public class ProdutoDAO {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
-
+        List<Produto> lista = new ArrayList<>();
 
         try {
             stmt = con.prepareStatement("SELECT * FROM produtos;");
@@ -92,6 +92,8 @@ public class ProdutoDAO {
                 prod.setForn(forn);
 
                 prod.setCat();*/
+
+                lista.add(prod);
             }
         } catch (SQLException e) {
             e.printStackTrace();
