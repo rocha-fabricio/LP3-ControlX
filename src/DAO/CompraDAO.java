@@ -8,7 +8,6 @@ import java.util.Date;
 import java.util.List;
 
 public class CompraDAO {
-    static List<Compra> compras = new ArrayList<Compra>();
 
     public void comprar(Compra c) {
         double total = 0;
@@ -23,7 +22,7 @@ public class CompraDAO {
         Date data = new Date(System.currentTimeMillis());
         c.setData(data);
         c.setValor(total);
-        compras.add(c);
+        //compras.add(c);
     }
 
     public void read(Compra c) {
@@ -31,21 +30,9 @@ public class CompraDAO {
     }
 
     public void listAll() {
-        if(compras.size() > 0)
-            for (Compra c : compras) {
-                System.out.println(
-                        "ID: " + c.getId() +
-                                " || Valor: R$" + c.getValor() +
-                                " || Data: " + c.getData() +
-                                "\nProdutos:");
-                for (Produto p : c.getProdutos())
-                    System.out.print(p.getNome() + "(" + p.getQtd() + " " + p.getTipoUn() + ") - ");
-                System.out.println("\n------------------------------");
-            }
-        else
-            System.out.println("Nenhuma compra feita.");
+
     }
-        public void del(Compra c){   // ou pelo id, public void del(int id)
+    public void del(Compra c){   // ou pelo id, public void del(int id)
 
         }
 }

@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 
@@ -13,7 +14,7 @@ public class Login {
 
     @FXML
     private PasswordField txtPassword;
-
+    private TextField txtLogin;
         @FXML
         public void logar() throws IOException {
             Stage primaryStage = new Stage();

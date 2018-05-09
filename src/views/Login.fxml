@@ -12,9 +12,9 @@
       <Pane layoutX="5.0" layoutY="3.0" prefHeight="217.0" prefWidth="306.0" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="3.0">
          <children>
             <PasswordField fx:id="txtPassword" layoutX="68.0" layoutY="112.0" />
-            <Label id="lbSenha" layoutX="134.0" layoutY="97.0" text="Senha" />
-            <Label id="lbLogin" layoutX="135.0" layoutY="28.0" text="Login" />
-            <TextField id="txLogin" layoutX="68.0" layoutY="43.0" />
+            <Label id="lbSenha" fx:id="lbSenha" layoutX="134.0" layoutY="97.0" text="Senha" />
+            <Label id="lbLogin" fx:id="lbLogin" layoutX="135.0" layoutY="28.0" text="Login" />
+            <TextField id="txLogin" fx:id="txtLogin" layoutX="68.0" layoutY="43.0" />
             <Button id="btEntrar" fx:id="btEntrar" layoutX="126.0" layoutY="165.0" mnemonicParsing="false" onAction="#logar" text="Entrar" />
          </children>
       </Pane>
