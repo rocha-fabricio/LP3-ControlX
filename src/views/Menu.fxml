@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
@@ -7,11 +8,23 @@
 <?import javafx.scene.layout.*?>
 
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controls.Menu">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="275.0" prefWidth="424.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button layoutX="99.0" layoutY="120.0" mnemonicParsing="false" text="Button" />
-      <Button layoutX="417.0" layoutY="120.0" mnemonicParsing="false" text="Button" />
-      <Button layoutX="99.0" layoutY="260.0" mnemonicParsing="false" text="Button" />
-      <Button layoutX="417.0" layoutY="260.0" mnemonicParsing="false" text="Button" />
+      <Pane layoutX="8.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="268.0" prefWidth="409.0">
+         <children>
+            <Button id="bt-produto" fx:id="btProdutos" layoutX="45.0" layoutY="190.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="91.0" text="Produtos" />
+            <Button id="bt-venda" fx:id="btVender" layoutX="45.0" layoutY="140.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="91.0" text="Vender" />
+            <Button id="bt-fornecedor" fx:id="btFornecedores" layoutX="145.0" layoutY="140.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="107.0" text="Fornecedores" />
+            <Button id="bt-compras" fx:id="btCompras" layoutX="145.0" layoutY="190.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="91.0" text="Compras" />
+            <Button id="bt-funcionario" fx:id="btFuncionarios" layoutX="245.0" layoutY="190.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="107.0" text="Funcionarios" />
+            <Button id="bt-historico" fx:id="btHistoricos" layoutX="259.0" layoutY="140.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="91.0" text="Historicos" />
+            <Pane layoutX="8.0" layoutY="14.0" prefHeight="110.0" prefWidth="349.0">
+               <children>
+                  <Text layoutX="28.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Usuario:" />
+                  <Text layoutX="190.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cargo:" />
+               </children>
+            </Pane>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>
