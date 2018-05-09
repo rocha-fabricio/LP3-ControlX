@@ -15,7 +15,8 @@ import java.util.List;
 
 public class ProdutoDAO {
 
-    static List<Produto> prods = new ArrayList<Produto>();
+    private FornecedorDAO fornDAO = new FornecedorDAO();
+    private CategoriaDAO catDAO = new CategoriaDAO();
 
     public void add(Produto p) throws ClassNotFoundException {
         Connection con = ConnectionFactory.getConnection();
@@ -86,20 +87,18 @@ public class ProdutoDAO {
                 prod.setPreco(rs.getDouble("qtd"));
                 prod.setTipoUn(rs.getString("tipoUn"));
                 prod.setEstoqueMin(rs.getDouble("estoqueMin"));
-
-                /*Fornecedor forn = new Fornecedor();
-                forn.setId(rs.getInt("idFornecedor"));
-                prod.setForn(forn);
-
-                prod.setCat();*/
-
+                prod.setForn(fornDAO.read(rs.getInt("idFornecedor")));
+                prod.setCat(catDAO.read(rs.getInt("idCategoria")));
                 lista.add(prod);
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+            return lista;
         }
 
-        return lista;
+
     }
 
     public void del(Produto p) {   // ou pelo id, public void del(int id)
