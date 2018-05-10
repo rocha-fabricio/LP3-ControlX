@@ -18,9 +18,6 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        ProdutoDAO dao = new ProdutoDAO();
-        dao.del(1);
-
         Parent root = FXMLLoader.load(getClass().getResource("/views/Login.fxml"));
         primaryStage.setTitle("ControlX - Entrar");
         stage = primaryStage;

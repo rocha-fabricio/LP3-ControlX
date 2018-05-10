@@ -106,7 +106,7 @@ public class ProdutoDAO {
 
     }
 
-    public void del(int id) throws ClassNotFoundException {   // ou pelo id, public void del(int id)
+    public void del(Produto p) throws ClassNotFoundException {   // ou pelo id, public void del(int id)
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
 
@@ -120,7 +120,7 @@ public class ProdutoDAO {
 
             stmt = con.prepareStatement("UPDATE produtos SET deleted_at = ? WHERE id = ?;");
             stmt.setString(1, data);
-            stmt.setInt(2, id);
+            stmt.setInt(2, p.getId());
 
             stmt.executeUpdate();
 
@@ -138,24 +138,28 @@ public class ProdutoDAO {
         Produto prod = new Produto();
 
         try {
-            stmt = con.prepareStatement("SELECT * FROM produtos WHERE id = ? ,deleted_at = NULL;");
+            stmt = con.prepareStatement("SELECT id, nome, preco, qntd, tipoUn," +
+                    " estoqueMin, idFornecedor, idCategoria" +
+                    " FROM produtos WHERE id = ? and deleted_at is NULL;");
             stmt.setInt(1, p.getId());
             rs = stmt.executeQuery();
 
-            prod.setId(rs.getInt("id"));
-            prod.setNome(rs.getString("nome"));
-            prod.setPreco(rs.getDouble("qntd"));
-            prod.setTipoUn(rs.getString("tipoUn"));
-            prod.setEstoqueMin(rs.getDouble("estoqueMin"));
-            prod.setForn(fornDAO.read(rs.getInt("idFornecedor")));
-            prod.setCat(catDAO.read(rs.getInt("idCategoria")));
-
+            if (rs.next()) {
+                prod.setId(rs.getInt("id"));
+                prod.setNome(rs.getString("nome"));
+                prod.setPreco(rs.getDouble("preco"));
+                prod.setQtd(rs.getDouble("qntd"));
+                prod.setTipoUn(rs.getString("tipoUn"));
+                prod.setEstoqueMin(rs.getDouble("estoqueMin"));
+                prod.setForn(fornDAO.read(rs.getInt("idFornecedor")));
+                prod.setCat(catDAO.read(rs.getInt("idCategoria")));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             ConnectionFactory.closeConnection(con, stmt, rs);
-            return prod;
         }
+        return prod;
     }
 
     public Produto read(int id) throws ClassNotFoundException {
