@@ -9,25 +9,99 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class CategoriaDAO {
 
-    public void add(Categoria c)
-    {
+    public void add(Categoria c) throws ClassNotFoundException {
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
 
+        try {
+
+            stmt = con.prepareStatement("INSERT INTO categoria (nome) " +
+                    "VALUES (?);");
+            stmt.setString(1, c.getNome());
+
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt);
+        }
     }
-    public void up(Categoria c)
-    {
+    public void up(Categoria c) throws ClassNotFoundException {
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
 
+        try {
+
+            stmt = con.prepareStatement("UPDATE categoria SET nome = ? WHERE id = ?;");
+            stmt.setString(1, c.getNome());
+            stmt.setInt(2, c.getId());
+
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt);
+        }
     }
 
-    public void listAll() {
+    public List<Categoria> listAll() throws ClassNotFoundException {
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<Categoria> lista = new ArrayList<>();
 
+        try {
+            stmt = con.prepareStatement("SELECT * FROM categoria WHERE deleted_at is NULL;");
+            rs = stmt.executeQuery();
+
+            while (rs.next()){
+                Categoria cat = new Categoria();
+                cat.setId(rs.getInt("id"));
+                cat.setNome(rs.getString("nome"));
+                lista.add(cat);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+
+        }
+        return lista;
     }
-    public void del(Categoria c){   // ou pelo id, public void del(int id)
 
+    public void del(Categoria c) throws ClassNotFoundException {   // ou pelo id, public void del(int id)
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+
+        //Formatando a data
+        DateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
+        Date date = new Date(System.currentTimeMillis());
+        String data = dateFormat.format(date);
+
+
+        try {
+
+            stmt = con.prepareStatement("UPDATE categoria SET deleted_at = ? WHERE id = ?;");
+            stmt.setString(1, data);
+            stmt.setInt(2, c.getId());
+
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt);
+        }
 
     }
 
