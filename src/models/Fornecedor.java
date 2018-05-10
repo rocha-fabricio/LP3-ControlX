@@ -6,8 +6,8 @@ public class Fornecedor {
     private String cnpj;
     private String telefone1;
     private String telefone2;
-    private long cep;
-    private String num;
+    private String cep;
+    private int num;
     private String rua;
     private String comp;
     private String bairro;
@@ -51,17 +51,17 @@ public class Fornecedor {
         this.telefone2 = telefone2;
     }
     //-------x----------------x--------
-    public long getCep(){
+    public String getCep(){
         return this.cep;
     }
-    public void setCep(long cep){
+    public void setCep(String cep){
         this.cep = cep;
     }
     //-------x----------------x--------
-    public String getNum(){
+    public int getNum(){
         return this.num;
     }
-    public void setNum(String num){
+    public void setNum(int num){
         this.num = num;
     }
     //-------x----------------x--------
@@ -102,7 +102,7 @@ public class Fornecedor {
     //-------x----------------x--------
     //Construtores
     //-------x----------------x--------
-    public Fornecedor(int id, String cpnj, String telefone1, String telefone2, long cep, String num, String rua, String comp, String bairro, String cidade, String estado, String nome)
+    public Fornecedor(int id, String cpnj, String telefone1, String telefone2, String cep, int num, String rua, String comp, String bairro, String cidade, String estado, String nome)
     {
         this.id = id;
         this.cnpj = cpnj;

@@ -10,8 +10,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 public class ProdutoDAO {
 
@@ -24,7 +29,7 @@ public class ProdutoDAO {
 
         try {
 
-            stmt = con.prepareStatement("INSERT INTO produtos (nome, preco, qtd, tipoUn, estoqueMin, idFornecedor, idCategoria) " +
+            stmt = con.prepareStatement("INSERT INTO produtos (nome, preco, qntd, tipoUn, estoqueMin, idFornecedor, idCategoria) " +
                     "VALUES (?, ?, ?, ?, ?);");
             stmt.setString(1, p.getNome());
             stmt.setDouble(2, p.getPreco());
@@ -49,7 +54,7 @@ public class ProdutoDAO {
 
         try {
 
-            stmt = con.prepareStatement("UPDATE produtos SET nome = ?, preco = ?, qtd = ?, " +
+            stmt = con.prepareStatement("UPDATE produtos SET nome = ?, preco = ?, qntd = ?, " +
                     "tipoUn = ?, estoqueMin = ?, idFornecedor = ?, idCategoria = ? WHERE id = ?;");
             stmt.setString(1, p.getNome());
             stmt.setDouble(2, p.getPreco());
@@ -77,14 +82,14 @@ public class ProdutoDAO {
         List<Produto> lista = new ArrayList<>();
 
         try {
-            stmt = con.prepareStatement("SELECT * FROM produtos;");
-            stmt.executeQuery();
+            stmt = con.prepareStatement("SELECT * FROM produtos WHERE deleted_at is NULL;");
+            rs = stmt.executeQuery();
 
             while (rs.next()){
                 Produto prod = new Produto();
                 prod.setId(rs.getInt("id"));
                 prod.setNome(rs.getString("nome"));
-                prod.setPreco(rs.getDouble("qtd"));
+                prod.setPreco(rs.getDouble("qntd"));
                 prod.setTipoUn(rs.getString("tipoUn"));
                 prod.setEstoqueMin(rs.getDouble("estoqueMin"));
                 prod.setForn(fornDAO.read(rs.getInt("idFornecedor")));
@@ -95,24 +100,92 @@ public class ProdutoDAO {
             e.printStackTrace();
         } finally {
             ConnectionFactory.closeConnection(con, stmt, rs);
-            return lista;
+
         }
-
-
-    }
-
-    public void del(Produto p) {   // ou pelo id, public void del(int id)
+        return lista;
 
     }
 
-    public Produto read(Produto p) {
+    public void del(int id) throws ClassNotFoundException {   // ou pelo id, public void del(int id)
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
 
-        return null;
+        //Formatando a data
+        DateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
+        Date date = new Date(System.currentTimeMillis());
+        String data = dateFormat.format(date);
+
+
+        try {
+
+            stmt = con.prepareStatement("UPDATE produtos SET deleted_at = ? WHERE id = ?;");
+            stmt.setString(1, data);
+            stmt.setInt(2, id);
+
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt);
+        }
     }
 
-    public Produto read(int id) {
+    public Produto read(Produto p) throws ClassNotFoundException {
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
         Produto prod = new Produto();
 
+        try {
+            stmt = con.prepareStatement("SELECT * FROM produtos WHERE id = ? ,deleted_at = NULL;");
+            stmt.setInt(1, p.getId());
+            rs = stmt.executeQuery();
+
+            prod.setId(rs.getInt("id"));
+            prod.setNome(rs.getString("nome"));
+            prod.setPreco(rs.getDouble("qntd"));
+            prod.setTipoUn(rs.getString("tipoUn"));
+            prod.setEstoqueMin(rs.getDouble("estoqueMin"));
+            prod.setForn(fornDAO.read(rs.getInt("idFornecedor")));
+            prod.setCat(catDAO.read(rs.getInt("idCategoria")));
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+            return prod;
+        }
+    }
+
+    public Produto read(int id) throws ClassNotFoundException {
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Produto prod = new Produto();
+
+        try {
+            stmt = con.prepareStatement("SELECT id, nome, preco, qntd, tipoUn," +
+                    " estoqueMin, idFornecedor, idCategoria" +
+                    " FROM produtos WHERE id = ? and deleted_at is NULL;");
+            stmt.setInt(1, id);
+            rs = stmt.executeQuery();
+
+                if (rs.next()) {
+                    prod.setId(rs.getInt("id"));
+                    prod.setNome(rs.getString("nome"));
+                    prod.setPreco(rs.getDouble("preco"));
+                    prod.setQtd(rs.getDouble("qntd"));
+                    prod.setTipoUn(rs.getString("tipoUn"));
+                    prod.setEstoqueMin(rs.getDouble("estoqueMin"));
+                    prod.setForn(fornDAO.read(rs.getInt("idFornecedor")));
+                    prod.setCat(catDAO.read(rs.getInt("idCategoria")));
+                }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
         return prod;
     }
 }

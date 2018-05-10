@@ -9,10 +9,13 @@ import java.util.List;
 
 public class CompraDAO {
 
-    public void comprar(Compra c) {
+    public void comprar(Compra c) throws ClassNotFoundException {
         double total = 0;
+        ProdutoDAO prodDAO = new ProdutoDAO();
+        List<Produto> prod = prodDAO.listAll();
+
         for (Produto p : c.getProdutos()) {              //p é o Produto da Venda, com qtd de venda
-            for (Produto prods : ProdutoDAO.prods)      //prods é o Produto do estoque, com a qtd do estoque
+            for (Produto prods : prod)      //prods é o Produto do estoque, com a qtd do estoque
                 if (p.getId() == prods.getId())
                     prods.setQtd(prods.getQtd() + p.getQtd());
             total += (p.getQtd() * p.getPreco());

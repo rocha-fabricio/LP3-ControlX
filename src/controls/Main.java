@@ -10,12 +10,17 @@ import models.Categoria;
 import models.Fornecedor;
 import models.Produto;
 
+import java.util.List;
+
 public class Main extends Application {
 
     static Stage stage;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        ProdutoDAO dao = new ProdutoDAO();
+        dao.del(1);
+
         Parent root = FXMLLoader.load(getClass().getResource("/views/Login.fxml"));
         primaryStage.setTitle("ControlX - Entrar");
         stage = primaryStage;
