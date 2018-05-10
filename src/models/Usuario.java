@@ -5,13 +5,13 @@ import java.util.Date;
 public class Usuario {
     private int id;
     private String nome;
-    private long cpf;
-    private char sexo;
+    private String cpf;
+    private String sexo;
     private Date dataNasc;
     private String telefone1;
     private String telefone2;
-    private long cep;
-    private String num;
+    private String cep;
+    private int num;
     private String rua;
     private String comp;
     private String bairro;
@@ -37,17 +37,17 @@ public class Usuario {
         this.id = id;
     }
     //-------x----------------x--------
-    public long getCpf(){
+    public String getCpf(){
         return this.cpf;
     }
-    public void setCpf(long cpf){
+    public void setCpf(String cpf){
         this.cpf = cpf;
     }
     //-------x----------------x--------
-    public char getSexo(){
+    public String getSexo(){
         return this.sexo;
     }
-    public void setSexo(char sexo){
+    public void setSexo(String sexo){
         this.sexo = sexo;
     }
     //-------x----------------x--------
@@ -72,17 +72,17 @@ public class Usuario {
         this.telefone2 = telefone2;
     }
     //-------x----------------x--------
-    public long getCep(){
+    public String getCep(){
         return this.cep;
     }
-    public void setCep(long cep){
+    public void setCep(String cep){
         this.cep = cep;
     }
     //-------x----------------x--------
-    public String getNum(){
+    public int getNum(){
         return this.num;
     }
-    public void setNum(String num){
+    public void setNum(int num){
         this.num = num;
     }
     //-------x----------------x--------
@@ -153,7 +153,7 @@ public class Usuario {
     //-------x----------------x--------
     //Construtores
     //-------x----------------x--------
-    public Usuario(int id, String nome, long cpf, char sexo, Date dataNasc, String telefone1, String telefone2, long cep, String num, String rua, String comp, String bairro, String cidade, String estado, String login, String senha)
+    public Usuario(int id, String nome, String cpf, String sexo, Date dataNasc, String telefone1, String telefone2, String cep, int num, String rua, String comp, String bairro, String cidade, String estado, String login, String senha)
     {
         this.id = id;
         this.nome = nome;
@@ -171,6 +171,11 @@ public class Usuario {
         this.estado = estado;
         this.login = login;
         this.senha = senha;
+    }
+
+    public Usuario()
+    {
+
     }
     //-------x----------------x--------
 }

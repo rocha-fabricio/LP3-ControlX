@@ -15,7 +15,7 @@ public class CompraDAO {
         List<Produto> prod = prodDAO.listAll();
 
         for (Produto p : c.getProdutos()) {              //p é o Produto da Venda, com qtd de venda
-            for (Produto prods : prod)      //prods é o Produto do estoque, com a qtd do estoque
+            for (Produto prods : prod)                   //prods é o Produto do estoque, com a qtd do estoque
                 if (p.getId() == prods.getId())
                     prods.setQtd(prods.getQtd() + p.getQtd());
             total += (p.getQtd() * p.getPreco());
