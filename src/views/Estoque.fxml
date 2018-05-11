@@ -6,9 +6,37 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="controls.Estoque"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="438.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controls.Estoque">
+   <children>
+      <Pane layoutX="14.0" layoutY="105.0" prefHeight="308.0" prefWidth="574.0">
+         <children>
+            <TableView fx:id="tbView" layoutY="7.0" prefHeight="308.0" prefWidth="574.0">
+              <columns>
+                <TableColumn prefWidth="75.0" text="C1" />
+                <TableColumn prefWidth="75.0" text="C2" />
+              </columns>
+            </TableView>
+         </children>
+      </Pane>
+      <Pane layoutY="14.0" prefHeight="43.0" prefWidth="600.0">
+         <children>
+            <Button fx:id="btMenu" layoutX="39.0" layoutY="9.0" mnemonicParsing="false" text="Voltar" />
+            <Button layoutX="116.0" layoutY="9.0" mnemonicParsing="false" text="Categorias" />
+            <Button layoutX="222.0" layoutY="9.0" mnemonicParsing="false" text="Adicionar" />
+            <Button layoutX="325.0" layoutY="9.0" mnemonicParsing="false" text="Detalhes" />
+            <Button layoutX="417.0" layoutY="9.0" mnemonicParsing="false" text="Editar" />
+            <Button layoutX="488.0" layoutY="9.0" mnemonicParsing="false" text="Remover" />
+         </children>
+      </Pane>
+      <Pane layoutY="60.0" prefHeight="52.0" prefWidth="600.0">
+         <children>
+            <Label fx:id="txtPesquisar" layoutX="14.0" layoutY="19.0" text="Pesquisar:" />
+            <TextField layoutX="90.0" layoutY="14.0" prefHeight="25.0" prefWidth="348.0" />
+            <ChoiceBox fx:id="bxCategoria" layoutX="518.0" layoutY="14.0" prefHeight="25.0" prefWidth="68.0" />
+            <RadioButton layoutX="448.0" layoutY="5.0" mnemonicParsing="false" text="Nome" />
+            <RadioButton layoutX="448.0" layoutY="29.0" mnemonicParsing="false" text="ID" />
+         </children>
+      </Pane>
+   </children>
 </AnchorPane>
