@@ -105,6 +105,29 @@ public class CategoriaDAO {
 
     }
 
+    public Categoria read(Categoria c) throws ClassNotFoundException {
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Categoria cat = new Categoria();
+
+        try {
+            stmt = con.prepareStatement("SELECT id, nome FROM categoria WHERE id = ? and deleted_at is NULL;");
+            stmt.setInt(1, c.getId());
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                cat.setId(rs.getInt("id"));
+                cat.setNome(rs.getString("nome"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+            return cat;
+        }
+    }
+
     public Categoria read(int id) throws ClassNotFoundException {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;

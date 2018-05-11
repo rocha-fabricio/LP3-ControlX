@@ -6,15 +6,18 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane prefHeight="438.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controls.Estoque">
    <children>
       <Pane layoutX="14.0" layoutY="105.0" prefHeight="308.0" prefWidth="574.0">
          <children>
             <TableView fx:id="tbView" layoutY="7.0" prefHeight="308.0" prefWidth="574.0">
               <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
+                <TableColumn fx:id="tcId" prefWidth="45.0" text="ID" />
+                <TableColumn fx:id="tcNome" prefWidth="335.0" text="Nome" />
+                  <TableColumn fx:id="tcPreco" minWidth="0.0" prefWidth="55.0" text="Preço" />
+                  <TableColumn fx:id="tcQtd" minWidth="0.0" prefWidth="46.0" text="Qtd" />
+                  <TableColumn fx:id="tcUn" prefWidth="30.0" text="Un" />
+                  <TableColumn fx:id="tcCat" prefWidth="62.0" text="Cat" />
               </columns>
             </TableView>
          </children>

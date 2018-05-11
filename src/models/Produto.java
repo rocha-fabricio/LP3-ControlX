@@ -88,6 +88,16 @@ public class Produto {
         this.tipoUn = tipoUn;
         this.estoqueMin = estoqueMin;
     }
+
+    public Produto(int id, String nome, double preco, double qtd, String tipoUn, Categoria cat) {
+        this.id = id;
+        this.nome = nome;
+        this.preco = preco;
+        this.qtd = qtd;
+        this.tipoUn = tipoUn;
+        this.cat = cat;
+    }
+
     //-------x----------------x--------
     public Produto(){
     }
