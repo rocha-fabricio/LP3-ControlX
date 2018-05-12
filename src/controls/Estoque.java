@@ -24,15 +24,23 @@ import java.util.ResourceBundle;
 public class Estoque implements Initializable {
 
     @FXML
-    private TableView<Produto> tbView;
+            private TableView<Produto> tbView;
     @FXML
-    private RadioButton rdId;
+            private RadioButton rdId;
     @FXML
-    private RadioButton rdNome;
+            private RadioButton rdNome;
     @FXML
-    private TextField txPesquisar;
+            private TextField txPesquisar;
     @FXML
-    private ComboBox cbCat;
+            private ComboBox cbCat;
+    @FXML
+            private Menu menuAdd;
+    @FXML
+            private Menu menuRemove;
+    @FXML
+            private Menu menuEdit;
+    @FXML
+            private Menu menuVoltar;
 
     ProdutoDAO pdao = new ProdutoDAO();
     CategoriaDAO cdao = new CategoriaDAO();
@@ -50,6 +58,7 @@ public class Estoque implements Initializable {
 
     public void listView(List<Produto> prods) throws ClassNotFoundException {
         tbView.getItems().clear();
+        tbView.getColumns().clear();
 
         ObservableList<Produto> lista = FXCollections.observableArrayList();
 
@@ -62,7 +71,7 @@ public class Estoque implements Initializable {
         idColumn.setCellValueFactory( new PropertyValueFactory<>("id") );
 
         TableColumn<Produto, String> nomeColumn = new TableColumn<>("Nome");
-        nomeColumn.setMinWidth(200);
+        nomeColumn.setMinWidth(250);
         nomeColumn.setCellValueFactory( new PropertyValueFactory<>("nome") );
 
         TableColumn<Produto, Double> precoColumn = new TableColumn<>("Preço (R$)");
@@ -131,5 +140,8 @@ public class Estoque implements Initializable {
         }
 
         cbCat.setItems(opcoes);
+        cbCat.setValue("Todos");
     }
+
+    //public void verifica
 }

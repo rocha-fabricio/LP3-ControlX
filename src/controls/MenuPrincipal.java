@@ -16,7 +16,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class Menu {
+public class MenuPrincipal
+{
 
     public void btProdutos() throws IOException {
         Stage primaryStage = new Stage();
