@@ -24,33 +24,34 @@ import java.util.ResourceBundle;
 public class Estoque implements Initializable {
 
     @FXML
-            private TableView<Produto> tbView;
+    private TableView<Produto> tbView;
     @FXML
-            private RadioButton rdId;
+    private RadioButton rdId;
     @FXML
-            private RadioButton rdNome;
+    private RadioButton rdNome;
     @FXML
-            private TextField txPesquisar;
+    private TextField txPesquisar;
     @FXML
-            private ComboBox cbCat;
+    private ComboBox cbCat;
     @FXML
-            private Menu menuAdd;
+    private Menu menuAdd;
     @FXML
-            private Menu menuRemove;
+    private Menu menuRemove;
     @FXML
-            private Menu menuEdit;
+    private Menu menuEdit;
     @FXML
-            private Menu menuVoltar;
+    private Menu menuVoltar;
 
-    ProdutoDAO pdao = new ProdutoDAO();
-    CategoriaDAO cdao = new CategoriaDAO();
-    FornecedorDAO fdao = new FornecedorDAO();
+    private ProdutoDAO pdao = new ProdutoDAO();
+    private CategoriaDAO cdao = new CategoriaDAO();
+    private FornecedorDAO fdao = new FornecedorDAO();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
             listView(pdao.listAll());
             iniComboBox();
+            verificaSelecao();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -68,53 +69,56 @@ public class Estoque implements Initializable {
 
         TableColumn<Produto, Integer> idColumn = new TableColumn<>("ID");
         idColumn.setMinWidth(50);
-        idColumn.setCellValueFactory( new PropertyValueFactory<>("id") );
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
 
         TableColumn<Produto, String> nomeColumn = new TableColumn<>("Nome");
         nomeColumn.setMinWidth(250);
-        nomeColumn.setCellValueFactory( new PropertyValueFactory<>("nome") );
+        nomeColumn.setCellValueFactory(new PropertyValueFactory<>("nome"));
 
         TableColumn<Produto, Double> precoColumn = new TableColumn<>("Preço (R$)");
         precoColumn.setMinWidth(60);
-        precoColumn.setCellValueFactory( new PropertyValueFactory<>("preco") );
+        precoColumn.setCellValueFactory(new PropertyValueFactory<>("preco"));
 
         TableColumn<Produto, Double> qtdColumn = new TableColumn<>("Qtd");
         qtdColumn.setMinWidth(60);
-        qtdColumn.setCellValueFactory( new PropertyValueFactory<>("qtd") );
+        qtdColumn.setCellValueFactory(new PropertyValueFactory<>("qtd"));
 
         TableColumn<Produto, String> unColumn = new TableColumn<>("Un");
         unColumn.setMinWidth(60);
-        unColumn.setCellValueFactory( new PropertyValueFactory<>("tipoUn") );
+        unColumn.setCellValueFactory(new PropertyValueFactory<>("tipoUn"));
 
         TableColumn<Produto, String> catColumn = new TableColumn<>("Cat");
         catColumn.setMinWidth(50);
-        catColumn.setCellValueFactory( new PropertyValueFactory<>("cat") );
+        catColumn.setCellValueFactory(new PropertyValueFactory<>("cat"));
 
         tbView.setItems(lista);
 
         tbView.getColumns().addAll(idColumn, nomeColumn, precoColumn, qtdColumn, unColumn, catColumn);
+        verificaSelecao();
     }
 
-    public void addProduto(){
-
-    }
-
-    public void removeProduto(){
+    public void botaoAddProduto() {
 
     }
 
-    public void editProduto(){
+    public void botaoRemoveProduto() {
+
+    }
+
+    public void botaoEditProduto() {
+
+    }
+
+    public void botaoVoltar(){
 
     }
 
     public void pesquisarProduto() throws ClassNotFoundException {
-        if(rdId.isSelected()){
+        if (rdId.isSelected()) {
             listView(pdao.listAllById(txPesquisar.getText()));
-        }
-        else if(rdNome.isSelected()){
+        } else if (rdNome.isSelected()) {
             listView(pdao.listAllByName(txPesquisar.getText()));
-        }
-        else if(txPesquisar.getText().equals("")){
+        } else if (txPesquisar.getText().equals("")) {
             listView(pdao.listAll());
         }
 
@@ -122,7 +126,7 @@ public class Estoque implements Initializable {
 
     public void pesquisarCategoria() throws ClassNotFoundException {
         String cat = cbCat.getValue().toString();
-        if (cat.equals("Todos")){
+        if (cat.equals("Todos")) {
             listView(pdao.listAll());
         } else {
             Categoria c = cdao.readNome(cat);
@@ -135,7 +139,7 @@ public class Estoque implements Initializable {
         List<Categoria> categorias = cdao.listAll();
         opcoes.add("Todos");
 
-        for(Categoria cat : categorias){
+        for (Categoria cat : categorias) {
             opcoes.add(cat.getNome());
         }
 
@@ -143,5 +147,15 @@ public class Estoque implements Initializable {
         cbCat.setValue("Todos");
     }
 
-    //public void verifica
+    public void verificaSelecao(){
+        if (tbView.isFocused()){
+            menuAdd.setDisable(false);
+            menuRemove.setDisable(false);
+            menuEdit.setDisable(false);
+        } else {
+            menuAdd.setDisable(true);
+            menuRemove.setDisable(true);
+            menuEdit.setDisable(true);
+        }
+    }
 }

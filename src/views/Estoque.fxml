@@ -16,17 +16,17 @@
          <children>
             <MenuBar prefHeight="29.0" prefWidth="602.0" style="-fx-border-radius: 20;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <menus>
-                <Menu fx:id="menuAdd" mnemonicParsing="false" text="Adicionar" />
-                <Menu fx:id="menuRemove" mnemonicParsing="false" text="Remover" />
-                <Menu fx:id="menuEdit" mnemonicParsing="false" text="Editar" />
-                  <Menu fx:id="menuVoltar" mnemonicParsing="false" text="Voltar" />
+                <Menu fx:id="menuAdd" mnemonicParsing="false" onAction="#botaoAddProduto" text="Adicionar" />
+                <Menu fx:id="menuRemove" mnemonicParsing="false" onAction="#botaoRemoveProduto" text="Remover" />
+                <Menu fx:id="menuEdit" mnemonicParsing="false" onAction="#botaoEditProduto" text="Editar" />
+                  <Menu fx:id="menuVoltar" mnemonicParsing="false" onAction="#botaoVoltar" text="Voltar" />
               </menus>
             </MenuBar>
          </children>
       </AnchorPane>
       <AnchorPane layoutX="14.0" layoutY="93.0" prefHeight="315.0" prefWidth="578.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="93.0">
          <children>
-            <TableView fx:id="tbView" prefHeight="310.0" prefWidth="578.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <TableView fx:id="tbView" onMouseClicked="#verificaSelecao" prefHeight="310.0" prefWidth="578.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="13.0" layoutY="29.0" prefHeight="64.0" prefWidth="574.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="29.0">
@@ -37,7 +37,7 @@
                </toggleGroup></RadioButton>
             <RadioButton fx:id="rdNome" layoutX="387.0" layoutY="36.0" mnemonicParsing="false" text="Nome" toggleGroup="$group" AnchorPane.rightAnchor="126.0" />
             <TextField fx:id="txPesquisar" layoutX="74.0" layoutY="20.0" onKeyReleased="#pesquisarProduto" prefHeight="26.0" prefWidth="305.0" AnchorPane.leftAnchor="74.0" AnchorPane.rightAnchor="197.0" />
-            <Label fx:id="txtPesquisar" layoutY="25.0" text="Pesquisar:" AnchorPane.leftAnchor="0.0" />
+            <Label fx:id="lbPesquisar" layoutY="25.0" text="Pesquisar:" AnchorPane.leftAnchor="0.0" />
             <ComboBox fx:id="cbCat" layoutX="456.0" layoutY="29.0" onHidden="#pesquisarCategoria" prefHeight="26.0" prefWidth="120.0" AnchorPane.rightAnchor="0.0" />
             <Label fx:id="lbCategorias" layoutX="479.0" layoutY="11.0" text="Categorias:" AnchorPane.rightAnchor="22.0" />
          </children>
