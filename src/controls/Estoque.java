@@ -9,12 +9,16 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import models.Categoria;
 import models.Produto;
 
 import java.net.URL;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class Estoque implements Initializable {
@@ -45,6 +49,7 @@ public class Estoque implements Initializable {
 
     public void listView(List<Produto> prods) throws ClassNotFoundException {
         tbView.getItems().clear();
+
         ObservableList<Produto> lista = FXCollections.observableArrayList();
 
         for (Produto p : prods) {
@@ -59,7 +64,7 @@ public class Estoque implements Initializable {
         nomeColumn.setMinWidth(200);
         nomeColumn.setCellValueFactory( new PropertyValueFactory<>("nome") );
 
-        TableColumn<Produto, Double> precoColumn = new TableColumn<>("Preço");
+        TableColumn<Produto, Double> precoColumn = new TableColumn<>("Preço (R$)");
         precoColumn.setMinWidth(60);
         precoColumn.setCellValueFactory( new PropertyValueFactory<>("preco") );
 
@@ -97,7 +102,12 @@ public class Estoque implements Initializable {
             listView(pdao.listAllById(txPesquisar.getText()));
         }
         else if(rdNome.isSelected()){
-
+            listView(pdao.listAllByName(txPesquisar.getText()));
         }
+        else if(txPesquisar.getText().equals("")){
+            listView(pdao.listAll());
+        }
+
     }
+
 }

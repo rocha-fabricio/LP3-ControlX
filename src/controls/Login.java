@@ -14,7 +14,9 @@ public class Login {
 
     @FXML
     private PasswordField txtPassword;
+    @FXML
     private TextField txtLogin;
+
         @FXML
         public void logar() throws IOException {
             Stage primaryStage = new Stage();
