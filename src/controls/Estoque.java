@@ -32,7 +32,7 @@ public class Estoque implements Initializable {
     @FXML
     private TextField txPesquisar;
     @FXML
-    private ChoiceBox bxCategoria;
+    private ComboBox cbCat;
 
     ProdutoDAO pdao = new ProdutoDAO();
     CategoriaDAO cdao = new CategoriaDAO();
@@ -42,6 +42,7 @@ public class Estoque implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         try {
             listView(pdao.listAll());
+            iniComboBox();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -110,4 +111,25 @@ public class Estoque implements Initializable {
 
     }
 
+    public void pesquisarCategoria() throws ClassNotFoundException {
+        String cat = cbCat.getValue().toString();
+        if (cat.equals("Todos")){
+            listView(pdao.listAll());
+        } else {
+            Categoria c = cdao.readNome(cat);
+            listView(pdao.listAllByCategoria(c.getId()));
+        }
+    }
+
+    public void iniComboBox() throws ClassNotFoundException {
+        ObservableList<String> opcoes = FXCollections.observableArrayList();
+        List<Categoria> categorias = cdao.listAll();
+        opcoes.add("Todos");
+
+        for(Categoria cat : categorias){
+            opcoes.add(cat.getNome());
+        }
+
+        cbCat.setItems(opcoes);
+    }
 }

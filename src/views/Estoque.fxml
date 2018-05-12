@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="420.0" prefWidth="602.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controls.Estoque">
+<AnchorPane prefHeight="420.0" prefWidth="602.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controls.Estoque">
    <children>
       <AnchorPane layoutX="6.0" layoutY="8.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -20,21 +24,22 @@
             </MenuBar>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="14.0" layoutY="105.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="105.0">
+      <AnchorPane layoutX="14.0" layoutY="93.0" prefHeight="315.0" prefWidth="578.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="93.0">
          <children>
-            <TableView fx:id="tbView" prefHeight="308.0" prefWidth="574.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <TableView fx:id="tbView" prefHeight="310.0" prefWidth="578.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="13.0" layoutY="29.0" prefHeight="64.0" prefWidth="574.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="29.0">
          <children>
-            <RadioButton fx:id="rdId" layoutX="403.0" layoutY="11.0" mnemonicParsing="false" selected="true" text="ID" AnchorPane.rightAnchor="135.0">
+            <RadioButton fx:id="rdId" layoutX="387.0" layoutY="11.0" mnemonicParsing="false" selected="true" text="ID" AnchorPane.rightAnchor="151.0">
                <toggleGroup>
                   <ToggleGroup fx:id="group" />
                </toggleGroup></RadioButton>
-            <RadioButton fx:id="rdNome" layoutX="403.0" layoutY="36.0" mnemonicParsing="false" text="Nome" toggleGroup="$group" AnchorPane.rightAnchor="110.0" />
-            <ChoiceBox fx:id="bxCategoria" layoutX="506.0" layoutY="20.0" prefHeight="25.0" prefWidth="100.0" AnchorPane.rightAnchor="2.0" />
-            <TextField fx:id="txPesquisar" layoutX="74.0" layoutY="20.0" onKeyReleased="#pesquisarProduto" prefHeight="25.0" prefWidth="315.0" AnchorPane.leftAnchor="74.0" AnchorPane.rightAnchor="187.0" />
+            <RadioButton fx:id="rdNome" layoutX="387.0" layoutY="36.0" mnemonicParsing="false" text="Nome" toggleGroup="$group" AnchorPane.rightAnchor="126.0" />
+            <TextField fx:id="txPesquisar" layoutX="74.0" layoutY="20.0" onKeyReleased="#pesquisarProduto" prefHeight="26.0" prefWidth="305.0" AnchorPane.leftAnchor="74.0" AnchorPane.rightAnchor="197.0" />
             <Label fx:id="txtPesquisar" layoutY="25.0" text="Pesquisar:" AnchorPane.leftAnchor="0.0" />
+            <ComboBox fx:id="cbCat" layoutX="456.0" layoutY="29.0" onHidden="#pesquisarCategoria" onMouseExited="#pesquisarCategoria" prefHeight="26.0" prefWidth="120.0" promptText="Todos" AnchorPane.rightAnchor="0.0" />
+            <Label fx:id="lbCategorias" layoutX="479.0" layoutY="11.0" text="Categorias:" AnchorPane.rightAnchor="22.0" />
          </children>
       </AnchorPane>
    </children>
