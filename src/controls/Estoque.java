@@ -7,8 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import models.Categoria;
 import models.Produto;
@@ -22,6 +21,14 @@ public class Estoque implements Initializable {
 
     @FXML
     private TableView<Produto> tbView;
+    @FXML
+    private RadioButton rdId;
+    @FXML
+    private RadioButton rdNome;
+    @FXML
+    private TextField txPesquisar;
+    @FXML
+    private ChoiceBox bxCategoria;
 
     ProdutoDAO pdao = new ProdutoDAO();
     CategoriaDAO cdao = new CategoriaDAO();
@@ -30,16 +37,16 @@ public class Estoque implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            listView();
+            listView(pdao.listAll());
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
 
-    public void listView() throws ClassNotFoundException {
+    public void listView(List<Produto> prods) throws ClassNotFoundException {
+        tbView.getItems().clear();
         ObservableList<Produto> lista = FXCollections.observableArrayList();
 
-        List <Produto> prods = pdao.listAll();
         for (Produto p : prods) {
             lista.add(new Produto(p.getId(), p.getNome(), p.getPreco(), p.getQtd(), p.getTipoUn(), p.getCat()));
         }
@@ -71,5 +78,26 @@ public class Estoque implements Initializable {
         tbView.setItems(lista);
 
         tbView.getColumns().addAll(idColumn, nomeColumn, precoColumn, qtdColumn, unColumn, catColumn);
+    }
+
+    public void addProduto(){
+
+    }
+
+    public void removeProduto(){
+
+    }
+
+    public void editProduto(){
+
+    }
+
+    public void pesquisarProduto() throws ClassNotFoundException {
+        if(rdId.isSelected()){
+            listView(pdao.listAllById(txPesquisar.getText()));
+        }
+        else if(rdNome.isSelected()){
+
+        }
     }
 }

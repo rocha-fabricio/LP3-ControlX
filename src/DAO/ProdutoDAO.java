@@ -192,4 +192,35 @@ public class ProdutoDAO {
         }
         return prod;
     }
+
+    public List<Produto> listAllById(String id) throws ClassNotFoundException {
+
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<Produto> lista = new ArrayList<>();
+
+        try {
+            stmt = con.prepareStatement("SELECT * FROM produtos WHERE id LIKE ? AND deleted_at is NULL;");
+            stmt.setString(1, "'" + id + "%'");
+            rs = stmt.executeQuery();
+
+            while (rs.next()){
+                Produto prod = new Produto();
+                prod.setId(rs.getInt("id"));
+                prod.setNome(rs.getString("nome"));
+                prod.setPreco(rs.getDouble("qntd"));
+                prod.setTipoUn(rs.getString("tipoUn"));
+                prod.setEstoqueMin(rs.getDouble("estoqueMin"));
+                prod.setForn(fornDAO.read(rs.getInt("idFornecedor")));
+                prod.setCat(catDAO.read(rs.getInt("idCategoria")));
+                lista.add(prod);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+        return lista;
+    }
 }
