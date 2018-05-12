@@ -6,11 +6,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="438.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controls.Estoque">
+<AnchorPane prefHeight="420.0" prefWidth="602.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controls.Estoque">
    <children>
-      <Pane layoutX="6.0" layoutY="8.0" prefHeight="43.0" prefWidth="586.0" stylesheets="@estilo.css">
+      <AnchorPane layoutX="6.0" layoutY="8.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <MenuBar layoutX="6.0" layoutY="7.0" prefHeight="29.0" prefWidth="574.0" style="-fx-border-radius: 20;">
+            <MenuBar prefHeight="29.0" prefWidth="602.0" style="-fx-border-radius: 20;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <menus>
                 <Menu mnemonicParsing="false" text="Adicionar" />
                 <Menu mnemonicParsing="false" text="Remover" />
@@ -19,29 +19,20 @@
               </menus>
             </MenuBar>
          </children>
-      </Pane>
-      <Pane layoutX="14.0" layoutY="105.0" prefHeight="308.0" prefWidth="574.0">
+      </AnchorPane>
+      <AnchorPane layoutX="14.0" layoutY="105.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="105.0">
          <children>
-            <TableView fx:id="tbView" layoutY="7.0" prefHeight="308.0" prefWidth="574.0">
-              <columns>
-                <TableColumn fx:id="tcId" prefWidth="45.0" text="ID" />
-                <TableColumn fx:id="tcNome" prefWidth="335.0" text="Nome" />
-                  <TableColumn fx:id="tcPreco" minWidth="0.0" prefWidth="55.0" text="Preço" />
-                  <TableColumn fx:id="tcQtd" minWidth="0.0" prefWidth="46.0" text="Qtd" />
-                  <TableColumn fx:id="tcUn" prefWidth="30.0" text="Un" />
-                  <TableColumn fx:id="tcCat" prefWidth="62.0" text="Cat" />
-              </columns>
-            </TableView>
+            <TableView fx:id="tbView" prefHeight="308.0" prefWidth="574.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children>
-      </Pane>
-      <Pane layoutY="60.0" prefHeight="52.0" prefWidth="600.0">
+      </AnchorPane>
+      <AnchorPane layoutX="13.0" layoutY="29.0" prefHeight="64.0" prefWidth="574.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="29.0">
          <children>
-            <Label fx:id="txtPesquisar" layoutX="14.0" layoutY="19.0" text="Pesquisar:" />
-            <TextField layoutX="90.0" layoutY="14.0" prefHeight="25.0" prefWidth="348.0" />
-            <ChoiceBox fx:id="bxCategoria" layoutX="518.0" layoutY="14.0" prefHeight="25.0" prefWidth="68.0" />
-            <RadioButton layoutX="448.0" layoutY="5.0" mnemonicParsing="false" text="Nome" />
-            <RadioButton layoutX="448.0" layoutY="29.0" mnemonicParsing="false" text="ID" />
+            <RadioButton layoutX="403.0" layoutY="11.0" mnemonicParsing="false" text="ID" AnchorPane.rightAnchor="135.0" />
+            <RadioButton layoutX="403.0" layoutY="36.0" mnemonicParsing="false" text="Nome" AnchorPane.rightAnchor="110.0" />
+            <ChoiceBox fx:id="bxCategoria" layoutX="506.0" layoutY="20.0" prefHeight="25.0" prefWidth="100.0" AnchorPane.rightAnchor="2.0" />
+            <TextField layoutX="74.0" layoutY="20.0" prefHeight="25.0" prefWidth="315.0" AnchorPane.leftAnchor="74.0" AnchorPane.rightAnchor="187.0" />
+            <Label fx:id="txtPesquisar" layoutY="25.0" text="Pesquisar:" AnchorPane.leftAnchor="0.0" />
          </children>
-      </Pane>
+      </AnchorPane>
    </children>
 </AnchorPane>
