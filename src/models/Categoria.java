@@ -41,4 +41,10 @@ public class Categoria {
     public Categoria(){
     }
     //-------x----------------x--------
+
+    @Override
+    public String toString(){
+        return this.nome;
+    }
+
 }
