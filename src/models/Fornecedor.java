@@ -120,4 +120,10 @@ public class Fornecedor {
     public Fornecedor(){
 
     }
+
+    @Override
+    public String toString(){
+        return this.nome;
+    }
+
 }

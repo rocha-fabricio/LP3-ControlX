@@ -20,12 +20,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("/views/Login.fxml"));
-        primaryStage.setTitle("ControlX - Entrar");
-        stage = primaryStage;
-        primaryStage.setScene(new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()));
-        primaryStage.setResizable(false);
-        primaryStage.show();
+        new Login().show(primaryStage);
     }
 
     public static void main(String[] args) {

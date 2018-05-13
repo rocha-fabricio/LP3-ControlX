@@ -19,6 +19,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import models.Categoria;
+import models.Fornecedor;
 import models.Produto;
 
 import java.io.IOException;
@@ -50,6 +51,8 @@ public class Estoque implements Initializable {
     private Button btEdit;
     @FXML
     private Button btVoltar;
+    @FXML
+    Button btView;
 
     private ProdutoDAO pdao = new ProdutoDAO();
     private CategoriaDAO cdao = new CategoriaDAO();
@@ -87,7 +90,7 @@ public class Estoque implements Initializable {
             lista.add(new Produto(p.getId(), p.getNome(), p.getPreco(), p.getQtd(), p.getTipoUn(), p.getCat()));
         }
 
-        TableColumn<Produto, Integer> idColumn = new TableColumn<>("ID");
+        TableColumn<Produto, String> idColumn = new TableColumn<>("ID");
         idColumn.setMinWidth(50);
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
 
@@ -95,11 +98,11 @@ public class Estoque implements Initializable {
         nomeColumn.setMinWidth(250);
         nomeColumn.setCellValueFactory(new PropertyValueFactory<>("nome"));
 
-        TableColumn<Produto, Double> precoColumn = new TableColumn<>("Preço (R$)");
+        TableColumn<Produto, String> precoColumn = new TableColumn<>("Preço (R$)");
         precoColumn.setMinWidth(60);
         precoColumn.setCellValueFactory(new PropertyValueFactory<>("preco"));
 
-        TableColumn<Produto, Double> qtdColumn = new TableColumn<>("Qtd");
+        TableColumn<Produto, String> qtdColumn = new TableColumn<>("Qtd");
         qtdColumn.setMinWidth(60);
         qtdColumn.setCellValueFactory(new PropertyValueFactory<>("qtd"));
 
@@ -108,7 +111,7 @@ public class Estoque implements Initializable {
         unColumn.setCellValueFactory(new PropertyValueFactory<>("tipoUn"));
 
         TableColumn<Produto, String> catColumn = new TableColumn<>("Cat");
-        catColumn.setMinWidth(50);
+        catColumn.setMinWidth(60);
         catColumn.setCellValueFactory(new PropertyValueFactory<>("cat"));
 
         tbView.setItems(lista);
@@ -126,22 +129,34 @@ public class Estoque implements Initializable {
     }
 
     public void botaoEditProduto() throws IOException {
-        new AddProduto().show();
-        /*
-        new AddProduto(true,
+        new AddProduto(
+                true, false,
                 tbView.getSelectionModel().getSelectedItem().getNome(),
-                tbView.getSelectionModel().getSelectedItem().getId(),
-                tbView.getSelectionModel().getSelectedItem().getPreco(),
-                tbView.getSelectionModel().getSelectedItem().getQtd(),
+                String.valueOf(tbView.getSelectionModel().getSelectedItem().getId()),
+                String.valueOf(tbView.getSelectionModel().getSelectedItem().getPreco()),
+                String.valueOf(tbView.getSelectionModel().getSelectedItem().getQtd()),
                 tbView.getSelectionModel().getSelectedItem().getTipoUn(),
-                tbView.getSelectionModel().getSelectedItem().getEstoqueMin(),
-                tbView.getSelectionModel().getSelectedItem().getForn(),
-                tbView.getSelectionModel().getSelectedItem().getCat());
-        */
+                String.valueOf(tbView.getSelectionModel().getSelectedItem().getEstoqueMin()),
+                String.valueOf(tbView.getSelectionModel().getSelectedItem().getForn()),
+                String.valueOf(tbView.getSelectionModel().getSelectedItem().getCat()))
+                .show();
+    }
+
+    public void botaoViewProduto() throws IOException {
+        new AddProduto(
+                false, true,
+                tbView.getSelectionModel().getSelectedItem().getNome(),
+                Integer.toString(tbView.getSelectionModel().getSelectedItem().getId()),
+                Double.toString(tbView.getSelectionModel().getSelectedItem().getPreco()),
+                Double.toString(tbView.getSelectionModel().getSelectedItem().getQtd()),
+                tbView.getSelectionModel().getSelectedItem().getTipoUn(),
+                Double.toString(tbView.getSelectionModel().getSelectedItem().getEstoqueMin()),
+                String.valueOf(tbView.getSelectionModel().getSelectedItem().getForn()),
+                String.valueOf(tbView.getSelectionModel().getSelectedItem().getCat()))
+                .show();
     }
 
     public void botaoVoltar() throws IOException {
-
         Stage primaryStage = new Stage();
         Parent root = null;
         root = FXMLLoader.load(getClass().getResource("/views/MenuPrincipal.fxml"));
@@ -151,7 +166,6 @@ public class Estoque implements Initializable {
         primaryStage.setScene(new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()));
         primaryStage.setResizable(true);
         primaryStage.show();
-
     }
 
     public void pesquisarProduto() throws ClassNotFoundException {
@@ -192,9 +206,11 @@ public class Estoque implements Initializable {
         if (tbView.isFocused()){
             btRemove.setDisable(false);
             btEdit.setDisable(false);
+            btView.setDisable(false);
         } else {
             btRemove.setDisable(true);
             btEdit.setDisable(true);
+            btView.setDisable(true);
         }
     }
 }

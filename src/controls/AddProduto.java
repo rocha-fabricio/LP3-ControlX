@@ -1,17 +1,28 @@
 package controls;
 
+import DAO.CategoriaDAO;
+import DAO.FornecedorDAO;
+import DAO.ProdutoDAO;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import models.Categoria;
+import models.Fornecedor;
 import org.w3c.dom.Text;
 
-import java.awt.*;
+
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class AddProduto implements Initializable {
@@ -40,40 +51,39 @@ public class AddProduto implements Initializable {
     @FXML
     Button btCancelar;
 
+    private String nome, id, preco, qtd, un, estoqueMin, forn, cat;
+
+    ProdutoDAO pdao = new ProdutoDAO();
+    FornecedorDAO fdao = new FornecedorDAO();
+    CategoriaDAO cdao = new CategoriaDAO();
+
     public AddProduto(){
 
     }
 
     //Editar
-    public AddProduto(boolean edit, String txNome, String txId, String txPreco, String txQtd, String cbUn, String txEstoqueMin, String cbForn, String cbCat){
+    public AddProduto(boolean edit, boolean view, String txNome, String txId, String txPreco,
+                      String txQtd, String cbUn, String txEstoqueMin, String
+                              cbForn, String cbCat){
+
         this.edit = edit;
-        this.txNome.setText(txNome);
-        this.txId.setText(txId);
-        this.txPreco.setText(txPreco);
-        this.txQtd.setText(txQtd);
-        this.cbUn.setValue(cbUn);
-        this.txEstoqueMin.setText(txEstoqueMin);
-        this.cbForn.setValue(cbForn);
-        this.cbCat.setValue(cbCat);
-    }
-
-    //Ver
-    public AddProduto(String txNome, String txId, String txPreco, String txQtd, String cbUn, String txEstoqueMin, String cbForn, String cbCat, boolean view){
-        this.txNome.setText(txNome);
-        this.txId.setText(txId);
-        this.txPreco.setText(txPreco);
-        this.txQtd.setText(txQtd);
-        this.cbUn.setValue(cbUn);
-        this.txEstoqueMin.setText(txEstoqueMin);
-        this.cbForn.setValue(cbForn);
-        this.cbCat.setValue(cbCat);
         this.view = view;
+        this.nome = txNome;
+        this.id = txId;
+        this.preco = txPreco;
+        this.qtd = txQtd;
+        this.un = cbUn;
+        this.estoqueMin = txEstoqueMin;
+        this.forn = cbForn;
+        this.cat = cbCat;
     }
 
+    @FXML
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        try {
         if (view == true){
-
+            preencher();
             txNome.setEditable(false);
             txId.setEditable(false);
             txPreco.setEditable(false);
@@ -82,27 +92,73 @@ public class AddProduto implements Initializable {
             txEstoqueMin.setEditable(false);
             cbForn.setEditable(false);
             cbCat.setEditable(false);
-
-        } else if (edit == true){
-
         }
+        if (edit == true){
+            preencher();
+        }
+            iniComboBox();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void preencher(){
+        txNome.setText(nome);
+        txId.setText(id);
+        txPreco.setText(preco);
+        txQtd.setText(qtd);
+        cbUn.setValue(un);
+        txEstoqueMin.setText(estoqueMin);
+        cbForn.setValue(forn);
+        cbCat.setValue(cat);
     }
 
     public void show() throws IOException {
         Stage primaryStage = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("/views/AddProduto.fxml"));
-        primaryStage.setTitle("ControlX - Produtos");
+        primaryStage.setTitle("ControlX - Produto");
         Main.stage.hide();
         Main.stage = primaryStage;
         primaryStage.setScene(new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()));
         primaryStage.setResizable(false);
-        if (edit == true){
-
-        }
         primaryStage.show();
+        if (view == true){
+            btSalvar.setVisible(false);
+            btCancelar.setText("Voltar");
+        }
     }
 
-    public void gerenciarProdutos(){
+    public void addProdutos(){
 
     }
+
+    public void iniComboBox() throws ClassNotFoundException {
+        ObservableList<String> opcoes = FXCollections.observableArrayList();
+
+        //Categoria
+        List<Categoria> categorias = cdao.listAll();
+        for (Categoria cat : categorias) {
+            opcoes.add(cat.getNome());
+        }
+
+        cbCat.setItems(opcoes);
+        cbCat.setValue("<Selecione>");
+
+       /* //Fornecedor
+        List<Fornecedor> forn = fdao.listAll();
+        for (Categoria cat : categorias) {
+            opcoes.add(cat.getNome());
+        }
+
+        cbCat.setItems(opcoes);
+        cbCat.setValue("<Selecione>"); */
+
+       //TipoUn
+        ObservableList<String> tipoUn = FXCollections.observableArrayList("UN", "KG", "L", "ML", "G", "M", "CM");
+        cbUn.setItems(tipoUn);
+        cbUn.setValue("<Selecione>");
+
+
+    }
+
 }

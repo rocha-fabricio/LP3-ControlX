@@ -32,26 +32,27 @@
       </AnchorPane>
       <AnchorPane layoutX="1.0" prefHeight="38.0" prefWidth="576.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button fx:id="btVoltar" layoutX="164.0" layoutY="8.0" mnemonicParsing="false" onMouseClicked="#botaoVoltar" text="Voltar" textAlignment="CENTER">
+            <Button fx:id="btVoltar" layoutX="115.0" layoutY="8.0" mnemonicParsing="false" onMouseClicked="#botaoVoltar" text="Voltar" textAlignment="CENTER">
                <cursor>
                   <Cursor fx:constant="CLOSED_HAND" />
                </cursor>
             </Button>
-            <Button fx:id="btAdd" layoutX="225.0" layoutY="8.0" mnemonicParsing="false" text="Adicionar">
+            <Button fx:id="btAdd" layoutX="176.0" layoutY="8.0" mnemonicParsing="false" text="Adicionar">
                <cursor>
                   <Cursor fx:constant="CLOSED_HAND" />
                </cursor>
             </Button>
-            <Button fx:id="btEdit" layoutX="309.0" layoutY="8.0" mnemonicParsing="false" text="Editar">
+            <Button fx:id="btEdit" layoutX="260.0" layoutY="8.0" mnemonicParsing="false" onMouseClicked="#botaoEditProduto" text="Editar">
                <cursor>
                   <Cursor fx:constant="CLOSED_HAND" />
                </cursor>
             </Button>
-            <Button fx:id="btRemove" layoutX="370.0" layoutY="8.0" mnemonicParsing="false" text="Remover">
+            <Button fx:id="btRemove" layoutX="321.0" layoutY="8.0" mnemonicParsing="false" text="Remover">
                <cursor>
                   <Cursor fx:constant="CLOSED_HAND" />
                </cursor>
             </Button>
+            <Button fx:id="btView" layoutX="402.0" layoutY="8.0" mnemonicParsing="false" onMouseClicked="#botaoViewProduto" text="Visualizar" />
          </children>
       </AnchorPane>
    </children>
