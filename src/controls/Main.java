@@ -2,6 +2,7 @@ package controls;
 
 import DAO.ProdutoDAO;
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -10,6 +11,7 @@ import models.Categoria;
 import models.Fornecedor;
 import models.Produto;
 
+import java.awt.*;
 import java.util.List;
 
 public class Main extends Application {

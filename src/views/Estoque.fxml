@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -12,18 +12,6 @@
 
 <AnchorPane prefHeight="420.0" prefWidth="602.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controls.Estoque">
    <children>
-      <AnchorPane layoutX="6.0" layoutY="8.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <MenuBar prefHeight="29.0" prefWidth="602.0" style="-fx-border-radius: 20;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-              <menus>
-                <Menu fx:id="menuAdd" mnemonicParsing="false" onAction="#botaoAddProduto" text="Adicionar" />
-                <Menu fx:id="menuRemove" mnemonicParsing="false" onAction="#botaoRemoveProduto" text="Remover" />
-                <Menu fx:id="menuEdit" mnemonicParsing="false" onAction="#botaoEditProduto" text="Editar" />
-                  <Menu fx:id="menuVoltar" mnemonicParsing="false" onAction="#botaoVoltar" text="Voltar" />
-              </menus>
-            </MenuBar>
-         </children>
-      </AnchorPane>
       <AnchorPane layoutX="14.0" layoutY="93.0" prefHeight="315.0" prefWidth="578.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="93.0">
          <children>
             <TableView fx:id="tbView" onMouseClicked="#verificaSelecao" prefHeight="310.0" prefWidth="578.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
@@ -40,6 +28,30 @@
             <Label fx:id="lbPesquisar" layoutY="25.0" text="Pesquisar:" AnchorPane.leftAnchor="0.0" />
             <ComboBox fx:id="cbCat" layoutX="456.0" layoutY="29.0" onHidden="#pesquisarCategoria" prefHeight="26.0" prefWidth="120.0" AnchorPane.rightAnchor="0.0" />
             <Label fx:id="lbCategorias" layoutX="479.0" layoutY="11.0" text="Categorias:" AnchorPane.rightAnchor="22.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="1.0" prefHeight="38.0" prefWidth="576.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Button fx:id="btVoltar" layoutX="164.0" layoutY="8.0" mnemonicParsing="false" onMouseClicked="#botaoVoltar" text="Voltar" textAlignment="CENTER">
+               <cursor>
+                  <Cursor fx:constant="CLOSED_HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="btAdd" layoutX="225.0" layoutY="8.0" mnemonicParsing="false" text="Adicionar">
+               <cursor>
+                  <Cursor fx:constant="CLOSED_HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="btEdit" layoutX="309.0" layoutY="8.0" mnemonicParsing="false" text="Editar">
+               <cursor>
+                  <Cursor fx:constant="CLOSED_HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="btRemove" layoutX="370.0" layoutY="8.0" mnemonicParsing="false" text="Remover">
+               <cursor>
+                  <Cursor fx:constant="CLOSED_HAND" />
+               </cursor>
+            </Button>
          </children>
       </AnchorPane>
    </children>

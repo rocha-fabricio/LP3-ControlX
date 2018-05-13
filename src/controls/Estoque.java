@@ -5,14 +5,23 @@ import DAO.FornecedorDAO;
 import DAO.ProdutoDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import models.Categoria;
 import models.Produto;
 
+import java.io.IOException;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -34,13 +43,13 @@ public class Estoque implements Initializable {
     @FXML
     private ComboBox cbCat;
     @FXML
-    private Menu menuAdd;
+    private Button btAdd;
     @FXML
-    private Menu menuRemove;
+    private Button btRemove;
     @FXML
-    private Menu menuEdit;
+    private Button btEdit;
     @FXML
-    private Menu menuVoltar;
+    private Button btVoltar;
 
     private ProdutoDAO pdao = new ProdutoDAO();
     private CategoriaDAO cdao = new CategoriaDAO();
@@ -109,7 +118,17 @@ public class Estoque implements Initializable {
 
     }
 
-    public void botaoVoltar(){
+    public void botaoVoltar() throws IOException {
+
+        Stage primaryStage = new Stage();
+        Parent root = null;
+        root = FXMLLoader.load(getClass().getResource("/views/MenuPrincipal.fxml"));
+        primaryStage.setTitle("ControlX - Menu");
+        Main.stage.hide();
+        Main.stage = primaryStage;
+        primaryStage.setScene(new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()));
+        primaryStage.setResizable(true);
+        primaryStage.show();
 
     }
 
@@ -149,13 +168,11 @@ public class Estoque implements Initializable {
 
     public void verificaSelecao(){
         if (tbView.isFocused()){
-            menuAdd.setDisable(false);
-            menuRemove.setDisable(false);
-            menuEdit.setDisable(false);
+            btRemove.setDisable(false);
+            btEdit.setDisable(false);
         } else {
-            menuAdd.setDisable(true);
-            menuRemove.setDisable(true);
-            menuEdit.setDisable(true);
+            btRemove.setDisable(true);
+            btEdit.setDisable(true);
         }
     }
 }
