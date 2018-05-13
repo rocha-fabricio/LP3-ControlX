@@ -66,6 +66,17 @@ public class Estoque implements Initializable {
         }
     }
 
+    public void show() throws IOException {
+        Stage primaryStage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("/views/Estoque.fxml"));
+        primaryStage.setTitle("ControlX - Produtos");
+        Main.stage.hide();
+        Main.stage = primaryStage;
+        primaryStage.setScene(new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()));
+        primaryStage.setResizable(true);
+        primaryStage.show();
+    }
+
     public void listView(List<Produto> prods) throws ClassNotFoundException {
         tbView.getItems().clear();
         tbView.getColumns().clear();
@@ -106,16 +117,27 @@ public class Estoque implements Initializable {
         verificaSelecao();
     }
 
-    public void botaoAddProduto() {
-
+    public void botaoAddProduto() throws IOException {
+        new AddProduto().show();
     }
 
     public void botaoRemoveProduto() {
 
     }
 
-    public void botaoEditProduto() {
-
+    public void botaoEditProduto() throws IOException {
+        new AddProduto().show();
+        /*
+        new AddProduto(true,
+                tbView.getSelectionModel().getSelectedItem().getNome(),
+                tbView.getSelectionModel().getSelectedItem().getId(),
+                tbView.getSelectionModel().getSelectedItem().getPreco(),
+                tbView.getSelectionModel().getSelectedItem().getQtd(),
+                tbView.getSelectionModel().getSelectedItem().getTipoUn(),
+                tbView.getSelectionModel().getSelectedItem().getEstoqueMin(),
+                tbView.getSelectionModel().getSelectedItem().getForn(),
+                tbView.getSelectionModel().getSelectedItem().getCat());
+        */
     }
 
     public void botaoVoltar() throws IOException {

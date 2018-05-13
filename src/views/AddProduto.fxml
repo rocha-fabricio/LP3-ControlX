@@ -6,25 +6,26 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane prefHeight="297.0" prefWidth="459.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controls.AddProduto">
    <children>
-      <TextField fx:id="txNome" layoutX="83.0" layoutY="59.0" prefHeight="26.0" prefWidth="351.0" />
+      <TextField fx:id="txNome" layoutX="83.0" layoutY="59.0" prefHeight="26.0" prefWidth="225.0" />
       <Label layoutX="27.0" layoutY="64.0" text="Nome:" />
       <Label layoutX="28.0" layoutY="103.0" text="Preço:" />
       <Label layoutX="28.0" layoutY="141.0" text="Qtd:" />
-      <Label layoutX="259.0" layoutY="103.0" text="Un:" />
-      <Label layoutX="259.0" layoutY="141.0" prefHeight="16.0" prefWidth="109.0" text="Estoque Minimo:" />
+      <Label layoutX="320.0" layoutY="103.0" text="Un:" />
+      <Label layoutX="259.0" layoutY="141.0" prefHeight="16.0" prefWidth="91.0" text="Estoque Min:" />
       <Label layoutX="137.0" layoutY="14.0" text="ControlX - Adicionar Produto" />
       <Label layoutX="74.0" layoutY="174.0" text="Fornecedor:" />
       <Label layoutX="312.0" layoutY="174.0" text="Categoria:" />
       <TextField fx:id="txPreco" layoutX="83.0" layoutY="98.0" prefHeight="26.0" prefWidth="152.0" />
       <TextField fx:id="txQtd" layoutX="83.0" layoutY="136.0" prefHeight="26.0" prefWidth="152.0" />
-      <TextField fx:id="txUn" layoutX="292.0" layoutY="98.0" prefHeight="26.0" prefWidth="141.0" />
-      <TextField fx:id="txEstoqueMin" layoutX="377.0" layoutY="136.0" prefHeight="26.0" prefWidth="54.0" />
+      <TextField fx:id="txEstoqueMin" layoutX="352.0" layoutY="136.0" prefHeight="26.0" prefWidth="79.0" />
       <ComboBox fx:id="cbCat" layoutX="271.0" layoutY="199.0" prefWidth="150.0" AnchorPane.rightAnchor="38.0" />
       <ComboBox fx:id="cbForn" layoutX="41.0" layoutY="199.0" prefWidth="150.0" AnchorPane.leftAnchor="38.0" />
       <Button fx:id="btSalvar" layoutX="68.0" layoutY="252.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="91.0" text="Salvar" />
       <Button fx:id="btCancelar" layoutX="301.0" layoutY="252.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="91.0" text="Cancelar" />
+      <ComboBox fx:id="cbUn" layoutX="352.0" layoutY="98.0" prefHeight="26.0" prefWidth="79.0" />
+      <TextField fx:id="txId" editable="false" layoutX="353.0" layoutY="59.0" prefHeight="26.0" prefWidth="79.0" />
+      <Label layoutX="322.0" layoutY="64.0" text="ID:" />
    </children>
 </AnchorPane>

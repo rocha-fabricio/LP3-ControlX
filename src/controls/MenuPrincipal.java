@@ -19,15 +19,19 @@ import java.util.ResourceBundle;
 public class MenuPrincipal
 {
 
-    public void btProdutos() throws IOException {
+    public void show() throws IOException {
         Stage primaryStage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("/views/Estoque.fxml"));
-        primaryStage.setTitle("ControlX - Produtos");
+        Parent root = FXMLLoader.load(getClass().getResource("/views/MenuPrincipal.fxml"));
+        primaryStage.setTitle("ControlX - Menu");
         Main.stage.hide();
         Main.stage = primaryStage;
         primaryStage.setScene(new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()));
         primaryStage.setResizable(true);
         primaryStage.show();
+    }
+
+    public void btProdutos() throws IOException {
+        new Estoque().show();
     }
 
 }
