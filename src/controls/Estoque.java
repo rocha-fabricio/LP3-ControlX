@@ -129,31 +129,22 @@ public class Estoque implements Initializable {
     }
 
     public void botaoEditProduto() throws IOException {
-        new AddProduto(
+        /*new AddProduto(
                 true, false,
-                tbView.getSelectionModel().getSelectedItem().getNome(),
-                String.valueOf(tbView.getSelectionModel().getSelectedItem().getId()),
-                String.valueOf(tbView.getSelectionModel().getSelectedItem().getPreco()),
-                String.valueOf(tbView.getSelectionModel().getSelectedItem().getQtd()),
-                tbView.getSelectionModel().getSelectedItem().getTipoUn(),
-                String.valueOf(tbView.getSelectionModel().getSelectedItem().getEstoqueMin()),
-                String.valueOf(tbView.getSelectionModel().getSelectedItem().getForn()),
-                String.valueOf(tbView.getSelectionModel().getSelectedItem().getCat()))
-                .show();
-    }
-
-    public void botaoViewProduto() throws IOException {
-        new AddProduto(
-                false, true,
                 tbView.getSelectionModel().getSelectedItem().getNome(),
                 Integer.toString(tbView.getSelectionModel().getSelectedItem().getId()),
                 Double.toString(tbView.getSelectionModel().getSelectedItem().getPreco()),
                 Double.toString(tbView.getSelectionModel().getSelectedItem().getQtd()),
                 tbView.getSelectionModel().getSelectedItem().getTipoUn(),
                 Double.toString(tbView.getSelectionModel().getSelectedItem().getEstoqueMin()),
-                String.valueOf(tbView.getSelectionModel().getSelectedItem().getForn()),
-                String.valueOf(tbView.getSelectionModel().getSelectedItem().getCat()))
-                .show();
+                tbView.getSelectionModel().getSelectedItem().getForn().getNome(),
+                tbView.getSelectionModel().getSelectedItem().getCat().getNome())
+                .show(); */
+    }
+
+    public void botaoViewProduto() throws IOException, ClassNotFoundException {
+        Produto prod = pdao.read(tbView.getSelectionModel().getSelectedItem().getId());
+        new AddProduto(true, false, prod).show();
     }
 
     public void botaoVoltar() throws IOException {

@@ -17,6 +17,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import models.Categoria;
 import models.Fornecedor;
+import models.Produto;
 import org.w3c.dom.Text;
 
 
@@ -53,6 +54,8 @@ public class AddProduto implements Initializable {
 
     private String nome, id, preco, qtd, un, estoqueMin, forn, cat;
 
+    private Produto prod = new Produto();
+
     ProdutoDAO pdao = new ProdutoDAO();
     FornecedorDAO fdao = new FornecedorDAO();
     CategoriaDAO cdao = new CategoriaDAO();
@@ -61,29 +64,21 @@ public class AddProduto implements Initializable {
 
     }
 
-    //Editar
-    public AddProduto(boolean edit, boolean view, String txNome, String txId, String txPreco,
-                      String txQtd, String cbUn, String txEstoqueMin, String
-                              cbForn, String cbCat){
+   public AddProduto(boolean view, boolean edit, Produto p) throws ClassNotFoundException {
+       this.view = view;
+       this.edit = edit;
+       this.prod = pdao.read(p.getId());
+   }
 
-        this.edit = edit;
-        this.view = view;
-        this.nome = txNome;
-        this.id = txId;
-        this.preco = txPreco;
-        this.qtd = txQtd;
-        this.un = cbUn;
-        this.estoqueMin = txEstoqueMin;
-        this.forn = cbForn;
-        this.cat = cbCat;
-    }
 
-    @FXML
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        try {
+       try {
+            iniComboBox();
         if (view == true){
             preencher();
+            btSalvar.setVisible(false);
+            btCancelar.setText("Voltar");
             txNome.setEditable(false);
             txId.setEditable(false);
             txPreco.setEditable(false);
@@ -96,22 +91,22 @@ public class AddProduto implements Initializable {
         if (edit == true){
             preencher();
         }
-            iniComboBox();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
-        }
+       }
     }
 
     public void preencher(){
-        txNome.setText(nome);
-        txId.setText(id);
-        txPreco.setText(preco);
-        txQtd.setText(qtd);
-        cbUn.setValue(un);
-        txEstoqueMin.setText(estoqueMin);
-        cbForn.setValue(forn);
-        cbCat.setValue(cat);
+       txNome.setText(prod.getNome());
+       txId.setText(Integer.toString(prod.getId()));
+       txPreco.setText(Double.toString(prod.getPreco()));
+       txQtd.setText(Double.toString(prod.getQtd()));
+       cbUn.setValue(prod.getTipoUn());
+       txEstoqueMin.setText(Double.toString(prod.getEstoqueMin()));
+       cbForn.setValue(prod.getForn().getNome());
+       cbCat.setValue(prod.getCat().getNome());
     }
+
 
     public void show() throws IOException {
         Stage primaryStage = new Stage();
@@ -122,10 +117,6 @@ public class AddProduto implements Initializable {
         primaryStage.setScene(new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()));
         primaryStage.setResizable(false);
         primaryStage.show();
-        if (view == true){
-            btSalvar.setVisible(false);
-            btCancelar.setText("Voltar");
-        }
     }
 
     public void addProdutos(){
