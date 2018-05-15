@@ -21,11 +21,14 @@ public class MenuPrincipal
 
     public void show() throws IOException {
         Stage primaryStage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("/views/MenuPrincipal.fxml"));
+        FXMLLoader root = new FXMLLoader(getClass().getResource("/views/MenuPrincipal.fxml"));
+        root.setControllerFactory(c -> {
+            return new MenuPrincipal();
+        });
         primaryStage.setTitle("ControlX - Menu");
         Main.stage.hide();
         Main.stage = primaryStage;
-        primaryStage.setScene(new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()));
+        primaryStage.setScene(new Scene(root.load(), primaryStage.getWidth(), primaryStage.getHeight()));
         primaryStage.setResizable(true);
         primaryStage.show();
     }

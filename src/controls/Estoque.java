@@ -71,11 +71,14 @@ public class Estoque implements Initializable {
 
     public void show() throws IOException {
         Stage primaryStage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("/views/Estoque.fxml"));
+        FXMLLoader root = new FXMLLoader(getClass().getResource("/views/Estoque.fxml"));
+        root.setControllerFactory(c -> {
+            return new Estoque();
+        });
         primaryStage.setTitle("ControlX - Produtos");
         Main.stage.hide();
         Main.stage = primaryStage;
-        primaryStage.setScene(new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()));
+        primaryStage.setScene(new Scene(root.load(), primaryStage.getWidth(), primaryStage.getHeight()));
         primaryStage.setResizable(true);
         primaryStage.show();
     }
@@ -129,24 +132,23 @@ public class Estoque implements Initializable {
     }
 
     public void botaoEditProduto() throws IOException, ClassNotFoundException {
-        AddProduto addProd = new AddProduto(false,true, tbView.getSelectionModel().getSelectedItem().getId());
-        addProd.show();
+        new AddProduto().show(false,true, tbView.getSelectionModel().getSelectedItem().getId());
     }
 
     public void botaoViewProduto() throws IOException, ClassNotFoundException {
-        //Produto prod = pdao.read(tbView.getSelectionModel().getSelectedItem().getId());
-        AddProduto addProd = new AddProduto(true,false, tbView.getSelectionModel().getSelectedItem().getId());
-        addProd.show();
+        new AddProduto().show(true,false, tbView.getSelectionModel().getSelectedItem().getId());
     }
 
     public void botaoVoltar() throws IOException {
         Stage primaryStage = new Stage();
-        Parent root = null;
-        root = FXMLLoader.load(getClass().getResource("/views/MenuPrincipal.fxml"));
+        FXMLLoader root = new FXMLLoader(getClass().getResource("/views/MenuPrincipal.fxml"));
+        root.setControllerFactory(c -> {
+            return new MenuPrincipal();
+        });
         primaryStage.setTitle("ControlX - Menu");
         Main.stage.hide();
         Main.stage = primaryStage;
-        primaryStage.setScene(new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()));
+        primaryStage.setScene(new Scene(root.load(), primaryStage.getWidth(), primaryStage.getHeight()));
         primaryStage.setResizable(true);
         primaryStage.show();
     }

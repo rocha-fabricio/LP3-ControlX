@@ -28,9 +28,12 @@ public class Login implements Initializable {
 
         public void show(Stage primaryStage) throws IOException {
             Main.stage = primaryStage;
-            Parent root = FXMLLoader.load(getClass().getResource("/views/Login.fxml"));
+            FXMLLoader root = new FXMLLoader(getClass().getResource("/views/Login.fxml"));
+            root.setControllerFactory(c -> {
+                return new Login();
+            });
             Main.stage.setTitle("ControlX - Entrar");
-            Main.stage.setScene(new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()));
+            Main.stage.setScene(new Scene(root.load(), primaryStage.getWidth(), primaryStage.getHeight()));
             Main.stage.setResizable(false);
             Main.stage.getIcons().add(new Image("images/mercado.jpg"));
             Main.stage.show();
