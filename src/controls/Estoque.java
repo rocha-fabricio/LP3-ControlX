@@ -121,7 +121,7 @@ public class Estoque implements Initializable {
     }
 
     public void botaoAddProduto() throws IOException {
-        new AddProduto().show();
+       // new AddProduto().show();
     }
 
     public void botaoRemoveProduto() {
@@ -143,8 +143,9 @@ public class Estoque implements Initializable {
     }
 
     public void botaoViewProduto() throws IOException, ClassNotFoundException {
-        Produto prod = pdao.read(tbView.getSelectionModel().getSelectedItem().getId());
-        new AddProduto(true, false, prod).show();
+        //Produto prod = pdao.read(tbView.getSelectionModel().getSelectedItem().getId());
+        AddProduto addProd = new AddProduto(tbView.getSelectionModel().getSelectedItem().getId());
+        addProd.show();
     }
 
     public void botaoVoltar() throws IOException {

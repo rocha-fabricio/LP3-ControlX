@@ -30,11 +30,13 @@ public class AddProduto implements Initializable {
 
     private boolean edit = false;
     private boolean view = false;
+    private Produto prod;
+    private static int idProd;
 
     @FXML
-    TextField txNome;
+    public TextField txNome;
     @FXML
-    TextField txId;
+    public TextField txId;
     @FXML
     TextField txPreco;
     @FXML
@@ -52,76 +54,92 @@ public class AddProduto implements Initializable {
     @FXML
     Button btCancelar;
 
-    private String nome, id, preco, qtd, un, estoqueMin, forn, cat;
+    //private String nome, id, preco, qtd, un, estoqueMin, forn, cat;
 
-    private Produto prod = new Produto();
+
 
     ProdutoDAO pdao = new ProdutoDAO();
     FornecedorDAO fdao = new FornecedorDAO();
     CategoriaDAO cdao = new CategoriaDAO();
 
+    public AddProduto(int idProd){
+        this.idProd = idProd;
+    }
     public AddProduto(){
 
     }
-
    public AddProduto(boolean view, boolean edit, Produto p) throws ClassNotFoundException {
        this.view = view;
        this.edit = edit;
-       this.prod = pdao.read(p.getId());
+       this.prod = p;
    }
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-       try {
+        System.out.println("INICIO INITIALIZE");
+        try {
             iniComboBox();
-        if (view == true){
-            preencher();
-            btSalvar.setVisible(false);
-            btCancelar.setText("Voltar");
-            txNome.setEditable(false);
-            txId.setEditable(false);
-            txPreco.setEditable(false);
-            txQtd.setEditable(false);
-            cbUn.setEditable(false);
-            txEstoqueMin.setEditable(false);
-            cbForn.setEditable(false);
-            cbCat.setEditable(false);
-        }
-        if (edit == true){
-            preencher();
-        }
+            prod = pdao.read(idProd);
+            //txNome.setText(prod.getNome());
+            preencher(prod);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
-       }
+        }
+        System.out.println("FIM INITIALIZE");
     }
 
-    public void preencher(){
-       txNome.setText(prod.getNome());
-       txId.setText(Integer.toString(prod.getId()));
-       txPreco.setText(Double.toString(prod.getPreco()));
-       txQtd.setText(Double.toString(prod.getQtd()));
-       cbUn.setValue(prod.getTipoUn());
-       txEstoqueMin.setText(Double.toString(prod.getEstoqueMin()));
-       cbForn.setValue(prod.getForn().getNome());
-       cbCat.setValue(prod.getCat().getNome());
+    public void preencher(Produto p){
+        System.out.println("PREENCHER");
+        btSalvar.setVisible(false);
+        //btCancelar.setText("Voltar");
+        //txNome.setEditable(false);
+        //txId.setEditable(false);
+        //txPreco.setEditable(false);
+        //txQtd.setEditable(false);
+        //cbUn.setEditable(false);
+        //txEstoqueMin.setEditable(false);
+        //cbForn.setEditable(false);
+        //cbCat.setEditable(false);
+        //if (view){
+        //    txNome.setText("VIEW");
+        //}
+        //if (edit){
+        //    txNome.setText("EDIT");
+        //}
+
+
+        txNome.setText(p.getNome());
+        txId.setText(Integer.toString(p.getId()));
+        txPreco.setText(Double.toString(p.getPreco()));
+        txQtd.setText(Double.toString(p.getQtd()));
+        cbUn.setValue(p.getTipoUn());
+        txEstoqueMin.setText(Double.toString(p.getEstoqueMin()));
+        cbForn.setValue(p.getForn().getNome());
+        cbCat.setValue(p.getCat().getNome());
     }
 
 
     public void show() throws IOException {
+        System.out.println("1 - SHOW");
         Stage primaryStage = new Stage();
+        System.out.println("2 - SHOW");
         Parent root = FXMLLoader.load(getClass().getResource("/views/AddProduto.fxml"));
+        System.out.println("3 - SHOW");
         primaryStage.setTitle("ControlX - Produto");
+        System.out.println("4 - SHOW");
         Main.stage.hide();
+        System.out.println("5 - SHOW");
         Main.stage = primaryStage;
+        System.out.println("6 - SHOW");
         primaryStage.setScene(new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()));
+        System.out.println("7 - SHOW");
         primaryStage.setResizable(false);
+        System.out.println("8 - SHOW");
         primaryStage.show();
+        System.out.println("FIM SHOW");
     }
 
-    public void addProdutos(){
-
-    }
 
     public void iniComboBox() throws ClassNotFoundException {
         ObservableList<String> opcoes = FXCollections.observableArrayList();
