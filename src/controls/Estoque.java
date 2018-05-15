@@ -128,23 +128,14 @@ public class Estoque implements Initializable {
 
     }
 
-    public void botaoEditProduto() throws IOException {
-        /*new AddProduto(
-                true, false,
-                tbView.getSelectionModel().getSelectedItem().getNome(),
-                Integer.toString(tbView.getSelectionModel().getSelectedItem().getId()),
-                Double.toString(tbView.getSelectionModel().getSelectedItem().getPreco()),
-                Double.toString(tbView.getSelectionModel().getSelectedItem().getQtd()),
-                tbView.getSelectionModel().getSelectedItem().getTipoUn(),
-                Double.toString(tbView.getSelectionModel().getSelectedItem().getEstoqueMin()),
-                tbView.getSelectionModel().getSelectedItem().getForn().getNome(),
-                tbView.getSelectionModel().getSelectedItem().getCat().getNome())
-                .show(); */
+    public void botaoEditProduto() throws IOException, ClassNotFoundException {
+        AddProduto addProd = new AddProduto(false,true, tbView.getSelectionModel().getSelectedItem().getId());
+        addProd.show();
     }
 
     public void botaoViewProduto() throws IOException, ClassNotFoundException {
         //Produto prod = pdao.read(tbView.getSelectionModel().getSelectedItem().getId());
-        AddProduto addProd = new AddProduto(true,false,tbView.getSelectionModel().getSelectedItem().getId());
+        AddProduto addProd = new AddProduto(true,false, tbView.getSelectionModel().getSelectedItem().getId());
         addProd.show();
     }
 
