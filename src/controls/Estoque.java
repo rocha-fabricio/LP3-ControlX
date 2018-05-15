@@ -144,7 +144,7 @@ public class Estoque implements Initializable {
 
     public void botaoViewProduto() throws IOException, ClassNotFoundException {
         //Produto prod = pdao.read(tbView.getSelectionModel().getSelectedItem().getId());
-        AddProduto addProd = new AddProduto(tbView.getSelectionModel().getSelectedItem().getId());
+        AddProduto addProd = new AddProduto(true,false,tbView.getSelectionModel().getSelectedItem().getId());
         addProd.show();
     }
 

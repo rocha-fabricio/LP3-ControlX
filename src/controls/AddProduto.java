@@ -28,8 +28,8 @@ import java.util.ResourceBundle;
 
 public class AddProduto implements Initializable {
 
-    private boolean edit = false;
-    private boolean view = false;
+    private static boolean edit = false;
+    private static boolean view = false;
     private Produto prod;
     private static int idProd;
 
@@ -68,10 +68,10 @@ public class AddProduto implements Initializable {
     public AddProduto(){
 
     }
-   public AddProduto(boolean view, boolean edit, Produto p) throws ClassNotFoundException {
+   public AddProduto(boolean view, boolean edit, int idProd) throws ClassNotFoundException {
        this.view = view;
        this.edit = edit;
-       this.prod = p;
+       this.idProd = idProd;
    }
 
 
@@ -91,23 +91,22 @@ public class AddProduto implements Initializable {
 
     public void preencher(Produto p){
         System.out.println("PREENCHER");
-        btSalvar.setVisible(false);
-        //btCancelar.setText("Voltar");
-        //txNome.setEditable(false);
-        //txId.setEditable(false);
-        //txPreco.setEditable(false);
-        //txQtd.setEditable(false);
-        //cbUn.setEditable(false);
-        //txEstoqueMin.setEditable(false);
-        //cbForn.setEditable(false);
-        //cbCat.setEditable(false);
-        //if (view){
-        //    txNome.setText("VIEW");
-        //}
-        //if (edit){
-        //    txNome.setText("EDIT");
-        //}
-
+        if (view){
+            btSalvar.setVisible(false);
+            btCancelar.setText("Voltar");
+            btCancelar.setText("Voltar");
+            txNome.setEditable(false);
+            txId.setEditable(false);
+            txPreco.setEditable(false);
+            txQtd.setEditable(false);
+            cbUn.setEditable(false);
+            txEstoqueMin.setEditable(false);
+            cbForn.setEditable(false);
+            cbCat.setEditable(false);
+        }
+        if (edit){
+            btSalvar.setVisible(true);
+        }
 
         txNome.setText(p.getNome());
         txId.setText(Integer.toString(p.getId()));
