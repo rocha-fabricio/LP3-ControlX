@@ -129,6 +129,7 @@ public class AddProduto implements Initializable {
 
     public void iniComboBox() throws ClassNotFoundException {
         ObservableList<String> opcoes = FXCollections.observableArrayList();
+        ObservableList<String> forn = FXCollections.observableArrayList();
 
         //Categoria
         List<Categoria> categorias = cdao.listAll();
@@ -139,14 +140,10 @@ public class AddProduto implements Initializable {
         cbCat.setItems(opcoes);
         cbCat.setValue("<Selecione>");
 
-       /* //Fornecedor
-        List<Fornecedor> forn = fdao.listAll();
-        for (Categoria cat : categorias) {
-            opcoes.add(cat.getNome());
-        }
-
-        cbCat.setItems(opcoes);
-        cbCat.setValue("<Selecione>"); */
+       //Fornecedor
+        for(Fornecedor f : fdao.listAll())
+             forn.add(f.getNome());
+        cbForn.setItems(forn);
 
        //TipoUn
         ObservableList<String> tipoUn = FXCollections.observableArrayList("UN", "KG", "L", "ML", "G", "M", "CM");
