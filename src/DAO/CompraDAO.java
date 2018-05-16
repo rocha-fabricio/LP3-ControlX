@@ -35,8 +35,9 @@ public class CompraDAO {
     public void listAll() {
 
     }
-    public void del(Compra c){   // ou pelo id, public void del(int id)
 
-        }
+    public void del(Compra c){
+
+    }
 }
 

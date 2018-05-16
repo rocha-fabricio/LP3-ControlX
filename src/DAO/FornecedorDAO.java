@@ -7,7 +7,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class FornecedorDAO {
@@ -40,8 +43,33 @@ public class FornecedorDAO {
         }
     }
 
-    public void up(Fornecedor f) {
+    public void up(Fornecedor f) throws ClassNotFoundException {
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
 
+        try {
+
+            stmt = con.prepareStatement("UPDATE funcionario SET nome = ?, cnpj = ?, tel1 = ?, tel2 = ?, " +
+                    "cep = ?, num = ?, rua = ?, comp = ?, bairro = ?, cidade = ?, estado = ? WHERE id = ?;");
+            stmt.setString(1, f.getNome());
+            stmt.setString(2, f.getCnpj());
+            stmt.setString(3, f.getTelefone1());
+            stmt.setString(4, f.getTelefone2());
+            stmt.setString(5, f.getCep());
+            stmt.setInt(6, f.getNum());
+            stmt.setString(7, f.getRua());
+            stmt.setString(8, f.getComp());
+            stmt.setString(9, f.getBairro());
+            stmt.setString(10, f.getCidade());
+            stmt.setString(11, f.getEstado());
+
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt);
+        }
     }
 
     public List<Fornecedor> listAll() throws ClassNotFoundException {
@@ -78,8 +106,29 @@ public class FornecedorDAO {
         return lista;
     }
 
-    public void del(Fornecedor f) {   // ou pelo id, public void del(int id)
+    public void del(Fornecedor f) throws ClassNotFoundException {   // ou pelo id, public void del(int id)
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
 
+        //Formatando a data
+        DateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
+        Date date = new Date(System.currentTimeMillis());
+        String data = dateFormat.format(date);
+
+
+        try {
+
+            stmt = con.prepareStatement("UPDATE produtos SET deleted_at = ? WHERE id = ?;");
+            stmt.setString(1, data);
+            stmt.setInt(2, f.getId());
+
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt);
+        }
     }
 
     public Fornecedor read(int id) throws ClassNotFoundException {

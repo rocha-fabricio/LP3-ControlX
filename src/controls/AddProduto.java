@@ -136,14 +136,15 @@ public class AddProduto implements Initializable {
         for (Categoria cat : categorias) {
             opcoes.add(cat.getNome());
         }
-
         cbCat.setItems(opcoes);
         cbCat.setValue("<Selecione>");
 
        //Fornecedor
-        for(Fornecedor f : fdao.listAll())
-             forn.add(f.getNome());
+        for(Fornecedor f : fdao.listAll()) {
+            forn.add(f.getNome());
+        }
         cbForn.setItems(forn);
+        cbCat.setValue("<Selecione>");
 
        //TipoUn
         ObservableList<String> tipoUn = FXCollections.observableArrayList("UN", "KG", "L", "ML", "G", "M", "CM");
