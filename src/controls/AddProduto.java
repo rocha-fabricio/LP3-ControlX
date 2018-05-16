@@ -162,15 +162,14 @@ public class AddProduto implements Initializable {
 
         Produto p = new Produto();
         p.setNome(txNome.getText());
-        p.setId(Integer.parseInt(txId.getText()));
         p.setPreco(Double.parseDouble(txPreco.getText()));
         p.setQtd(Double.parseDouble(txQtd.getText()));
-        p.setTipoUn((String) cbUn.getValue());
+        p.setTipoUn(cbUn.getValue().toString());
         p.setEstoqueMin(Double.parseDouble(txEstoqueMin.getText()));
-        p.setCat(cdao.readNome((String) cbCat.getValue()));
-        p.setForn(fdao.readNome((String) cbForn.getValue()));
+        p.setCat(cdao.read(cbCat.getValue().toString()));
+        p.setForn(fdao.read(cbForn.getValue().toString()));
 
-        if(edit = true) {
+        if(edit) {
             pdao.up(p);
         } else {
             pdao.add(p);

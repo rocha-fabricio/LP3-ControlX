@@ -177,7 +177,7 @@ public class Estoque implements Initializable {
         if (cat.equals("Todos")) {
             listView(pdao.listAll());
         } else {
-            Categoria c = cdao.readNome(cat);
+            Categoria c = cdao.read(cat);
             listView(pdao.listAllByCategoria(c.getId()));
         }
     }

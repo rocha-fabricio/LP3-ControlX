@@ -30,7 +30,7 @@ public class ProdutoDAO {
         try {
 
             stmt = con.prepareStatement("INSERT INTO produtos (nome, preco, qntd, tipoUn, estoqueMin, idFornecedor, idCategoria) " +
-                    "VALUES (?, ?, ?, ?, ?);");
+                    "VALUES (?, ?, ?, ?, ?, ?, ?);");
             stmt.setString(1, p.getNome());
             stmt.setDouble(2, p.getPreco());
             stmt.setDouble(3, p.getQtd());

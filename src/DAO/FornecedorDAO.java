@@ -166,7 +166,7 @@ public class FornecedorDAO {
         }
     }
 
-    public Fornecedor readNome(String nome) throws ClassNotFoundException {
+    public Fornecedor read(String nome) throws ClassNotFoundException {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -175,7 +175,7 @@ public class FornecedorDAO {
         try {
             stmt = con.prepareStatement("SELECT id, nome, cnpj, tel1, tel2, cep, " +
                     "num, rua, comp, bairro, cidade, estado" +
-                    " FROM fornecedor WHERE nome = ? and deleted_at is NULL;");
+                    " FROM fornecedor WHERE nome LIKE ? and deleted_at is NULL;");
             stmt.setString(1, nome);
             rs = stmt.executeQuery();
 

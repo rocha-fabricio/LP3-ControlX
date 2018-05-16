@@ -150,14 +150,14 @@ public class CategoriaDAO {
             return cat;
         }
     }
-    public Categoria readNome(String nome) throws ClassNotFoundException {
+    public Categoria read(String nome) throws ClassNotFoundException {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
         Categoria cat = new Categoria();
 
         try {
-            stmt = con.prepareStatement("SELECT id, nome FROM categoria WHERE nome = ? and deleted_at is NULL;");
+            stmt = con.prepareStatement("SELECT id, nome FROM categoria WHERE nome LIKE ? and deleted_at is NULL;");
             stmt.setString(1, nome);
             rs = stmt.executeQuery();
 
