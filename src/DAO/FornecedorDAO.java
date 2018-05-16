@@ -12,8 +12,32 @@ import java.util.List;
 
 public class FornecedorDAO {
 
-    public void add(Fornecedor f) {
+    public void add(Fornecedor f) throws ClassNotFoundException {
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
 
+        try {
+
+            stmt = con.prepareStatement("INSERT INTO fornecedor(nome, cnpj, tel1, tel2, cep, num, rua, comp, bairro, cidade, estado)" +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
+            stmt.setString(1, f.getNome());
+            stmt.setString(2, f.getCnpj());
+            stmt.setString(3, f.getTelefone1());
+            stmt.setString(4, f.getTelefone2());
+            stmt.setString(5, f.getCep());
+            stmt.setInt(6, f.getNum());
+            stmt.setString(7, f.getRua());
+            stmt.setString(8, f.getComp());
+            stmt.setString(9, f.getBairro());
+            stmt.setString(10, f.getCidade());
+            stmt.setString(11, f.getEstado());
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt);
+        }
     }
 
     public void up(Fornecedor f) {

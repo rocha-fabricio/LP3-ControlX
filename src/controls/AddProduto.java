@@ -164,4 +164,8 @@ public class AddProduto implements Initializable {
         primaryStage.setResizable(true);
         primaryStage.show();
     }
+
+    public void btSalvar_Click(MouseEvent mouseEvent) {
+
+    }
 }

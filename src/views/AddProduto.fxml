@@ -25,7 +25,7 @@
       <TextField fx:id="txEstoqueMin" layoutX="352.0" layoutY="136.0" prefHeight="26.0" prefWidth="79.0" />
       <ComboBox fx:id="cbCat" layoutX="271.0" layoutY="199.0" prefWidth="150.0" AnchorPane.rightAnchor="38.0" />
       <ComboBox fx:id="cbForn" layoutX="41.0" layoutY="199.0" prefWidth="150.0" AnchorPane.leftAnchor="38.0" />
-      <Button fx:id="btSalvar" layoutX="68.0" layoutY="252.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="91.0" text="Salvar" />
+      <Button fx:id="btSalvar" layoutX="68.0" layoutY="252.0" mnemonicParsing="false" onMouseClicked="#btSalvar_Click" prefHeight="26.0" prefWidth="91.0" text="Salvar" />
       <Button fx:id="btCancelar" layoutX="301.0" layoutY="252.0" mnemonicParsing="false" onMouseClicked="#btCancel_Click" prefHeight="26.0" prefWidth="91.0" text="Cancelar" />
       <ComboBox fx:id="cbUn" layoutX="352.0" layoutY="98.0" prefHeight="26.0" prefWidth="79.0" />
       <TextField fx:id="txId" editable="false" layoutX="353.0" layoutY="59.0" prefHeight="26.0" prefWidth="79.0" />
