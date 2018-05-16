@@ -73,6 +73,8 @@ public class AddProduto implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         try {
             iniComboBox();
+            ativarBotaoSalvar();
+
             if(view){
                 preencher();
                 btSalvar.setVisible(false);
@@ -81,10 +83,10 @@ public class AddProduto implements Initializable {
                 txId.setEditable(false);
                 txPreco.setEditable(false);
                 txQtd.setEditable(false);
-                cbUn.setDisable(false);
+                cbUn.setDisable(true);
                 txEstoqueMin.setEditable(false);
-                cbForn.setDisable(false);
-                cbCat.setDisable(false);
+                cbForn.setDisable(true);
+                cbCat.setDisable(true);
             }
             if(edit) {
                 preencher();
@@ -107,6 +109,16 @@ public class AddProduto implements Initializable {
         cbCat.setValue(p.getCat().getNome());
     }
 
+    public void ativarBotaoSalvar(){
+        if (txNome.getText().isEmpty() || txPreco.getText().isEmpty() ||
+                txQtd.getText().isEmpty() || cbUn.getValue().equals("<Selecione>") ||
+                txEstoqueMin.getText().isEmpty() || cbForn.getValue().equals("<Selecione>") ||
+                cbCat.getValue().equals("<Selecione>")){
+            btSalvar.setDisable(true);
+        } else {
+            btSalvar.setDisable(false);
+        }
+    }
 
     public void show(boolean view, boolean edit, int id) throws IOException {
         Stage primaryStage = new Stage();

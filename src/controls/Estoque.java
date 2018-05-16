@@ -148,17 +148,7 @@ public class Estoque implements Initializable {
     }
 
     public void botaoVoltar() throws IOException {
-        Stage primaryStage = new Stage();
-        FXMLLoader root = new FXMLLoader(getClass().getResource("/views/MenuPrincipal.fxml"));
-        root.setControllerFactory(c -> {
-            return new MenuPrincipal();
-        });
-        primaryStage.setTitle("ControlX - Menu");
-        Main.stage.hide();
-        Main.stage = primaryStage;
-        primaryStage.setScene(new Scene(root.load(), primaryStage.getWidth(), primaryStage.getHeight()));
-        primaryStage.setResizable(true);
-        primaryStage.show();
+        new MenuPrincipal().show();
     }
 
     public void pesquisarProduto() throws ClassNotFoundException {
