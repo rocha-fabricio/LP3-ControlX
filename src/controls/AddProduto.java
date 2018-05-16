@@ -155,18 +155,28 @@ public class AddProduto implements Initializable {
     }
 
     public void btCancel_Click(MouseEvent mouseEvent) throws IOException {
-        Stage primaryStage = new Stage();
-        Parent root = null;
-        root = FXMLLoader.load(getClass().getResource("/views/Estoque.fxml"));
-        primaryStage.setTitle("ControlX - Estoque");
-        Main.stage.hide();
-        Main.stage = primaryStage;
-        primaryStage.setScene(new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()));
-        primaryStage.setResizable(true);
-        primaryStage.show();
+        new Estoque().show();
     }
 
-    public void btSalvar_Click(MouseEvent mouseEvent) {
+    public void btSalvar_Click(MouseEvent mouseEvent) throws ClassNotFoundException, IOException {
+
+        Produto p = new Produto();
+        p.setNome(txNome.getText());
+        p.setId(Integer.parseInt(txId.getText()));
+        p.setPreco(Double.parseDouble(txPreco.getText()));
+        p.setQtd(Double.parseDouble(txQtd.getText()));
+        p.setTipoUn((String) cbUn.getValue());
+        p.setEstoqueMin(Double.parseDouble(txEstoqueMin.getText()));
+        p.setCat(cdao.readNome((String) cbCat.getValue()));
+        p.setForn(fdao.readNome((String) cbForn.getValue()));
+
+        if(edit = true) {
+            pdao.up(p);
+        } else {
+            pdao.add(p);
+        }
+
+        new Estoque().show();
 
     }
 }

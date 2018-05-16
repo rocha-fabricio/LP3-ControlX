@@ -26,10 +26,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class Estoque implements Initializable {
 
@@ -124,11 +121,22 @@ public class Estoque implements Initializable {
     }
 
     public void botaoAddProduto() throws IOException {
-       // new AddProduto().show();
+       new AddProduto().show(false, false, Integer.parseInt(null));
     }
 
-    public void botaoRemoveProduto() {
+    public void botaoRemoveProduto() throws ClassNotFoundException {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("ControlX - Remover produto");
+        alert.setHeaderText("Este produto será removido permanentemente.");
+        alert.setContentText("Deseja continuar?");
 
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            pdao.del(pdao.read(tbView.getSelectionModel().getSelectedItem().getId()));
+            listView(pdao.listAll());
+        } else {
+            // ... user chose CANCEL or closed the dialog
+        }
     }
 
     public void botaoEditProduto() throws IOException, ClassNotFoundException {

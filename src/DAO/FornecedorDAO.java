@@ -165,4 +165,39 @@ public class FornecedorDAO {
             return forn;
         }
     }
+
+    public Fornecedor readNome(String nome) throws ClassNotFoundException {
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Fornecedor forn = new Fornecedor();
+
+        try {
+            stmt = con.prepareStatement("SELECT id, nome, cnpj, tel1, tel2, cep, " +
+                    "num, rua, comp, bairro, cidade, estado" +
+                    " FROM fornecedor WHERE nome = ? and deleted_at is NULL;");
+            stmt.setString(1, nome);
+            rs = stmt.executeQuery();
+
+            if(rs.next()) {
+                forn.setId(rs.getInt("id"));
+                forn.setNome(rs.getString("nome"));
+                forn.setCnpj(rs.getString("cnpj"));
+                forn.setTelefone1(rs.getString("tel1"));
+                forn.setTelefone2(rs.getString("tel2"));
+                forn.setCep(rs.getString("cep"));
+                forn.setNum(rs.getInt("num"));
+                forn.setRua(rs.getString("rua"));
+                forn.setComp(rs.getString("comp"));
+                forn.setBairro(rs.getString("bairro"));
+                forn.setCidade(rs.getString("cidade"));
+                forn.setEstado(rs.getString("estado"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+            return forn;
+        }
+    }
 }

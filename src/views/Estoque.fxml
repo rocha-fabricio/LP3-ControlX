@@ -47,7 +47,7 @@
                   <Cursor fx:constant="CLOSED_HAND" />
                </cursor>
             </Button>
-            <Button fx:id="btRemove" layoutX="321.0" layoutY="8.0" mnemonicParsing="false" text="Remover">
+            <Button fx:id="btRemove" layoutX="321.0" layoutY="8.0" mnemonicParsing="false" onMouseClicked="#botaoRemoveProduto" text="Remover">
                <cursor>
                   <Cursor fx:constant="CLOSED_HAND" />
                </cursor>
