@@ -144,7 +144,7 @@ public class AddProduto implements Initializable {
             forn.add(f.getNome());
         }
         cbForn.setItems(forn);
-        cbCat.setValue("<Selecione>");
+        cbForn.setValue("<Selecione>");
 
        //TipoUn
         ObservableList<String> tipoUn = FXCollections.observableArrayList("UN", "KG", "L", "ML", "G", "M", "CM");

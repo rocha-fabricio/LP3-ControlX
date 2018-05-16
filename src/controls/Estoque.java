@@ -121,7 +121,7 @@ public class Estoque implements Initializable {
     }
 
     public void botaoAddProduto() throws IOException {
-       new AddProduto().show(false, false, Integer.parseInt(null));
+       new AddProduto().show(false, false, 0);
     }
 
     public void botaoRemoveProduto() throws ClassNotFoundException {

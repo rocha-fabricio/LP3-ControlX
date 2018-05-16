@@ -37,7 +37,7 @@
                   <Cursor fx:constant="CLOSED_HAND" />
                </cursor>
             </Button>
-            <Button fx:id="btAdd" layoutX="176.0" layoutY="8.0" mnemonicParsing="false" text="Adicionar">
+            <Button fx:id="btAdd" layoutX="176.0" layoutY="8.0" mnemonicParsing="false" onMouseClicked="#botaoAddProduto" text="Adicionar">
                <cursor>
                   <Cursor fx:constant="CLOSED_HAND" />
                </cursor>
