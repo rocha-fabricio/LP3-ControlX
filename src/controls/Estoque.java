@@ -110,7 +110,7 @@ public class Estoque implements Initializable {
         unColumn.setMinWidth(60);
         unColumn.setCellValueFactory(new PropertyValueFactory<>("tipoUn"));
 
-        TableColumn<Produto, String> catColumn = new TableColumn<>("Cat");
+        TableColumn<Produto, Categoria> catColumn = new TableColumn<>("Cat");
         catColumn.setMinWidth(60);
         catColumn.setCellValueFactory(new PropertyValueFactory<>("cat"));
 

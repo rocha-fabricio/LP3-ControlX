@@ -105,8 +105,8 @@ public class AddProduto implements Initializable {
         txQtd.setText(Double.toString(p.getQtd()));
         cbUn.setValue(p.getTipoUn());
         txEstoqueMin.setText(Double.toString(p.getEstoqueMin()));
-        cbForn.setValue(p.getForn().getNome());
-        cbCat.setValue(p.getCat().getNome());
+        cbForn.setValue(p.getForn());
+        cbCat.setValue(p.getCat());
     }
 
     public void ativarBotaoSalvar(){
@@ -140,22 +140,20 @@ public class AddProduto implements Initializable {
 
 
     public void iniComboBox() throws ClassNotFoundException {
-        ObservableList<String> opcoes = FXCollections.observableArrayList();
-        ObservableList<String> forn = FXCollections.observableArrayList();
-
         //Categoria
-        List<Categoria> categorias = cdao.listAll();
-        for (Categoria cat : categorias) {
-            opcoes.add(cat.getNome());
+        ObservableList<Categoria> categorias = FXCollections.observableArrayList();
+        for (Categoria cat : cdao.listAll()) {
+            categorias.add(cat);
         }
-        cbCat.setItems(opcoes);
+        cbCat.setItems(categorias);
         cbCat.setValue("<Selecione>");
 
        //Fornecedor
+        ObservableList<Fornecedor> fornecedores = FXCollections.observableArrayList();
         for(Fornecedor f : fdao.listAll()) {
-            forn.add(f.getNome());
+            fornecedores.add(f);
         }
-        cbForn.setItems(forn);
+        cbForn.setItems(fornecedores);
         cbForn.setValue("<Selecione>");
 
        //TipoUn
@@ -172,14 +170,14 @@ public class AddProduto implements Initializable {
 
     public void btSalvar_Click(MouseEvent mouseEvent) throws ClassNotFoundException, IOException {
 
-        Produto p = new Produto();
+        Produto p = pdao.read(idProd);
         p.setNome(txNome.getText());
         p.setPreco(Double.parseDouble(txPreco.getText()));
         p.setQtd(Double.parseDouble(txQtd.getText()));
         p.setTipoUn(cbUn.getValue().toString());
         p.setEstoqueMin(Double.parseDouble(txEstoqueMin.getText()));
-        p.setCat(cdao.read(cbCat.getValue().toString()));
-        p.setForn(fdao.read(cbForn.getValue().toString()));
+        p.setCat((Categoria) cbCat.getValue());
+        p.setForn((Fornecedor) cbForn.getValue());
 
         if(edit) {
             pdao.up(p);
