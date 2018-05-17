@@ -136,6 +136,19 @@ public class GerenciarProduto implements Initializable {
         primaryStage.show();
     }
 
+    public void show() throws IOException {
+        Stage primaryStage = new Stage();
+        FXMLLoader root = new FXMLLoader(getClass().getResource("/views/GerenciarProduto.fxml"));
+        root.setControllerFactory(c -> {
+                return new GerenciarProduto();
+        });
+        Main.stage.hide();
+        Main.stage = primaryStage;
+        primaryStage.setScene(new Scene(root.load(), primaryStage.getWidth(), primaryStage.getHeight()));
+        primaryStage.setResizable(false);
+        primaryStage.show();
+    }
+
 
     public void iniComboBox() throws ClassNotFoundException {
         //Categoria
