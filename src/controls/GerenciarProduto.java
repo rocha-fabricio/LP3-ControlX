@@ -8,26 +8,22 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import models.Categoria;
 import models.Fornecedor;
 import models.Produto;
-import org.w3c.dom.Text;
 
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
-public class AddProduto implements Initializable {
+public class GerenciarProduto implements Initializable {
 
     @FXML
     public TextField txNome;
@@ -59,10 +55,10 @@ public class AddProduto implements Initializable {
     private int idProd;
 
 
-    public AddProduto(){
+    public GerenciarProduto(){
 
     }
-   public AddProduto(boolean view, boolean edit, int idProd) throws ClassNotFoundException {
+   public GerenciarProduto(boolean view, boolean edit, int idProd) throws ClassNotFoundException {
        this.view = view;
        this.edit = edit;
        this.idProd = idProd;
@@ -72,8 +68,10 @@ public class AddProduto implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
+            if(view == false){
             iniComboBox();
             ativarBotaoSalvar();
+            }
 
             if(view == false && edit == false){
                 txId.setText(Integer.toString(pdao.idAutoIncrement()));
@@ -86,10 +84,7 @@ public class AddProduto implements Initializable {
                 txId.setEditable(false);
                 txPreco.setEditable(false);
                 txQtd.setEditable(false);
-                cbUn.setDisable(true);
                 txEstoqueMin.setEditable(false);
-                cbForn.setDisable(true);
-                cbCat.setDisable(true);
             }
             if(edit) {
                 preencher();
@@ -125,13 +120,13 @@ public class AddProduto implements Initializable {
 
     public void show(boolean view, boolean edit, int id) throws IOException {
         Stage primaryStage = new Stage();
-        FXMLLoader root = new FXMLLoader(getClass().getResource("/views/AddProduto.fxml"));
+        FXMLLoader root = new FXMLLoader(getClass().getResource("/views/GerenciarProduto.fxml"));
         root.setControllerFactory(c -> {
                     try {
-                        return new AddProduto(view, edit, id);
+                        return new GerenciarProduto(view, edit, id);
                     } catch (ClassNotFoundException e) {
                         e.printStackTrace();
-                        return new AddProduto();
+                        return new GerenciarProduto();
                     }
                 });
         Main.stage.hide();

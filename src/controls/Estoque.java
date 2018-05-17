@@ -5,27 +5,18 @@ import DAO.FornecedorDAO;
 import DAO.ProdutoDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import models.Categoria;
-import models.Fornecedor;
 import models.Produto;
 
 import java.io.IOException;
 import java.net.URL;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.*;
 
 public class Estoque implements Initializable {
@@ -121,7 +112,7 @@ public class Estoque implements Initializable {
     }
 
     public void botaoAddProduto() throws IOException {
-       new AddProduto().show(false, false, 0);
+       new GerenciarProduto().show(false, false, 0);
     }
 
     public void botaoRemoveProduto() throws ClassNotFoundException {
@@ -140,11 +131,11 @@ public class Estoque implements Initializable {
     }
 
     public void botaoEditProduto() throws IOException, ClassNotFoundException {
-        new AddProduto().show(false,true, tbView.getSelectionModel().getSelectedItem().getId());
+        new GerenciarProduto().show(false,true, tbView.getSelectionModel().getSelectedItem().getId());
     }
 
     public void botaoViewProduto() throws IOException, ClassNotFoundException {
-        new AddProduto().show(true,false, tbView.getSelectionModel().getSelectedItem().getId());
+        new GerenciarProduto().show(true,false, tbView.getSelectionModel().getSelectedItem().getId());
     }
 
     public void botaoVoltar() throws IOException {
