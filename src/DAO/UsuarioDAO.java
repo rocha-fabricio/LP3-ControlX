@@ -219,4 +219,26 @@ public class UsuarioDAO {
         }
         return user;
     }
+
+    public int idAutoIncrement() throws ClassNotFoundException {
+        int id = 0;
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            stmt = con.prepareStatement("SELECT AUTO_INCREMENT FROM information_schema.tables WHERE table_name = 'usuario' AND table_schema = 'controlx'");
+            rs = stmt.executeQuery();
+
+            if (rs.next()){
+                id = rs.getInt("AUTO_INCREMENT");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+            return id;
+        }
+
+    }
 }

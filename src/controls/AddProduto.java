@@ -75,6 +75,9 @@ public class AddProduto implements Initializable {
             iniComboBox();
             ativarBotaoSalvar();
 
+            if(view == false && edit == false){
+                txId.setText(Integer.toString(pdao.idAutoIncrement()));
+            }
             if(view){
                 preencher();
                 btSalvar.setVisible(false);
