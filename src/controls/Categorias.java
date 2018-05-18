@@ -121,7 +121,9 @@ public class Categorias implements Initializable {
             listView(cdao.listAllById(txPesquisar.getText()));
         } else if (rdNome.isSelected()) {
             listView(cdao.listAllByName(txPesquisar.getText()));
-        } else if (txPesquisar.getText().equals("")) {
+        }
+
+        if (txPesquisar.getText().equals("")) {
             listView(cdao.listAll());
         }
 

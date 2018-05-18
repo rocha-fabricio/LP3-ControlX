@@ -43,8 +43,19 @@ public class GerenciarCategoria implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        ativarBotaoSalvar();
+        if (view == false && edit == false){
+            try {
+                txId.setText(Integer.toString(cdao.idAutoIncrement()));
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+
         if(view){
             try {
+                txNome.setEditable(false);
                 btSalvar.setVisible(false);
                 btCancelar.setText("Voltar");
                 preencher();
@@ -59,6 +70,14 @@ public class GerenciarCategoria implements Initializable {
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    public void ativarBotaoSalvar(){
+        if(txNome.getText().isEmpty()){
+            btSalvar.setDisable(true);
+        } else {
+            btSalvar.setDisable(false);
         }
     }
 
@@ -94,12 +113,22 @@ public class GerenciarCategoria implements Initializable {
         primaryStage.show();
     }
 
-    public void botaoSalvar(){
+    public void botaoSalvar() throws ClassNotFoundException, IOException {
+        Categoria c = cdao.read(idCat);
+        c.setNome(txNome.getText());
+
+        if(edit){
+            cdao.up(c);
+        } else {
+            cdao.add(c);
+        }
+
+        new Categorias().show();
 
     }
 
-    public void botaoCancelar(){
-
+    public void botaoCancelar() throws IOException {
+        new Categorias().show();
     }
 
 }

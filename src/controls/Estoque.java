@@ -148,7 +148,9 @@ public class Estoque implements Initializable {
             listView(pdao.listAllById(txPesquisar.getText()));
         } else if (rdNome.isSelected()) {
             listView(pdao.listAllByName(txPesquisar.getText()));
-        } else if (txPesquisar.getText().equals("")) {
+        }
+
+        if (txPesquisar.getText().equals("")) {
             listView(pdao.listAll());
         }
 
