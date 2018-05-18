@@ -32,19 +32,16 @@ public class Estoque implements Initializable {
     @FXML
     private ComboBox cbCat;
     @FXML
-    private Button btAdd;
-    @FXML
     private Button btRemove;
     @FXML
     private Button btEdit;
     @FXML
-    private Button btVoltar;
+    private Button btView;
     @FXML
-    Button btView;
+    private Button btCategorias;
 
     private ProdutoDAO pdao = new ProdutoDAO();
     private CategoriaDAO cdao = new CategoriaDAO();
-    private FornecedorDAO fdao = new FornecedorDAO();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -142,6 +139,10 @@ public class Estoque implements Initializable {
         new MenuPrincipal().show();
     }
 
+    public void botaoCategorias() throws IOException {
+        new Categorias().show();
+    }
+
     public void pesquisarProduto() throws ClassNotFoundException {
         if (rdId.isSelected()) {
             listView(pdao.listAllById(txPesquisar.getText()));
@@ -164,15 +165,14 @@ public class Estoque implements Initializable {
     }
 
     public void iniComboBox() throws ClassNotFoundException {
-        ObservableList<String> opcoes = FXCollections.observableArrayList();
-        List<Categoria> categorias = cdao.listAll();
-        opcoes.add("Todos");
+        ObservableList<String> categorias = FXCollections.observableArrayList();
+        categorias.add("Todos");
 
-        for (Categoria cat : categorias) {
-            opcoes.add(cat.getNome());
+        for (Categoria cat : cdao.listAll()) {
+            categorias.add(cat.getNome());
         }
 
-        cbCat.setItems(opcoes);
+        cbCat.setItems(categorias);
         cbCat.setValue("Todos");
     }
 

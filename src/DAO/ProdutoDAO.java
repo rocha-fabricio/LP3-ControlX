@@ -257,7 +257,6 @@ public class ProdutoDAO {
 
         }
         return lista;
-
     }
 
     public List<Produto> listAllByCategoria(int id) throws ClassNotFoundException {

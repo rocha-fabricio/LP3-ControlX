@@ -2,7 +2,6 @@ package DAO;
 
 import connection.ConnectionFactory;
 import models.Categoria;
-import models.Fornecedor;
 import models.Produto;
 
 import java.sql.Connection;
@@ -79,6 +78,58 @@ public class CategoriaDAO {
         return lista;
     }
 
+    public List<Categoria> listAllById(String id) throws ClassNotFoundException {
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<Categoria> lista = new ArrayList<>();
+
+        try {
+            stmt = con.prepareStatement("SELECT * FROM categoria WHERE id = ? AND deleted_at is NULL;");
+            stmt.setString(1, id);
+            rs = stmt.executeQuery();
+
+            while (rs.next()){
+                Categoria cat = new Categoria();
+                cat.setId(rs.getInt("id"));
+                cat.setNome(rs.getString("nome"));
+                lista.add(cat);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+
+        }
+        return lista;
+    }
+
+    public List<Categoria> listAllByName(String nome) throws ClassNotFoundException {
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<Categoria> lista = new ArrayList<>();
+
+        try {
+            stmt = con.prepareStatement("SELECT * FROM categoria WHERE nome LIKE ? AND deleted_at is NULL;");
+            stmt.setString(1, "%" + nome + "%");
+            rs = stmt.executeQuery();
+
+            while (rs.next()){
+                Categoria cat = new Categoria();
+                cat.setId(rs.getInt("id"));
+                cat.setNome(rs.getString("nome"));
+                lista.add(cat);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+
+        }
+        return lista;
+    }
+
     public void del(Categoria c) throws ClassNotFoundException {   // ou pelo id, public void del(int id)
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
@@ -128,15 +179,15 @@ public class CategoriaDAO {
         }
     }
 
-    public Categoria read(int id) throws ClassNotFoundException {
+    public Categoria read(String nome) throws ClassNotFoundException {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
         Categoria cat = new Categoria();
 
         try {
-            stmt = con.prepareStatement("SELECT id, nome FROM categoria WHERE id = ? and deleted_at is NULL;");
-            stmt.setInt(1, id);
+            stmt = con.prepareStatement("SELECT id, nome FROM categoria WHERE nome = ? and deleted_at is NULL;");
+            stmt.setString(1, nome);
             rs = stmt.executeQuery();
 
             if (rs.next()) {
@@ -150,15 +201,16 @@ public class CategoriaDAO {
             return cat;
         }
     }
-    public Categoria read(String nome) throws ClassNotFoundException {
+
+    public Categoria read(int id) throws ClassNotFoundException {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
         Categoria cat = new Categoria();
 
         try {
-            stmt = con.prepareStatement("SELECT id, nome FROM categoria WHERE nome LIKE ? and deleted_at is NULL;");
-            stmt.setString(1, nome);
+            stmt = con.prepareStatement("SELECT id, nome FROM categoria WHERE id = ? and deleted_at is NULL;");
+            stmt.setInt(1, id);
             rs = stmt.executeQuery();
 
             if (rs.next()) {
