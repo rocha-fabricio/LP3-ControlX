@@ -223,6 +223,7 @@ public class CategoriaDAO {
             ConnectionFactory.closeConnection(con, stmt, rs);
             return cat;
         }
+
     }
 
     public int idAutoIncrement() throws ClassNotFoundException {
