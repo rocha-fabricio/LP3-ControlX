@@ -44,6 +44,14 @@ public class Compra {
         this.produtos = produtos;
     }
     //-------x----------------x--------
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+    //-------x----------------x--------
     public Date getData(){
         return this.data;
     }
@@ -67,7 +75,7 @@ public class Compra {
     //-------x----------------x--------
     //Construtores
     //-------x----------------x--------
-    public Compra(int id, String usuario, double valor, List<Produto> produtos, int status, Date data, Date dataEntrega)
+    public Compra(int id, String usuario, double valor, List<Produto> produtos, int status, Date data, Date dataEntrega, Date dataFinal)
     {
         this.id = id;
         this.usuario = usuario;
@@ -76,6 +84,7 @@ public class Compra {
         this.status = status;
         this.data = data;
         this.dataEntrega = dataEntrega;
+        this.dataFinal = dataFinal;
     }
     //-------x----------------x--------
     public Compra(){
