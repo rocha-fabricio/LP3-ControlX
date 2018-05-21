@@ -37,4 +37,8 @@ public class MenuPrincipal
         new Estoque().show();
     }
 
+    public void btCompras() throws IOException {
+        new Compras().show();
+    }
+
 }
