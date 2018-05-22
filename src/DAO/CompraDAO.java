@@ -98,7 +98,7 @@ public class CompraDAO {
         PreparedStatement stmt = null;
         ResultSet rs = null;
         List<Compra> lista = new ArrayList<>();
-        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
 
         try {
@@ -123,6 +123,7 @@ public class CompraDAO {
                 String dfinal = dateFormat.format(rs.getDate("dataFinal"));
                 Date dataf = new Date(dfinal);
                 compra.setDataFinal(dataf);
+                lista.add(compra);
             }
         } catch (SQLException e) {
             e.printStackTrace();

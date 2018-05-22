@@ -1,5 +1,6 @@
 package controls;
 
+import DAO.CompraDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -25,9 +26,16 @@ public class Compras implements Initializable {
     @FXML
     private TableView<Compra> tbCPendentes;
 
+    CompraDAO cdao = new CompraDAO();
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        try {
+            listViewFinalizadas(cdao.listAll());
+            listViewPendentes(cdao.listAll());
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public void show() throws IOException {
@@ -53,24 +61,25 @@ public class Compras implements Initializable {
         ObservableList<Compra> lista = FXCollections.observableArrayList();
 
         for (Compra c : compras) {
-            if (c.getStatus() == 1)
-            lista.add(new Compra(c.getId(), c.getUsuario(), c.getValor(), c.getProdutos(), c.getStatus(), c.getData(), c.getDataEntrega(), c.getDataFinal()));
+            if (c.getStatus() == 1) {
+                lista.add(new Compra(c.getId(), c.getUsuario(), c.getValor(), c.getProdutos(), c.getStatus(), c.getData(), c.getDataEntrega(), c.getDataFinal()));
+            }
         }
 
-        TableColumn<Compra, String> idColumn = new TableColumn<>("ID");
+        TableColumn<Compra, Integer> idColumn = new TableColumn<>("ID");
         idColumn.setMinWidth(50);
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
 
         TableColumn<Compra, String> usuarioColumn = new TableColumn<>("Usuario");
-        usuarioColumn.setMinWidth(250);
+        usuarioColumn.setMinWidth(120);
         usuarioColumn.setCellValueFactory(new PropertyValueFactory<>("usuario"));
 
         TableColumn<Compra, Integer> valorColumn = new TableColumn<>("Valor total");
-        valorColumn.setMinWidth(250);
+        valorColumn.setMinWidth(100);
         valorColumn.setCellValueFactory(new PropertyValueFactory<>("valor"));
 
-        TableColumn<Compra, Date> dataColumn = new TableColumn<>("Entregue em");
-        dataColumn.setMinWidth(250);
+        TableColumn<Compra, String> dataColumn = new TableColumn<>("Entregue em");
+        dataColumn.setMinWidth(100);
         dataColumn.setCellValueFactory(new PropertyValueFactory<>("dataFinal"));
 
         tbCFinalizadas.setItems(lista);
