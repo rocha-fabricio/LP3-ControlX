@@ -178,4 +178,10 @@ public class Usuario {
 
     }
     //-------x----------------x--------
+
+
+    @Override
+    public String toString(){
+        return id + " - " + nome;
+    }
 }

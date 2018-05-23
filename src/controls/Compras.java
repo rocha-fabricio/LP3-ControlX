@@ -12,6 +12,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import models.Compra;
+import models.Usuario;
 
 import java.io.IOException;
 import java.net.URL;
@@ -61,7 +62,7 @@ public class Compras implements Initializable {
         ObservableList<Compra> lista = FXCollections.observableArrayList();
 
         for (Compra c : compras) {
-            if (c.getStatus() == 0) { //------------------ = 1
+            if (c.getStatus() == 1) {
                 lista.add(new Compra(c.getId(), c.getUsuario(), c.getValor(), c.getProdutos(), c.getStatus(), c.getData(), c.getDataEntrega(), c.getDataFinal()));
             }
         }
@@ -70,7 +71,7 @@ public class Compras implements Initializable {
         idColumn.setMinWidth(50);
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
 
-        TableColumn<Compra, String> usuarioColumn = new TableColumn<>("Usuario");
+        TableColumn<Compra, Usuario> usuarioColumn = new TableColumn<>("Usuario");
         usuarioColumn.setMinWidth(120);
         usuarioColumn.setCellValueFactory(new PropertyValueFactory<>("usuario"));
 
@@ -84,7 +85,6 @@ public class Compras implements Initializable {
 
         tbCFinalizadas.setItems(lista);
         tbCFinalizadas.getColumns().addAll(idColumn, usuarioColumn, valorColumn, dataColumn);
-
     }
 
     public void listViewPendentes(List<Compra> compras) throws ClassNotFoundException {
@@ -104,7 +104,7 @@ public class Compras implements Initializable {
         idColumn.setMinWidth(50);
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
 
-        TableColumn<Compra, String> usuarioColumn = new TableColumn<>("Usuario");
+        TableColumn<Compra, Usuario> usuarioColumn = new TableColumn<>("Usuario");
         usuarioColumn.setMinWidth(120);
         usuarioColumn.setCellValueFactory(new PropertyValueFactory<>("usuario"));
 
@@ -120,8 +120,8 @@ public class Compras implements Initializable {
         tbCPendentes.getColumns().addAll(idColumn, usuarioColumn, valorColumn, dataColumn);
     }
 
-    public void botaoVoltar(){
-
+    public void botaoVoltar() throws IOException {
+        new MenuPrincipal().show();
     }
 
     public void botaoAddCompra(){

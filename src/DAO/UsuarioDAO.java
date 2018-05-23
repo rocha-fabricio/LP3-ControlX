@@ -182,6 +182,44 @@ public class UsuarioDAO {
 
     }
 
+    public Usuario read(int id) throws ClassNotFoundException {
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Usuario user = new Usuario();
+
+        try {
+            stmt = con.prepareStatement("SELECT * "+
+                    " FROM usuario WHERE id = ? and deleted_at is NULL;");
+            stmt.setInt(1, id);
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                user.setId(rs.getInt("id"));
+                user.setNome(rs.getString("nome"));
+                user.setCpf(rs.getString("cpf"));
+                user.setSexo(rs.getString("sexo"));
+                user.setDataNasc(rs.getDate("dataNasc"));
+                user.setTelefone1(rs.getString("tel1"));
+                user.setTelefone2(rs.getString("tel2"));
+                user.setCep(rs.getString("cep"));
+                user.setNum(rs.getInt("num"));
+                user.setRua(rs.getString("rua"));
+                user.setComp(rs.getString("comp"));
+                user.setBairro(rs.getString("bairro"));
+                user.setCidade(rs.getString("cidade"));
+                user.setEstado(rs.getString("estado"));
+                user.setLogin(rs.getString("login"));
+                user.setSenha(rs.getString("senha"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+        return user;
+    }
+
     public Usuario read(Usuario u) throws ClassNotFoundException {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;

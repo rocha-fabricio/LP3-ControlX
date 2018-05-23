@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class Compra {
     private int id;
-    private String usuario;
+    private Usuario usuario;
     private double valor;
     private List<Produto> produtos = new ArrayList<Produto>();
     private int status;
@@ -16,10 +16,10 @@ public class Compra {
 
     //GET and SET
     //-------x----------------x--------
-    public String getUsuario(){
+    public Usuario getUsuario(){
         return this.usuario;
     }
-    public void setUsuario(String usuario){
+    public void setUsuario(Usuario usuario){
         this.usuario = usuario;
     }
     //-------x----------------x--------
@@ -75,7 +75,7 @@ public class Compra {
     //-------x----------------x--------
     //Construtores
     //-------x----------------x--------
-    public Compra(int id, String usuario, double valor, List<Produto> produtos, int status, Date data, Date dataEntrega, Date dataFinal)
+    public Compra(int id, Usuario usuario, double valor, List<Produto> produtos, int status, Date data, Date dataEntrega, Date dataFinal)
     {
         this.id = id;
         this.usuario = usuario;

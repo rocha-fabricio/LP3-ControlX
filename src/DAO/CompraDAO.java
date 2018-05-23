@@ -17,24 +17,45 @@ import java.util.List;
 public class CompraDAO {
 
     ProdutoDAO pdao = new ProdutoDAO();
+    UsuarioDAO udao = new UsuarioDAO();
 
     public void comprar(Compra c) throws ClassNotFoundException {
-        double total = 0;
-        ProdutoDAO prodDAO = new ProdutoDAO();
-        List<Produto> prod = prodDAO.listAll();
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-        for (Produto p : c.getProdutos()) {              //p é o Produto da Venda, com qtd de venda
-            for (Produto prods : prod)                   //prods é o Produto do estoque, com a qtd do estoque
-                if (p.getId() == prods.getId())
-                    prods.setQtd(prods.getQtd() + p.getQtd());
-            total += (p.getQtd() * p.getPreco());
+        try {
+
+            stmt = con.prepareStatement("INSERT INTO compras (idUsuario, valor, dataCompra, dataEntrega) " +
+                    "VALUES (?, ?, ?, ?);");
+            stmt.setInt(1, c.getUsuario().getId());
+            stmt.setDouble(2, c.getValor());
+
+            String dcompra = dateFormat.format(c.getData());
+            stmt.setDate(3, java.sql.Date.valueOf(dcompra));
+
+            String dentrega = dateFormat.format(c.getDataEntrega());
+            stmt.setDate(4, java.sql.Date.valueOf(dentrega));
+
+            stmt.executeUpdate();
+
+            for (Produto p : c.getProdutos()){
+                stmt = con.prepareStatement("INSERT INTO produtos_compra (idCompra, idProduto, qtdProduto, precoUnProduto) " +
+                        "VALUES (?, ?, ?, ?);");
+                stmt.setInt(1, c.getId());
+                stmt.setInt(2, p.getId());
+                stmt.setDouble(3, p.getQtd());
+                stmt.setDouble(4, p.getPreco());
+                stmt.executeUpdate();
+            }
 
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt);
         }
-        Date data = new Date(System.currentTimeMillis());
-        c.setData(data);
-        c.setValor(total);
-        //compras.add(c);
+
     }
 
     public Compra read(Compra c) throws ClassNotFoundException {
@@ -52,7 +73,7 @@ public class CompraDAO {
 
             if (rs.next()) {
                 compra.setId(rs.getInt("id"));
-                compra.setUsuario(rs.getString("nome_usuario"));
+                compra.setUsuario(udao.read(rs.getInt("idUsuario")));
                 compra.setValor(rs.getDouble("valor"));
                 compra.setStatus(rs.getInt("status"));
 
@@ -108,7 +129,7 @@ public class CompraDAO {
             while (rs.next()) {
                 Compra compra = new Compra();
                 compra.setId(rs.getInt("id"));
-                compra.setUsuario(rs.getString("nome_usuario"));
+                compra.setUsuario(udao.read(rs.getInt("idUsuario")));
                 compra.setValor(rs.getDouble("valor"));
                 compra.setStatus(rs.getInt("status"));
 
