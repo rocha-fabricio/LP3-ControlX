@@ -68,7 +68,7 @@ CREATE TABLE produtos (
 	id int NOT NULL AUTO_INCREMENT,
 	idUsuario int NOT NULL,
 	valor double,
-	status int,
+	status int DEFAULT 0,
 	dataCompra datetime,
 	dataEntrega datetime,
 	dataFinal datetime DEFAULT NULL,
