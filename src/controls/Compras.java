@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -26,6 +27,10 @@ public class Compras implements Initializable {
     private TableView<Compra> tbCFinalizadas;
     @FXML
     private TableView<Compra> tbCPendentes;
+    @FXML
+    private Button btVisualizar;
+    @FXML
+    private Button btFinalizar;
 
     CompraDAO cdao = new CompraDAO();
 
@@ -34,6 +39,7 @@ public class Compras implements Initializable {
         try {
             listViewFinalizadas(cdao.listAll());
             listViewPendentes(cdao.listAll());
+            verificaSelecao();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -118,6 +124,20 @@ public class Compras implements Initializable {
 
         tbCPendentes.setItems(lista);
         tbCPendentes.getColumns().addAll(idColumn, usuarioColumn, valorColumn, dataColumn);
+    }
+
+    public void verificaSelecao(){
+        if (tbCPendentes.isFocused() || tbCFinalizadas.isFocused()){
+            btVisualizar.setDisable(false);
+        } else {
+            btVisualizar.setDisable(true);
+        }
+
+        if (tbCPendentes.isFocused()){
+            btFinalizar.setDisable(false);
+        } else {
+            btFinalizar.setDisable(true);
+        }
     }
 
     public void botaoVoltar() throws IOException {
