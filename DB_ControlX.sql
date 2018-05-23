@@ -66,13 +66,14 @@ CREATE TABLE produtos (
 
  CREATE TABLE compras (
 	id int NOT NULL AUTO_INCREMENT,
-	nome_usuario varchar(64),
+	idUsuario int NOT NULL,
 	valor double,
-	status int,
+	status int DEFAULT 0,
 	dataCompra datetime,
 	dataEntrega datetime,
 	dataFinal datetime DEFAULT NULL,
-	PRIMARY KEY (id)
+	PRIMARY KEY (id),
+	FOREIGN KEY (idUsuario) REFERENCES usuario (id)
 );
  
  
@@ -88,10 +89,11 @@ CREATE TABLE produtos (
 
  CREATE TABLE vendas (
 	id int NOT NULL AUTO_INCREMENT,
-	nome_usuario varchar(64),
+	idUsuario int NOT NULL,
 	valor double,
 	dataVenda datetime,
-	PRIMARY KEY (id)
+	PRIMARY KEY (id),
+	FOREIGN KEY (idUsuario) REFERENCES usuario (id)
 );
  
  
