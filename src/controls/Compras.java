@@ -48,7 +48,7 @@ public class Compras implements Initializable {
         Main.stage.hide();
         Main.stage = primaryStage;
         primaryStage.setScene(new Scene(root.load(), primaryStage.getWidth(), primaryStage.getHeight()));
-        primaryStage.setResizable(true);
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 
@@ -61,7 +61,7 @@ public class Compras implements Initializable {
         ObservableList<Compra> lista = FXCollections.observableArrayList();
 
         for (Compra c : compras) {
-            if (c.getStatus() == 1) {
+            if (c.getStatus() == 0) { //------------------ = 1
                 lista.add(new Compra(c.getId(), c.getUsuario(), c.getValor(), c.getProdutos(), c.getStatus(), c.getData(), c.getDataEntrega(), c.getDataFinal()));
             }
         }
@@ -105,18 +105,35 @@ public class Compras implements Initializable {
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
 
         TableColumn<Compra, String> usuarioColumn = new TableColumn<>("Usuario");
-        usuarioColumn.setMinWidth(250);
+        usuarioColumn.setMinWidth(120);
         usuarioColumn.setCellValueFactory(new PropertyValueFactory<>("usuario"));
 
         TableColumn<Compra, Integer> valorColumn = new TableColumn<>("Valor total");
-        valorColumn.setMinWidth(250);
+        valorColumn.setMinWidth(100);
         valorColumn.setCellValueFactory(new PropertyValueFactory<>("valor"));
 
         TableColumn<Compra, Date> dataColumn = new TableColumn<>("Previsão:");
-        dataColumn.setMinWidth(250);
+        dataColumn.setMinWidth(100);
         dataColumn.setCellValueFactory(new PropertyValueFactory<>("dataEntrega"));
 
         tbCPendentes.setItems(lista);
         tbCPendentes.getColumns().addAll(idColumn, usuarioColumn, valorColumn, dataColumn);
     }
+
+    public void botaoVoltar(){
+
+    }
+
+    public void botaoAddCompra(){
+
+    }
+
+    public void botaoVisualizar(){
+
+    }
+
+    public void botaoFinalizar(){
+
+    }
+
 }

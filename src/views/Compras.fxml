@@ -5,26 +5,30 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="568.0" prefWidth="712.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controls.Compras">
+<AnchorPane prefHeight="606.0" prefWidth="786.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controls.Compras">
    <children>
-      <AnchorPane layoutX="13.0" layoutY="8.0" prefHeight="45.0" prefWidth="687.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="8.0">
+      <AnchorPane layoutX="13.0" layoutY="143.0" prefHeight="450.0" prefWidth="394.0" AnchorPane.bottomAnchor="38.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="418.0" AnchorPane.topAnchor="143.0">
          <children>
-            <Button fx:id="btVoltar" layoutX="221.0" layoutY="10.0" mnemonicParsing="false" text="Voltar" />
-            <Button fx:id="btComprar" layoutX="278.0" layoutY="10.0" mnemonicParsing="false" text="Nova Compra" />
-            <Button fx:id="btVisualizar" layoutX="385.0" layoutY="10.0" mnemonicParsing="false" text="Visualizar" />
+            <TableView fx:id="tbCFinalizadas" prefHeight="450.0" prefWidth="394.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="13.0" layoutY="118.0" prefHeight="412.0" prefWidth="687.0" AnchorPane.bottomAnchor="38.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="118.0">
+      <AnchorPane layoutX="418.0" layoutY="143.0" prefHeight="425.0" prefWidth="394.0" AnchorPane.bottomAnchor="38.0" AnchorPane.leftAnchor="418.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="143.0">
          <children>
-            <TableView fx:id="tbCFinalizadas" layoutY="25.0" prefHeight="387.0" prefWidth="337.0" AnchorPane.leftAnchor="0.0" />
-            <TableView fx:id="tbCPendentes" layoutX="350.0" layoutY="24.0" prefHeight="387.0" prefWidth="337.0" AnchorPane.leftAnchor="350.0" AnchorPane.rightAnchor="0.0" />
-            <Label layoutX="75.0" layoutY="6.0" text="Ultimas compras finalizadas:" />
-            <Label layoutX="451.0" layoutY="6.0" text="Compras pendentes:" />
+            <TableView fx:id="tbCPendentes" layoutX="7.0" prefHeight="450.0" prefWidth="394.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children>
       </AnchorPane>
+      <AnchorPane layoutX="11.0" layoutY="6.0" prefHeight="46.0" prefWidth="804.0" AnchorPane.bottomAnchor="554.0" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="6.0">
+         <children>
+            <Button fx:id="btVoltar" layoutX="278.0" layoutY="10.0" mnemonicParsing="false" text="Voltar" />
+            <Button fx:id="btComprar" layoutX="335.0" layoutY="10.0" mnemonicParsing="false" text="Nova Compra" />
+            <Button fx:id="btVisualizar" layoutX="442.0" layoutY="10.0" mnemonicParsing="false" text="Visualizar" />
+         </children>
+      </AnchorPane>
+      <Label layoutX="116.0" layoutY="119.0" text="Ultimas compras finalizadas:" AnchorPane.leftAnchor="116.0" />
+      <Label layoutX="547.0" layoutY="119.0" text="Compras pendentes:" AnchorPane.rightAnchor="142.0" />
       <AnchorPane layoutX="13.0" layoutY="530.0" prefHeight="38.0" prefWidth="687.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="12.0">
          <children>
-            <Button fx:id="btFinalizar" layoutX="558.0" layoutY="6.0" mnemonicParsing="false" text="Finalizar Compra" />
+            <Button fx:id="btFinalizar" layoutX="671.0" layoutY="6.0" mnemonicParsing="false" text="Finalizar Compra" />
          </children>
       </AnchorPane>
    </children>
