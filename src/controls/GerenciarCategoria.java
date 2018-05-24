@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import models.Categoria;
 
@@ -110,6 +111,7 @@ public class GerenciarCategoria implements Initializable {
         Main.stage = primaryStage;
         primaryStage.setScene(new Scene(root.load(), primaryStage.getWidth(), primaryStage.getHeight()));
         primaryStage.setResizable(false);
+        Main.stage.getIcons().add(new Image("images/controlx.png"));
         primaryStage.show();
     }
 

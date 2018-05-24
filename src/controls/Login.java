@@ -35,7 +35,7 @@ public class Login implements Initializable {
             Main.stage.setTitle("ControlX - Entrar");
             Main.stage.setScene(new Scene(root.load(), primaryStage.getWidth(), primaryStage.getHeight()));
             Main.stage.setResizable(false);
-            Main.stage.getIcons().add(new Image("images/mercado.jpg"));
+            Main.stage.getIcons().add(new Image("images/controlx.png"));
             Main.stage.show();
         }
 

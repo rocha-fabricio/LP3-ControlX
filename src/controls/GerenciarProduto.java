@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import models.Categoria;
@@ -26,25 +27,25 @@ import java.util.ResourceBundle;
 public class GerenciarProduto implements Initializable {
 
     @FXML
-    public TextField txNome;
+    private TextField txNome;
     @FXML
-    public TextField txId;
+    private TextField txId;
     @FXML
-    TextField txPreco;
+    private TextField txPreco;
     @FXML
-    TextField txQtd;
+    private TextField txQtd;
     @FXML
-    ComboBox cbUn;
+    private ComboBox cbUn;
     @FXML
-    TextField txEstoqueMin;
+    private TextField txEstoqueMin;
     @FXML
-    ComboBox cbForn;
+    private ComboBox cbForn;
     @FXML
-    ComboBox cbCat;
+    private ComboBox cbCat;
     @FXML
-    Button btSalvar;
+    private Button btSalvar;
     @FXML
-    Button btCancelar;
+    private Button btCancelar;
 
     ProdutoDAO pdao = new ProdutoDAO();
     FornecedorDAO fdao = new FornecedorDAO();
@@ -118,6 +119,15 @@ public class GerenciarProduto implements Initializable {
         }
     }
 
+    public void txtChanged(){
+
+        if(Character.isDigit(Integer.parseInt(txPreco.getText()))){
+
+        }
+        else{
+            txPreco.deletePreviousChar();
+        }
+    }
     public void show(boolean view, boolean edit, int id) throws IOException {
         Stage primaryStage = new Stage();
         FXMLLoader root = new FXMLLoader(getClass().getResource("/views/GerenciarProduto.fxml"));
@@ -133,6 +143,7 @@ public class GerenciarProduto implements Initializable {
         Main.stage = primaryStage;
         primaryStage.setScene(new Scene(root.load(), primaryStage.getWidth(), primaryStage.getHeight()));
         primaryStage.setResizable(false);
+        Main.stage.getIcons().add(new Image("images/controlx.png"));
         primaryStage.show();
     }
 
@@ -146,6 +157,7 @@ public class GerenciarProduto implements Initializable {
         Main.stage = primaryStage;
         primaryStage.setScene(new Scene(root.load(), primaryStage.getWidth(), primaryStage.getHeight()));
         primaryStage.setResizable(false);
+        Main.stage.getIcons().add(new Image("images/controlx.png"));
         primaryStage.show();
     }
 

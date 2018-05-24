@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import models.Compra;
 import models.Usuario;
@@ -56,6 +57,7 @@ public class Compras implements Initializable {
         Main.stage = primaryStage;
         primaryStage.setScene(new Scene(root.load(), primaryStage.getWidth(), primaryStage.getHeight()));
         primaryStage.setResizable(false);
+        Main.stage.getIcons().add(new Image("images/controlx.png"));
         primaryStage.show();
     }
 

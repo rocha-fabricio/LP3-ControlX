@@ -19,7 +19,7 @@
       </AnchorPane>
       <AnchorPane layoutX="11.0" layoutY="6.0" prefHeight="46.0" prefWidth="804.0" AnchorPane.bottomAnchor="554.0" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="6.0">
          <children>
-            <Button fx:id="btVoltar" layoutX="278.0" layoutY="10.0" mnemonicParsing="false" text="Voltar" />
+            <Button fx:id="btVoltar" layoutX="278.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#botaoVoltar" text="Voltar" />
             <Button fx:id="btComprar" layoutX="335.0" layoutY="10.0" mnemonicParsing="false" text="Nova Compra" />
             <Button fx:id="btVisualizar" layoutX="442.0" layoutY="10.0" mnemonicParsing="false" text="Visualizar" />
          </children>

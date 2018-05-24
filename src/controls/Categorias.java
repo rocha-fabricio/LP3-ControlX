@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import models.Categoria;
@@ -59,6 +60,7 @@ public class Categorias implements Initializable {
         Main.stage = primaryStage;
         primaryStage.setScene(new Scene(root.load(), primaryStage.getWidth(), primaryStage.getHeight()));
         primaryStage.setResizable(true);
+        Main.stage.getIcons().add(new Image("images/controlx.png"));
         primaryStage.show();
     }
 

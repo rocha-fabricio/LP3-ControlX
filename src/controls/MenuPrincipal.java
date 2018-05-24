@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import models.Produto;
 
@@ -29,7 +30,8 @@ public class MenuPrincipal
         Main.stage.hide();
         Main.stage = primaryStage;
         primaryStage.setScene(new Scene(root.load(), primaryStage.getWidth(), primaryStage.getHeight()));
-        primaryStage.setResizable(true);
+        primaryStage.setResizable(false);
+        Main.stage.getIcons().add(new Image("images/controlx.png"));
         primaryStage.show();
     }
 
@@ -39,6 +41,9 @@ public class MenuPrincipal
 
     public void btCompras() throws IOException {
         new Compras().show();
+    }
+    public void btVendas() throws IOException{
+        new Vendas().show();
     }
 
 }
