@@ -74,7 +74,7 @@ public class Vendas implements Initializable{
         Stage primaryStage = new Stage();
         FXMLLoader root = new FXMLLoader(getClass().getResource("/views/Vendas.fxml"));
         root.setControllerFactory(c -> {
-            return new MenuPrincipal();
+            return new Vendas();
         });
         primaryStage.setTitle("ControlX - Vendas");
         Main.stage.hide();
