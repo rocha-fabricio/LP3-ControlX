@@ -102,4 +102,7 @@ public class NovaCompra implements Initializable {
         new Compras().show();
     }
 
+    public void autoFill(){
+
+    }
 }

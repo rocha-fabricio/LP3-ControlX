@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableView?>
@@ -8,9 +12,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="528.0" prefWidth="759.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controls.Vendas">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="528.0" prefWidth="759.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controls.Vendas">
    <children>
-      <Pane layoutX="28.0" layoutY="64.0" prefHeight="198.0" prefWidth="297.0" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="70.0">
+      <Pane layoutX="28.0" layoutY="64.0" prefHeight="286.0" prefWidth="297.0" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="70.0">
          <children>
             <TextField fx:id="txNome" editable="false" layoutY="27.0" prefHeight="26.0" prefWidth="200.0" />
             <Label fx:id="lbNome" layoutY="10.0" text="Nome" />
@@ -26,6 +30,8 @@
             <Label layoutX="140.0" layoutY="103.0" text="Preço Venda" />
             <Button fx:id="btAdicionar" layoutX="217.0" layoutY="158.0" mnemonicParsing="false" text="Adicionar" />
             <Button fx:id="btLimparText" layoutX="139.0" layoutY="158.0" mnemonicParsing="false" text="Limpar" />
+            <Label layoutX="76.0" layoutY="230.0" text="Valor Total" />
+            <TextField layoutX="76.0" layoutY="246.0" />
          </children>
          <effect>
             <Blend />
@@ -49,11 +55,11 @@
             <Blend />
          </effect>
       </Pane>
-      <Pane layoutX="30.0" layoutY="283.0" prefHeight="216.0" prefWidth="297.0" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="16.0">
+      <Pane layoutX="30.0" layoutY="283.0" prefHeight="103.0" prefWidth="297.0" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="16.0">
          <children>
-            <Label fx:id="lbVendedor" layoutY="137.0" text="Vendedor:" />
-            <TextField fx:id="txVendedor" editable="false" layoutY="154.0" prefHeight="25.0" prefWidth="261.0" />
-            <Button fx:id="btVoltar" layoutY="190.0" mnemonicParsing="false" text="Voltar" />
+            <Label fx:id="lbVendedor" layoutY="14.0" text="Usuário" />
+            <TextField fx:id="txVendedor" editable="false" layoutY="31.0" prefHeight="25.0" prefWidth="261.0" />
+            <Button fx:id="btVoltar" layoutY="67.0" mnemonicParsing="false" onMouseClicked="#botaoVoltar" text="Voltar" />
          </children>
          <effect>
             <Blend />

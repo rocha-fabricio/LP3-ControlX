@@ -45,5 +45,8 @@ public class MenuPrincipal
     public void btVendas() throws IOException{
         new Vendas().show();
     }
+    public void botaoVoltar() throws IOException{
+        new Login().show();
+    }
 
 }

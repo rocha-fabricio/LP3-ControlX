@@ -58,7 +58,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Button layoutY="136.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="60.0" text="Sair" textFill="RED">
+            <Button layoutY="136.0" mnemonicParsing="false" onMouseClicked="#botaoVoltar" prefHeight="20.0" prefWidth="60.0" text="Sair" textFill="RED">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>

@@ -39,6 +39,19 @@ public class Login implements Initializable {
             Main.stage.show();
         }
 
+        public void show() throws IOException {
+            Stage primaryStage = new Stage();
+            FXMLLoader root = new FXMLLoader(getClass().getResource("/views/Login.fxml"));
+            root.setControllerFactory(c -> {
+            return new Login();
+            });
+            Main.stage.setTitle("ControlX - Entrar");
+            Main.stage.setScene(new Scene(root.load(), primaryStage.getWidth(), primaryStage.getHeight()));
+            Main.stage.setResizable(false);
+            Main.stage.getIcons().add(new Image("images/controlx.png"));
+            Main.stage.show();
+    }
+
         @FXML
         public void logar() throws IOException {
             new MenuPrincipal().show();
