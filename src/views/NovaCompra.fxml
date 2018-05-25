@@ -40,7 +40,7 @@
       <Pane fx:id="pnPesquisar" layoutX="26.0" layoutY="14.0" prefHeight="37.0" prefWidth="720.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="30.0">
          <children>
             <Label fx:id="lbPesquisar" layoutY="10.0" text="Pesquisar produto:" />
-            <TextField fx:id="txPesquisar" layoutX="130.0" layoutY="5.0" onKeyReleased="#autoFill" prefHeight="26.0" prefWidth="598.0" />
+            <ComboBox fx:id="cbPesquisar" editable="true" layoutX="138.0" layoutY="6.0" onHidden="#showProd" onKeyReleased="#autoFill" prefHeight="25.0" prefWidth="589.0" promptText="TODOS" />
          </children>
          <effect>
             <Blend />
@@ -59,7 +59,7 @@
          <children>
             <Label fx:id="lbVendedor" layoutY="14.0" text="Usuario" />
             <TextField fx:id="txVendedor" editable="false" layoutY="31.0" prefHeight="25.0" prefWidth="261.0" />
-            <Button fx:id="btVoltar" layoutY="67.0" mnemonicParsing="false" onMouseClicked="#botaoVoltar" text="Voltar" />
+            <Button fx:id="btVoltar" layoutY="77.0" mnemonicParsing="false" onMouseClicked="#botaoVoltar" text="Voltar" />
          </children>
          <effect>
             <Blend />

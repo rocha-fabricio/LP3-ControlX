@@ -97,6 +97,10 @@ public class Produto {
         this.tipoUn = tipoUn;
         this.cat = cat;
     }
+    @Override
+    public String toString(){
+        return this.id + " - " + this.nome;
+    }
 
     //-------x----------------x--------
     public Produto(){
