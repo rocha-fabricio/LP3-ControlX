@@ -146,8 +146,8 @@ public class Compras implements Initializable {
         new MenuPrincipal().show();
     }
 
-    public void botaoAddCompra(){
-
+    public void botaoAddCompra() throws IOException {
+        new NovaCompra().show();
     }
 
     public void botaoVisualizar(){
