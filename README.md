@@ -7,12 +7,12 @@ ControlX  ->  Sistema de controle de Estoque, Compra e Venda
 
 //
 ### JAVA JDK 10 - Instalação Linux:
-
+      - Executar:**
       sudo add-apt-repository ppa:linuxuprising/java
       sudo apt-get update
       sudo apt-get install oracle-java10-installer
     
-      Verificando Versão:
+      - Verificando Versão:
       $ /usr/lib/jvm/java-10-oracle/bin/java -version
       
       --
@@ -21,7 +21,7 @@ ControlX  ->  Sistema de controle de Estoque, Compra e Venda
       Java HotSpot(TM) 64-Bit Server VM 18.3 (build 10.0.1+10, mixed mode)
       --
     
-      Setando como DEFAULT:
+      - Setando como DEFAULT:
       sudo apt-get install oracle-java10-set-default
  
  //
