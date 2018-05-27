@@ -6,7 +6,7 @@ ControlX  ->  Sistema de controle de Estoque, Compra e Venda
   ('Control' de Controle e 'X' como uma incógnita, uma variável, mostrando de que esse Software não tem uso especifico, é genérico na área)
 
 //
-### JAVA SDK 10 - Instalação Linux:
+### JAVA JDK 10 - Instalação Linux:
 
       sudo add-apt-repository ppa:linuxuprising/java
       sudo apt-get update
@@ -26,7 +26,7 @@ ControlX  ->  Sistema de controle de Estoque, Compra e Venda
  
  //
 
-### classe PRODUTO
+### - classe PRODUTO
 
     String nome;
     int id;
@@ -37,7 +37,7 @@ ControlX  ->  Sistema de controle de Estoque, Compra e Venda
     
 //   
 
-### classe CATEGORIA  
+### - classe CATEGORIA  
 
     String nome;
     int id;
@@ -45,7 +45,7 @@ ControlX  ->  Sistema de controle de Estoque, Compra e Venda
   
 //
 
-### classe FORNECEDOR
+### - classe FORNECEDOR
 
     String nome;
     int id;
@@ -62,7 +62,7 @@ ControlX  ->  Sistema de controle de Estoque, Compra e Venda
     
 //    
 
-### classe COMPRA
+### - classe COMPRA
  
     int id;
     String usuario;
@@ -75,7 +75,7 @@ ControlX  ->  Sistema de controle de Estoque, Compra e Venda
   
  //
  
-### classe VENDA
+### - classe VENDA
  
     int id;
     String usuario;
@@ -85,7 +85,7 @@ ControlX  ->  Sistema de controle de Estoque, Compra e Venda
   
  //
  
-### classe USUARIO
+### - classe USUARIO
 **CRIAR CLASSES DOS CARGOS HERDANDO A CLASSE USUARIO**
  
     int id;
