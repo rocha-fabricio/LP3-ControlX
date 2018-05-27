@@ -7,7 +7,7 @@ ControlX  ->  Sistema de controle de Estoque, Compra e Venda
 
 //
 ### JAVA JDK 10 - Instalação Linux:
-      - Executar:**
+      - Executar:
       sudo add-apt-repository ppa:linuxuprising/java
       sudo apt-get update
       sudo apt-get install oracle-java10-installer
