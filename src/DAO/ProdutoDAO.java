@@ -1,22 +1,18 @@
 package DAO;
 
 import connection.ConnectionFactory;
-import models.Categoria;
 import models.Fornecedor;
 import models.Produto;
 
-import javax.swing.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.TimeZone;
 
 public class ProdutoDAO {
 
@@ -192,6 +188,38 @@ public class ProdutoDAO {
             ConnectionFactory.closeConnection(con, stmt, rs);
         }
         return prod;
+    }
+
+    public List<Produto> listAllByForn(Fornecedor f) throws ClassNotFoundException {
+
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<Produto> lista = new ArrayList<>();
+
+        try {
+            stmt = con.prepareStatement("SELECT * FROM produtos WHERE idFornecedor = ? AND deleted_at is NULL;");
+            stmt.setInt(1, f.getId());
+            rs = stmt.executeQuery();
+
+            while (rs.next()){
+                Produto prod = new Produto();
+                prod.setId(rs.getInt("id"));
+                prod.setNome(rs.getString("nome"));
+                prod.setPreco(rs.getDouble("preco"));
+                prod.setQtd(rs.getDouble("qntd"));
+                prod.setTipoUn(rs.getString("tipoUn"));
+                prod.setEstoqueMin(rs.getDouble("estoqueMin"));
+                prod.setForn(fornDAO.read(rs.getInt("idFornecedor")));
+                prod.setCat(catDAO.read(rs.getInt("idCategoria")));
+                lista.add(prod);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+        return lista;
     }
 
     public List<Produto> listAllById(String id) throws ClassNotFoundException {

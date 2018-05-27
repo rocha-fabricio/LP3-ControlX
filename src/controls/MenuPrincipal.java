@@ -1,21 +1,11 @@
 package controls;
 
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import models.Produto;
 
-import java.awt.*;
 import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
 
 public class MenuPrincipal
 {
@@ -47,6 +37,9 @@ public class MenuPrincipal
     }
     public void botaoVoltar() throws IOException{
         new Login().show();
+    }
+    public void botaoFornecedores() throws IOException {
+        new Fornecedores().show();
     }
 
 }

@@ -58,6 +58,24 @@ public class CompraDAO {
 
     }
 
+    public void up(Compra c) throws ClassNotFoundException {
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+
+        try {
+            stmt = con.prepareStatement("UPDATE compras SET status = ? WHERE id = ?;");
+            stmt.setInt(1, c.getStatus());
+            stmt.setInt(2, c.getId());
+
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+    }
+
     public Compra read(Compra c) throws ClassNotFoundException {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
@@ -113,6 +131,61 @@ public class CompraDAO {
         return compra;
     }
 
+    public Compra read(int id) throws ClassNotFoundException {
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Compra compra = new Compra();
+
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+
+        try {
+            stmt = con.prepareStatement("SELECT * FROM compras WHERE id = ?");
+            stmt.setInt(1, id);
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                compra.setId(rs.getInt("id"));
+                compra.setUsuario(udao.read(rs.getInt("idUsuario")));
+                compra.setValor(rs.getDouble("valor"));
+                compra.setStatus(rs.getInt("status"));
+
+                String dcompra = dateFormat.format(rs.getDate("dataCompra"));
+                Date datac = new Date(dcompra);
+                compra.setData(datac);
+
+                String dentrega = dateFormat.format(rs.getDate("dataEntrega"));
+                Date datae = new Date(dentrega);
+                compra.setDataEntrega(datae);
+
+                String dfinal = dateFormat.format(rs.getDate("dataFinal"));
+                Date dataf = new Date(dfinal);
+                compra.setDataFinal(dataf);
+            }
+
+            //Produtos da Compra
+
+            stmt = con.prepareStatement("SELECT * FROM produtos_compra WHERE idCompra = ?");
+            stmt.setInt(1, id);
+            rs = stmt.executeQuery();
+
+            List <Produto> lista = new ArrayList<>();
+            while (rs.next()) {
+                Produto p = pdao.read(rs.getInt("idProduto"));
+                p.setQtd(rs.getDouble("qtdProduto"));
+                p.setPreco(rs.getDouble("precoUnProduto"));
+                lista.add(p);
+            }
+
+            compra.setProdutos(lista);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+        return compra;
+    }
+
     public List<Compra> listAll() throws ClassNotFoundException {
 
         Connection con = ConnectionFactory.getConnection();
@@ -154,7 +227,36 @@ public class CompraDAO {
         }
 
         return lista;
+    }
 
+    public List<Produto> listProdsCompra(int id) throws ClassNotFoundException {
+
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<Produto> lista = new ArrayList<>();
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+
+        try {
+            stmt = con.prepareStatement("SELECT * FROM produtos_compra WHERE idCompra = ?");
+            stmt.setInt(1, id);
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Produto p = pdao.read(rs.getInt("idProduto"));
+                p.setQtd(rs.getDouble("qtdProduto"));
+                p.setPreco(rs.getDouble("precoUnProduto"));
+                lista.add(p);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+
+        }
+
+        return lista;
     }
 
 

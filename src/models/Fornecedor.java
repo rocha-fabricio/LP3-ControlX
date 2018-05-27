@@ -102,20 +102,20 @@ public class Fornecedor {
     //-------x----------------x--------
     //Construtores
     //-------x----------------x--------
-    public Fornecedor(int id, String cpnj, String telefone1, String telefone2, String cep, int num, String rua, String comp, String bairro, String cidade, String estado, String nome)
+    public Fornecedor(int id,  String nome, String cpnj, String telefone1, String telefone2, String cep, int num, String rua, String comp, String bairro, String cidade, String estado)
     {
         this.id = id;
+        this.nome = nome;
         this.cnpj = cpnj;
         this.telefone1 = telefone1;
         this.telefone2 = telefone2;
         this.cep = cep;
+        this.num = num;
         this.rua = rua;
         this.comp = comp;
         this.bairro = bairro;
         this.cidade = cidade;
         this.estado = estado;
-        this.nome = nome;
-        this.num = num;
     }
     public Fornecedor(){
 

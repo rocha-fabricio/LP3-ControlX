@@ -106,6 +106,76 @@ public class FornecedorDAO {
         return lista;
     }
 
+    public List<Fornecedor> listAllById(int id) throws ClassNotFoundException {
+
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<Fornecedor> lista = new ArrayList<>();
+
+        try {
+            stmt = con.prepareStatement("SELECT * FROM fornecedor WHERE id LIKE ? deleted_at is NULL;");
+            stmt.setString(1, "%" + id + "%");
+            rs = stmt.executeQuery();
+
+            while (rs.next()){
+                Fornecedor forn = new Fornecedor();
+                forn.setId(rs.getInt("id"));
+                forn.setNum(rs.getInt("num"));
+                forn.setNome(rs.getString("nome"));
+                forn.setRua(rs.getString("rua"));
+                forn.setBairro(rs.getString("bairro"));
+                forn.setCep(rs.getString("cep"));
+                forn.setCidade(rs.getString("cidade"));
+                forn.setCnpj(rs.getString("cnpj"));
+                forn.setEstado(rs.getString("estado"));
+                forn.setTelefone1(rs.getString("tel1"));
+                forn.setTelefone2(rs.getString("tel2"));
+                lista.add(forn);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+        return lista;
+    }
+
+    public List<Fornecedor> listAllByName(String nome) throws ClassNotFoundException {
+
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<Fornecedor> lista = new ArrayList<>();
+
+        try {
+            stmt = con.prepareStatement("SELECT * FROM fornecedor WHERE id LIKE ? deleted_at is NULL;");
+            stmt.setString(1, "%" + nome + "%");
+            rs = stmt.executeQuery();
+
+            while (rs.next()){
+                Fornecedor forn = new Fornecedor();
+                forn.setId(rs.getInt("id"));
+                forn.setNum(rs.getInt("num"));
+                forn.setNome(rs.getString("nome"));
+                forn.setRua(rs.getString("rua"));
+                forn.setBairro(rs.getString("bairro"));
+                forn.setCep(rs.getString("cep"));
+                forn.setCidade(rs.getString("cidade"));
+                forn.setCnpj(rs.getString("cnpj"));
+                forn.setEstado(rs.getString("estado"));
+                forn.setTelefone1(rs.getString("tel1"));
+                forn.setTelefone2(rs.getString("tel2"));
+                lista.add(forn);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+        return lista;
+    }
+
     public void del(Fornecedor f) throws ClassNotFoundException {   // ou pelo id, public void del(int id)
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;

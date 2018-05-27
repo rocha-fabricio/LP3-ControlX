@@ -150,12 +150,20 @@ public class Compras implements Initializable {
         new NovaCompra().show();
     }
 
-    public void botaoVisualizar(){
-
+    public void botaoVisualizar() throws IOException {
+        if(tbCPendentes.isFocused()) {
+            new NovaCompra().show(true, tbCPendentes.getSelectionModel().getSelectedItem().getId());
+        } else if (tbCFinalizadas.isFocused()){
+            new NovaCompra().show(true, tbCFinalizadas.getSelectionModel().getSelectedItem().getId());
+        }
     }
 
-    public void botaoFinalizar(){
-
+    public void botaoFinalizar() throws ClassNotFoundException {
+        Compra c = cdao.read(tbCPendentes.getSelectionModel().getSelectedItem().getId());
+        cdao.up(c);
+        listViewPendentes(cdao.listAll());
+        listViewFinalizadas(cdao.listAll());
+        verificaSelecao();
     }
 
 }
