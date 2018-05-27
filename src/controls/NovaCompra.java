@@ -1,5 +1,6 @@
 package controls;
 
+import DAO.CompraDAO;
 import DAO.ProdutoDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -87,6 +88,7 @@ public class NovaCompra implements Initializable {
     private DatePicker dtEntrega;
 
     Produto AOO = new Produto();
+    CompraDAO cdao = new CompraDAO();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -158,7 +160,7 @@ public class NovaCompra implements Initializable {
 
     }
 
-    public void comprar(){
+    public void comprar() throws ClassNotFoundException {
         if(tbProdutos.getItems().isEmpty()){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Aviso");
@@ -179,6 +181,8 @@ public class NovaCompra implements Initializable {
 
             Date dataE = new Date(dtEntrega.getValue().toString());
             c.setDataEntrega(dataE);
+
+            cdao.comprar(c);
         }
     }
 }
