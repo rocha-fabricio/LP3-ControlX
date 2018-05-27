@@ -1,25 +1,5 @@
 # LP3-ControlX Java
 
-//
-# JAVA SDK 10 - Instalação Linux
-    sudo add-apt-repository ppa:linuxuprising/java
-    sudo apt-get update
-    sudo apt-get install oracle-java10-installer
-    
- # Verificando Versão:
-    $ /usr/lib/jvm/java-10-oracle/bin/java -version
-      
-      --
-      java version "10.0.1" 2018-04-17
-      Java(TM) SE Runtime Environment 18.3 (build 10.0.1+10)
-      Java HotSpot(TM) 64-Bit Server VM 18.3 (build 10.0.1+10, mixed mode)
-      --
-    
- # Setando como DEFAULT:
-      sudo apt-get install oracle-java10-set-default
- 
- //
-
 Carlos Silva - Fabricio Rocha - Gustavo Nunes
 
 ControlX  ->  Sistema de controle de Estoque, Compra e Venda
