@@ -26,7 +26,7 @@ ControlX  ->  Sistema de controle de Estoque, Compra e Venda
  
  //
 
-## classe PRODUTO
+### classe PRODUTO
 
     String nome;
     int id;
@@ -37,7 +37,7 @@ ControlX  ->  Sistema de controle de Estoque, Compra e Venda
     
 //   
 
-## classe CATEGORIA  
+### classe CATEGORIA  
 
     String nome;
     int id;
@@ -45,7 +45,7 @@ ControlX  ->  Sistema de controle de Estoque, Compra e Venda
   
 //
 
-## classe FORNECEDOR
+### classe FORNECEDOR
 
     String nome;
     int id;
@@ -62,7 +62,7 @@ ControlX  ->  Sistema de controle de Estoque, Compra e Venda
     
 //    
 
-## classe COMPRA
+### classe COMPRA
  
     int id;
     String usuario;
@@ -75,7 +75,7 @@ ControlX  ->  Sistema de controle de Estoque, Compra e Venda
   
  //
  
-## classe VENDA
+### classe VENDA
  
     int id;
     String usuario;
@@ -85,7 +85,7 @@ ControlX  ->  Sistema de controle de Estoque, Compra e Venda
   
  //
  
-## classe USUARIO   **CRIAR CLASSES DOS CARGOS HERDANDO A CLASSE USUARIO**
+### classe USUARIO   **CRIAR CLASSES DOS CARGOS HERDANDO A CLASSE USUARIO**
  
     int id;
     String nome;
