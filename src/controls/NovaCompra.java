@@ -1,5 +1,6 @@
 package controls;
 
+import DAO.ProdutoDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -8,15 +9,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import models.Compra;
 import models.Produto;
-import DAO.ProdutoDAO;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class NovaCompra implements Initializable {
@@ -82,6 +82,9 @@ public class NovaCompra implements Initializable {
 
     @FXML
     private Button btRemover;
+
+    @FXML
+    private DatePicker dtEntrega;
 
     Produto AOO = new Produto();
 
@@ -153,5 +156,29 @@ public class NovaCompra implements Initializable {
 
         }
 
+    }
+
+    public void comprar(){
+        if(tbProdutos.getItems().isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Aviso");
+            alert.setHeaderText("Impossível finalizar a compra");
+            alert.setContentText("Você deve selecionar ao menos 1 produto.");
+
+            alert.showAndWait();
+        }else {
+
+            Compra c = new Compra();
+            c.setUsuario(Login.getUser());
+            c.setValor(Double.parseDouble(txPrecoTotal.getText()));
+
+            Date data = new Date();
+            SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
+            formatador.format(data);
+            c.setData(data);
+
+            Date dataE = new Date(dtEntrega.getValue().toString());
+            c.setDataEntrega(dataE);
+        }
     }
 }

@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -12,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="528.0" prefWidth="759.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controls.NovaCompra">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="528.0" prefWidth="759.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controls.NovaCompra">
    <children>
       <Pane layoutX="28.0" layoutY="64.0" prefHeight="286.0" prefWidth="297.0" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="70.0">
          <children>
@@ -30,8 +28,8 @@
             <Label layoutX="140.0" layoutY="103.0" text="Preço da Compra" />
             <Button fx:id="btAdicionar" layoutX="217.0" layoutY="158.0" mnemonicParsing="false" text="Adicionar" />
             <Button fx:id="btLimparText" layoutX="139.0" layoutY="158.0" mnemonicParsing="false" text="Limpar" />
-            <TextField fx:id="txPrecoTotal" layoutX="76.0" layoutY="246.0" prefHeight="26.0" prefWidth="146.0" />
-            <Label layoutX="76.0" layoutY="230.0" text="Valor Total" />
+            <DatePicker fx:id="dtEntrega" layoutX="40.0" layoutY="240.0" />
+            <Label layoutX="55.0" layoutY="224.0" text="Data estimada de entrega" />
          </children>
          <effect>
             <Blend />
@@ -67,13 +65,15 @@
       </Pane>
       <Pane layoutX="345.0" layoutY="490.0" prefHeight="25.0" prefWidth="398.0" AnchorPane.bottomAnchor="16.0">
          <children>
-            <Button fx:id="btFinalizar" layoutX="325.0" mnemonicParsing="false" text="Finalizar" />
+            <Button fx:id="btFinalizar" layoutX="325.0" mnemonicParsing="false" onMouseClicked="#comprar" text="Finalizar" />
             <Button fx:id="btLimparVenda" mnemonicParsing="false" text="Limpar" />
-            <Button fx:id="btRemover" layoutX="61.0" mnemonicParsing="false" text="Remover" />
+            <Button fx:id="btRemover" layoutX="63.0" mnemonicParsing="false" text="Remover" />
          </children>
          <effect>
             <Blend />
          </effect>
       </Pane>
+      <TextField fx:id="txPrecoTotal" layoutX="77.0" layoutY="383.0" prefHeight="26.0" prefWidth="146.0" />
+      <Label layoutX="116.0" layoutY="367.0" text="Valor total" />
    </children>
 </AnchorPane>
