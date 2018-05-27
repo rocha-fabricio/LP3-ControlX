@@ -6,8 +6,27 @@ ControlX  ->  Sistema de controle de Estoque, Compra e Venda
   ('Control' de Controle e 'X' como uma incógnita, uma variável, mostrando de que esse Software não tem uso especifico, é genérico na área)
 
 //
+### JAVA JDK 10 - Instalação Linux:
+      - Executar:
+      sudo add-apt-repository ppa:linuxuprising/java
+      sudo apt-get update
+      sudo apt-get install oracle-java10-installer
+    
+      - Verificando Versão:
+      $ /usr/lib/jvm/java-10-oracle/bin/java -version
+      
+      --
+      java version "10.0.1" 2018-04-17
+      Java(TM) SE Runtime Environment 18.3 (build 10.0.1+10)
+      Java HotSpot(TM) 64-Bit Server VM 18.3 (build 10.0.1+10, mixed mode)
+      --
+    
+      - Setando como DEFAULT:
+      sudo apt-get install oracle-java10-set-default
+ 
+ //
 
-classe PRODUTO
+### - classe PRODUTO
 
     String nome;
     int id;
@@ -18,7 +37,7 @@ classe PRODUTO
     
 //   
 
-classe CATEGORIA  
+### - classe CATEGORIA  
 
     String nome;
     int id;
@@ -26,7 +45,7 @@ classe CATEGORIA
   
 //
 
-classe FORNECEDOR
+### - classe FORNECEDOR
 
     String nome;
     int id;
@@ -43,7 +62,7 @@ classe FORNECEDOR
     
 //    
 
- classe COMPRA
+### - classe COMPRA
  
     int id;
     String usuario;
@@ -56,7 +75,7 @@ classe FORNECEDOR
   
  //
  
- classe VENDA
+### - classe VENDA
  
     int id;
     String usuario;
@@ -66,7 +85,8 @@ classe FORNECEDOR
   
  //
  
- classe USUARIO   **CRIAR CLASSES DOS CARGOS HERDANDO A CLASSE USUARIO**
+### - classe USUARIO
+**CRIAR CLASSES DOS CARGOS HERDANDO A CLASSE USUARIO**
  
     int id;
     String nome;
