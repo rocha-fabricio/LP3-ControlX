@@ -85,7 +85,8 @@ ControlX  ->  Sistema de controle de Estoque, Compra e Venda
   
  //
  
-### classe USUARIO   **CRIAR CLASSES DOS CARGOS HERDANDO A CLASSE USUARIO**
+### classe USUARIO
+**CRIAR CLASSES DOS CARGOS HERDANDO A CLASSE USUARIO**
  
     int id;
     String nome;
