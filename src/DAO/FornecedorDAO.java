@@ -189,7 +189,7 @@ public class FornecedorDAO {
 
         try {
 
-            stmt = con.prepareStatement("UPDATE produtos SET deleted_at = ? WHERE id = ?;");
+            stmt = con.prepareStatement("UPDATE fornecedor SET deleted_at = ? WHERE id = ?;");
             stmt.setString(1, data);
             stmt.setInt(2, f.getId());
 
