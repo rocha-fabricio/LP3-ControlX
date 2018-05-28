@@ -49,7 +49,7 @@ public class FornecedorDAO {
 
         try {
 
-            stmt = con.prepareStatement("UPDATE funcionario SET nome = ?, cnpj = ?, tel1 = ?, tel2 = ?, " +
+            stmt = con.prepareStatement("UPDATE fornecedor SET nome = ?, cnpj = ?, tel1 = ?, tel2 = ?, " +
                     "cep = ?, num = ?, rua = ?, comp = ?, bairro = ?, cidade = ?, estado = ? WHERE id = ?;");
             stmt.setString(1, f.getNome());
             stmt.setString(2, f.getCnpj());
@@ -62,6 +62,7 @@ public class FornecedorDAO {
             stmt.setString(9, f.getBairro());
             stmt.setString(10, f.getCidade());
             stmt.setString(11, f.getEstado());
+            stmt.setInt(12, f.getId());
 
             stmt.executeUpdate();
 
@@ -106,7 +107,7 @@ public class FornecedorDAO {
         return lista;
     }
 
-    public List<Fornecedor> listAllById(int id) throws ClassNotFoundException {
+    public List<Fornecedor> listAllById(String id) throws ClassNotFoundException {
 
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
@@ -114,7 +115,7 @@ public class FornecedorDAO {
         List<Fornecedor> lista = new ArrayList<>();
 
         try {
-            stmt = con.prepareStatement("SELECT * FROM fornecedor WHERE id LIKE ? deleted_at is NULL;");
+            stmt = con.prepareStatement("SELECT * FROM fornecedor WHERE id LIKE ? AND deleted_at is NULL;");
             stmt.setString(1, "%" + id + "%");
             rs = stmt.executeQuery();
 
@@ -149,7 +150,7 @@ public class FornecedorDAO {
         List<Fornecedor> lista = new ArrayList<>();
 
         try {
-            stmt = con.prepareStatement("SELECT * FROM fornecedor WHERE id LIKE ? deleted_at is NULL;");
+            stmt = con.prepareStatement("SELECT * FROM fornecedor WHERE nome LIKE ? AND deleted_at is NULL;");
             stmt.setString(1, "%" + nome + "%");
             rs = stmt.executeQuery();
 

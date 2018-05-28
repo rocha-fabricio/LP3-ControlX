@@ -100,7 +100,7 @@ public class Fornecedores implements Initializable {
     }
 
     public void botaoAddFornecedor() throws IOException {
-        //new GerenciarFornecedor().show();
+        new GerenciarFornecedor().show();
     }
 
     public void botaoRemoveFornecedor() throws ClassNotFoundException {
@@ -132,11 +132,11 @@ public class Fornecedores implements Initializable {
     }
 
     public void botaoEditFornecedor() throws IOException, ClassNotFoundException {
-
+        new GerenciarFornecedor().show(false, true, tbView.getSelectionModel().getSelectedItem().getId());
     }
 
     public void botaoViewFornecedor() throws IOException, ClassNotFoundException {
-
+        new GerenciarFornecedor().show(true, false, tbView.getSelectionModel().getSelectedItem().getId());
     }
 
     public void botaoVoltar() throws IOException {
@@ -144,15 +144,17 @@ public class Fornecedores implements Initializable {
     }
 
     public void pesquisarFornecedor() throws ClassNotFoundException {
-        if (rdId.isSelected()) {
-            listView(fdao.listAllById(Integer.parseInt(txPesquisar.getText())));
-        } else if (rdNome.isSelected()) {
-            listView(fdao.listAllByName(txPesquisar.getText()));
-        }
-
         if (txPesquisar.getText().equals("")) {
             listView(fdao.listAll());
+        }else {
+
+            if (rdId.isSelected()) {
+                listView(fdao.listAllById(txPesquisar.getText()));
+            } else if (rdNome.isSelected()) {
+                listView(fdao.listAllByName(txPesquisar.getText()));
+            }
         }
+
     }
 
     public void verificaSelecao(){
