@@ -1,7 +1,6 @@
 package DAO;
 
 import connection.ConnectionFactory;
-import models.Produto;
 import models.Usuario;
 
 import java.sql.Connection;
@@ -156,6 +155,91 @@ public class UsuarioDAO {
         }
         return lista;
     }
+
+    public List<Usuario> listAllById(String id) throws ClassNotFoundException {
+
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<Usuario> lista = new ArrayList<>();
+
+        try {
+            stmt = con.prepareStatement("SELECT * FROM usuario WHERE id LIKE ? AND deleted_at is NULL;");
+            stmt.setString(1, "%" + id + "%");
+            rs = stmt.executeQuery();
+
+            while (rs.next()){
+                Usuario user = new Usuario();
+                user.setId(rs.getInt("id"));
+                user.setNome(rs.getString("nome"));
+                user.setCpf(rs.getString("cpf"));
+                user.setSexo(rs.getString("sexo"));
+                user.setDataNasc(rs.getDate("dataNasc"));
+                user.setTelefone1(rs.getString("tel1"));
+                user.setTelefone2(rs.getString("tel2"));
+                user.setCep(rs.getString("cep"));
+                user.setNum(rs.getInt("num"));
+                user.setRua(rs.getString("rua"));
+                user.setComp(rs.getString("comp"));
+                user.setBairro(rs.getString("bairro"));
+                user.setCidade(rs.getString("cidade"));
+                user.setEstado(rs.getString("estado"));
+                user.setLogin(rs.getString("login"));
+                user.setSenha(rs.getString("senha"));
+
+                lista.add(user);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+
+        }
+        return lista;
+    }
+
+    public List<Usuario> listAllByName(String nome) throws ClassNotFoundException {
+
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<Usuario> lista = new ArrayList<>();
+
+        try {
+            stmt = con.prepareStatement("SELECT * FROM usuario WHERE nome LIKE ? AND deleted_at is NULL;");
+            stmt.setString(1, "%" + nome + "%");
+            rs = stmt.executeQuery();
+
+            while (rs.next()){
+                Usuario user = new Usuario();
+                user.setId(rs.getInt("id"));
+                user.setNome(rs.getString("nome"));
+                user.setCpf(rs.getString("cpf"));
+                user.setSexo(rs.getString("sexo"));
+                user.setDataNasc(rs.getDate("dataNasc"));
+                user.setTelefone1(rs.getString("tel1"));
+                user.setTelefone2(rs.getString("tel2"));
+                user.setCep(rs.getString("cep"));
+                user.setNum(rs.getInt("num"));
+                user.setRua(rs.getString("rua"));
+                user.setComp(rs.getString("comp"));
+                user.setBairro(rs.getString("bairro"));
+                user.setCidade(rs.getString("cidade"));
+                user.setEstado(rs.getString("estado"));
+                user.setLogin(rs.getString("login"));
+                user.setSenha(rs.getString("senha"));
+
+                lista.add(user);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+
+        }
+        return lista;
+    }
+
     public void del(Usuario u) throws ClassNotFoundException {   // ou pelo id, public void del(int id)
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;

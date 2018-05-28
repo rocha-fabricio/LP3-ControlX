@@ -23,7 +23,7 @@
                   <ToggleGroup fx:id="group" />
                </toggleGroup></RadioButton>
             <RadioButton fx:id="rdNome" layoutX="487.0" layoutY="36.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="75.0" text="Nome" toggleGroup="$group" AnchorPane.rightAnchor="14.0" />
-            <TextField fx:id="txPesquisar" layoutX="74.0" layoutY="20.0" onKeyReleased="#pesquisarFornecedor" prefHeight="26.0" prefWidth="400.0" AnchorPane.leftAnchor="74.0" AnchorPane.rightAnchor="102.0" />
+            <TextField fx:id="txPesquisar" layoutX="74.0" layoutY="20.0" onKeyReleased="#pesquisarUsuario" prefHeight="26.0" prefWidth="400.0" AnchorPane.leftAnchor="74.0" AnchorPane.rightAnchor="102.0" />
             <Label fx:id="lbPesquisar" layoutY="25.0" text="Pesquisar:" AnchorPane.leftAnchor="0.0" />
          </children>
       </AnchorPane>
@@ -34,22 +34,22 @@
                   <Cursor fx:constant="CLOSED_HAND" />
                </cursor>
             </Button>
-            <Button fx:id="btAdd" layoutX="179.0" layoutY="6.0" mnemonicParsing="false" onMouseClicked="#botaoAddFornecedor" text="Adicionar">
+            <Button fx:id="btAdd" layoutX="179.0" layoutY="6.0" mnemonicParsing="false" onMouseClicked="#botaoAddUsuario" text="Adicionar">
                <cursor>
                   <Cursor fx:constant="CLOSED_HAND" />
                </cursor>
             </Button>
-            <Button fx:id="btEdit" layoutX="262.0" layoutY="6.0" mnemonicParsing="false" onMouseClicked="#botaoEditFornecedor" text="Editar">
+            <Button fx:id="btEdit" layoutX="262.0" layoutY="6.0" mnemonicParsing="false" onMouseClicked="#botaoEditUsuario" text="Editar">
                <cursor>
                   <Cursor fx:constant="CLOSED_HAND" />
                </cursor>
             </Button>
-            <Button fx:id="btRemove" layoutX="322.0" layoutY="6.0" mnemonicParsing="false" onMouseClicked="#botaoRemoveFornecedor" text="Remover">
+            <Button fx:id="btRemove" layoutX="322.0" layoutY="6.0" mnemonicParsing="false" onMouseClicked="#botaoRemoveUsuario" text="Remover">
                <cursor>
                   <Cursor fx:constant="CLOSED_HAND" />
                </cursor>
             </Button>
-            <Button fx:id="btView" layoutX="402.0" layoutY="6.0" mnemonicParsing="false" onMouseClicked="#botaoViewFornecedor" text="Visualizar" />
+            <Button fx:id="btView" layoutX="402.0" layoutY="6.0" mnemonicParsing="false" onMouseClicked="#botaoViewUsuario" text="Visualizar" />
          </children>
       </AnchorPane>
    </children>

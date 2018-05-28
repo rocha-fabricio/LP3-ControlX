@@ -16,6 +16,7 @@ import models.Usuario;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class Usuarios implements Initializable {
@@ -96,43 +97,30 @@ public class Usuarios implements Initializable {
         verificaSelecao();
     }
 
-    public void botaoAddFornecedor() throws IOException {
+    public void botaoAddUsuario() throws IOException {
         //new GerenciarUsuario().show();
     }
-    /*
-    public void botaoRemoveFornecedor() throws ClassNotFoundException {
-        ProdutoDAO pdao = new ProdutoDAO();
-        Fornecedor f = fdao.read(tbView.getSelectionModel().getSelectedItem().getId());
-        List<Produto> lista = pdao.listAllByForn(f);
 
-        if (lista.isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("ControlX - Remover fornecedor");
-            alert.setHeaderText("Este fornecedor será removida permanentemente.");
-            alert.setContentText("Deseja continuar?");
+    public void botaoRemoveUsuario() throws ClassNotFoundException {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("ControlX - Remover usuario");
+        alert.setHeaderText("Este usuario será removido permanentemente.");
+        alert.setContentText("Deseja continuar?");
 
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() == ButtonType.OK) {
-                fdao.del(fdao.read(tbView.getSelectionModel().getSelectedItem().getId()));
-                listView(fdao.listAll());
-            } else {
-                // ... user chose CANCEL or closed the dialog
-            }
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            udao.del(udao.read(tbView.getSelectionModel().getSelectedItem().getId()));
+            listView(udao.listAll());
         } else {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("ControlX - Aviso");
-            alert.setHeaderText("Não é possível remover este fornecedor");
-            alert.setContentText("Existem um ou mais produtos cadastrados\n com este fornecedor.");
-
-            alert.showAndWait();
+            // ... user chose CANCEL or closed the dialog
         }
     }
 
-    public void botaoEditFornecedor() throws IOException, ClassNotFoundException {
+    public void botaoEditUsuario() throws IOException, ClassNotFoundException {
         new GerenciarFornecedor().show(false, true, tbView.getSelectionModel().getSelectedItem().getId());
     }
 
-    public void botaoViewFornecedor() throws IOException, ClassNotFoundException {
+    public void botaoViewUsuario() throws IOException, ClassNotFoundException {
         new GerenciarFornecedor().show(true, false, tbView.getSelectionModel().getSelectedItem().getId());
     }
 
@@ -140,19 +128,19 @@ public class Usuarios implements Initializable {
         new MenuPrincipal().show();
     }
 
-    public void pesquisarFornecedor() throws ClassNotFoundException {
+    public void pesquisarUsuario() throws ClassNotFoundException {
         if (txPesquisar.getText().equals("")) {
-            listView(fdao.listAll());
+            listView(udao.listAll());
         }else {
 
             if (rdId.isSelected()) {
-                listView(fdao.listAllById(txPesquisar.getText()));
+                listView(udao.listAllById(txPesquisar.getText()));
             } else if (rdNome.isSelected()) {
-                listView(fdao.listAllByName(txPesquisar.getText()));
+                listView(udao.listAllByName(txPesquisar.getText()));
             }
         }
 
-    }*/
+    }
 
     public void verificaSelecao(){
         if (tbView.isFocused()){
