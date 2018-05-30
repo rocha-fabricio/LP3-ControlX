@@ -50,11 +50,11 @@ public class Usuarios implements Initializable {
 
     public void show() throws IOException {
         Stage primaryStage = new Stage();
-        FXMLLoader root = new FXMLLoader(getClass().getResource("/views/Fornecedores.fxml"));
+        FXMLLoader root = new FXMLLoader(getClass().getResource("/views/Usuarios.fxml"));
         root.setControllerFactory(c -> {
             return new Usuarios();
         });
-        primaryStage.setTitle("ControlX - Fornecedores");
+        primaryStage.setTitle("ControlX - Usuarios");
         Main.stage.hide();
         Main.stage = primaryStage;
         primaryStage.setScene(new Scene(root.load(), primaryStage.getWidth(), primaryStage.getHeight()));

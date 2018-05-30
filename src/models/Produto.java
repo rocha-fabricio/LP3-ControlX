@@ -77,6 +77,8 @@ public class Produto {
     public void setCat(Categoria cat){
         this.cat = cat;
     }
+
+    public String getQtdUn() { return this.qtd + " " + this.getTipoUn();}
     //-------x----------------x--------
     //Construtores
     //-------x----------------x--------

@@ -28,8 +28,7 @@ public class MenuPrincipal implements Initializable
     public void initialize(URL location, ResourceBundle resources) {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date data = new Date(System.currentTimeMillis());
-        dateFormat.format(data);
-        lbDate.setText(String.valueOf(data));
+        lbDate.setText(String.valueOf(dateFormat.format(data)));
         usuario();
     }
 

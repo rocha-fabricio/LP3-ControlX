@@ -1,10 +1,16 @@
 package DAO;
 
+import connection.ConnectionFactory;
 import models.Produto;
 import models.Venda;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.text.DateFormat;
 import java.util.List;
 
 public class VendaDAO {
@@ -30,21 +36,100 @@ public class VendaDAO {
     }
 
     public void vender(Venda v) throws ClassNotFoundException {
-        double total = 0;
-        ProdutoDAO prodDAO = new ProdutoDAO();
-        List<Produto> prod = prodDAO.listAll();
 
-        for(Produto p : v.getProdutos()){           //p é o Produto da Venda, com qtd de venda
-            for(Produto prods : prod)     //prods é o Produto do estoque, com a qtd do estoque
-                if(p.getId() == prods.getId())
-                    prods.setQtd(prods.getQtd() - p.getQtd());
-            total += (p.getPreco() * p.getQtd());
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
+        try {
+
+            stmt = con.prepareStatement("INSERT INTO vendas (idUsuario, valor, dataVenda) " +
+                    "VALUES (?, ?, ?);");
+            stmt.setInt(1, v.getUsuario().getId());
+            stmt.setDouble(2, v.getValor());
+            String data = dateFormat.format(v.getData());
+            stmt.setString(3, data);
+            stmt.executeUpdate();
+
+            for (Produto p: v.getProdutos()) {
+
+                PreparedStatement st = null;
+                Connection conn = ConnectionFactory.getConnection();
+
+                String preco = String.valueOf(p.getPreco());
+                if (preco.contains(","))
+                    preco = preco.replace(",", ".");
+
+                String quantidade = String.valueOf(p.getQtd());
+                if (quantidade.contains(","))
+                    quantidade = quantidade.replace(",", ".");
+
+                System.out.println("DENTRO DO VENDER: V ID:" + getIdVenda()+" P ID: " + p.getId() +" P QTD: " + p.getQtd() +" P PRC " + p.getPreco());
+
+                st = conn.prepareStatement("INSERT INTO produtos_venda (idVenda, idProduto, qtdProduto, precoUnProduto) " +
+                        "VALUES (?, ?, ?, ?);");
+                st.setInt(1, getIdVenda());
+                st.setInt(2, p.getId());
+                st.setString(3, quantidade);
+                st.setString(4, preco);
+
+                st.executeUpdate();
+                ConnectionFactory.closeConnection(conn, st);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt);
         }
 
-        Date data = new Date(System.currentTimeMillis());
-        v.setData(data);
-        v.setValor(total);
-        vendas.add(v);
+    }
+
+    public void addProdVenda(Produto p, int idVenda) throws ClassNotFoundException, SQLException {
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement st = null;
+
+        try {
+            String preco = String.valueOf(p.getPreco());
+            if (preco.contains(","))
+                preco = preco.replace(",", ".");
+
+            String quantidade = String.valueOf(p.getQtd());
+            if (quantidade.contains(","))
+                quantidade = quantidade.replace(",", ".");
+
+            System.out.println("DENTRO DO ADD VENDA: V ID:" + idVenda+" P ID: " + p.getId() +"P QTD: " + p.getQtd() +"P PRC " + p.getPreco());
+
+            st = con.prepareStatement("INSERT INTO produtos_venda (idVenda, idProduto, qtdProduto, precoUnProduto) " +
+                        "VALUES (?, ?, ?, ?);");
+                st.setInt(1, idVenda);
+                st.setInt(2, p.getId());
+                st.setString(3, quantidade);
+                st.setString(4, preco);
+
+               st.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.closeConnection(con, st);
+        }
+    }
+
+    public int getIdVenda() throws ClassNotFoundException, SQLException {
+
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        stmt = con.prepareStatement("SELECT `AUTO_INCREMENT` FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'controlx' AND TABLE_NAME = 'vendas'");
+        rs = stmt.executeQuery();
+        if (rs.next()) {
+            int id = (rs.getInt("AUTO_INCREMENT"));
+            return (id - 1);
+        }
+        else
+            return 9999;
+
     }
 
     public void up(Venda v){
