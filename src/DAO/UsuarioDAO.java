@@ -48,9 +48,9 @@ public class UsuarioDAO {
 
         try {
 
-            stmt = con.prepareStatement("INSERT INTO produtos (nome, cpf, sexo, dataNasc," +
-                    " tel1, tel2, cep, num, rua, comp, bairro, cidade, estado, login, senha) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
+            stmt = con.prepareStatement("INSERT INTO usuario (nome, cpf, sexo, dataNasc," +
+                    " tel1, tel2, cep, num, rua, comp, bairro, cidade, estado, cargo, login, senha) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
             stmt.setString(1, u.getNome());
             stmt.setString(2, u.getCpf());
             stmt.setString(3, u.getSexo());
@@ -65,8 +65,9 @@ public class UsuarioDAO {
             stmt.setString(11, u.getBairro());
             stmt.setString(12, u.getCidade());
             stmt.setString(13, u.getEstado());
-            stmt.setString(14, u.getLogin());
-            stmt.setString(15, u.getSenha());
+            stmt.setInt(14, u.getCargo());
+            stmt.setString(15, u.getLogin());
+            stmt.setString(16, u.getSenha());
 
             stmt.executeUpdate();
 
@@ -86,7 +87,7 @@ public class UsuarioDAO {
         try {
             stmt = con.prepareStatement("UPDATE usuario SET nome = ?, cpf = ?, sexo = ?, dataNasc = ?," +
                     " tel1 = ?, tel2 = ?, cep = ?, num = ?, rua = ?, comp = ?," +
-                    " bairro = ?, cidade = ?, estado = ?, login = ?, senha = ? WHERE id = ?;");
+                    " bairro = ?, cidade = ?, estado = ?, cargo = ?, login = ?, senha = ? WHERE id = ?;");
             Usuario user = new Usuario();
             stmt.setString(1, u.getNome());
             stmt.setString(2, u.getCpf());
@@ -102,9 +103,10 @@ public class UsuarioDAO {
             stmt.setString(11, u.getBairro());
             stmt.setString(12, u.getCidade());
             stmt.setString(13, u.getEstado());
-            stmt.setString(14, u.getLogin());
-            stmt.setString(15, u.getSenha());
-            stmt.setInt(16, u.getId());
+            stmt.setInt(14, u.getCargo());
+            stmt.setString(16, u.getLogin());
+            stmt.setString(17, u.getSenha());
+            stmt.setInt(18, u.getId());
 
             stmt.executeUpdate();
 
@@ -142,6 +144,7 @@ public class UsuarioDAO {
                 user.setBairro(rs.getString("bairro"));
                 user.setCidade(rs.getString("cidade"));
                 user.setEstado(rs.getString("estado"));
+                user.setCargo(rs.getInt("cargo"));
                 user.setLogin(rs.getString("login"));
                 user.setSenha(rs.getString("senha"));
 
@@ -184,6 +187,7 @@ public class UsuarioDAO {
                 user.setBairro(rs.getString("bairro"));
                 user.setCidade(rs.getString("cidade"));
                 user.setEstado(rs.getString("estado"));
+                user.setCargo(rs.getInt("cargo"));
                 user.setLogin(rs.getString("login"));
                 user.setSenha(rs.getString("senha"));
 
@@ -226,6 +230,7 @@ public class UsuarioDAO {
                 user.setBairro(rs.getString("bairro"));
                 user.setCidade(rs.getString("cidade"));
                 user.setEstado(rs.getString("estado"));
+                user.setCargo(rs.getInt("cargo"));
                 user.setLogin(rs.getString("login"));
                 user.setSenha(rs.getString("senha"));
 
@@ -293,6 +298,46 @@ public class UsuarioDAO {
                 user.setBairro(rs.getString("bairro"));
                 user.setCidade(rs.getString("cidade"));
                 user.setEstado(rs.getString("estado"));
+                user.setCargo(rs.getInt("cargo"));
+                user.setLogin(rs.getString("login"));
+                user.setSenha(rs.getString("senha"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+        return user;
+    }
+
+    public Usuario read(String login) throws ClassNotFoundException {
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Usuario user = new Usuario();
+
+        try {
+            stmt = con.prepareStatement("SELECT * "+
+                    " FROM usuario WHERE login = ? AND deleted_at is NULL;");
+            stmt.setString(1, login);
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                user.setId(rs.getInt("id"));
+                user.setNome(rs.getString("nome"));
+                user.setCpf(rs.getString("cpf"));
+                user.setSexo(rs.getString("sexo"));
+                user.setDataNasc(rs.getDate("dataNasc"));
+                user.setTelefone1(rs.getString("tel1"));
+                user.setTelefone2(rs.getString("tel2"));
+                user.setCep(rs.getString("cep"));
+                user.setNum(rs.getInt("num"));
+                user.setRua(rs.getString("rua"));
+                user.setComp(rs.getString("comp"));
+                user.setBairro(rs.getString("bairro"));
+                user.setCidade(rs.getString("cidade"));
+                user.setEstado(rs.getString("estado"));
+                user.setCargo(rs.getInt("cargo"));
                 user.setLogin(rs.getString("login"));
                 user.setSenha(rs.getString("senha"));
             }
@@ -331,6 +376,7 @@ public class UsuarioDAO {
                 user.setBairro(rs.getString("bairro"));
                 user.setCidade(rs.getString("cidade"));
                 user.setEstado(rs.getString("estado"));
+                user.setCargo(rs.getInt("cargo"));
                 user.setLogin(rs.getString("login"));
                 user.setSenha(rs.getString("senha"));
             }
@@ -362,5 +408,28 @@ public class UsuarioDAO {
             return id;
         }
 
+    }
+
+    public boolean verificaLogin(String login) throws ClassNotFoundException {
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        boolean check = false;
+
+        try {
+            stmt = con.prepareStatement("SELECT * "+
+                    " FROM usuario WHERE login = ?;");
+            stmt.setString(1, login);
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+               check = true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+        return check;
     }
 }

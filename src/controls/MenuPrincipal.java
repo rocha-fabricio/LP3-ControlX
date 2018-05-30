@@ -1,14 +1,50 @@
 package controls;
 
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.ResourceBundle;
 
-public class MenuPrincipal
+public class MenuPrincipal implements Initializable
 {
+    @FXML
+    private Label lbUser;
+    @FXML
+    private Label lbCargo;
+    @FXML
+    private Label lbDate;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date data = new Date(System.currentTimeMillis());
+        dateFormat.format(data);
+        lbDate.setText(String.valueOf(data));
+        usuario();
+    }
+
+    public void usuario(){
+        lbUser.setText(Login.getUser().getNome());
+        if(Login.getUser().getCargo() == 0) {
+            lbCargo.setText("Administrador");
+        } else if(Login.getUser().getCargo() == 1) {
+            lbCargo.setText("Supervisor");
+        } else if(Login.getUser().getCargo() == 2) {
+            lbCargo.setText("Almoxarife");
+        } else if(Login.getUser().getCargo() == 3) {
+            lbCargo.setText("Caixa");
+        }
+    }
 
     public void show() throws IOException {
         Stage primaryStage = new Stage();
@@ -41,5 +77,7 @@ public class MenuPrincipal
     public void botaoFornecedores() throws IOException {
         new Fornecedores().show();
     }
-
+    public void botaoFuncionarios() throws IOException {
+        new Usuarios().show();
+    }
 }

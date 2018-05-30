@@ -72,7 +72,7 @@ public class Usuarios implements Initializable {
         for (Usuario u : users) {
             lista.add(new Usuario(u.getId(), u.getNome(), u.getCpf(), u.getSexo(), u.getDataNasc(),
                     u.getTelefone1(), u.getTelefone2(), u.getCep(), u.getNum(), u.getRua(), u.getComp(),
-                    u.getBairro(), u.getCidade(), u.getEstado(), u.getLogin(), u.getSenha()));
+                    u.getBairro(), u.getCidade(), u.getEstado(), u.getCargo(), u.getLogin(), u.getSenha()));
         }
 
         TableColumn<Usuario, Integer> idColumn = new TableColumn<>("ID");
@@ -98,7 +98,7 @@ public class Usuarios implements Initializable {
     }
 
     public void botaoAddUsuario() throws IOException {
-        //new GerenciarUsuario().show();
+        new GerenciarUsuario().show();
     }
 
     public void botaoRemoveUsuario() throws ClassNotFoundException {
@@ -117,11 +117,11 @@ public class Usuarios implements Initializable {
     }
 
     public void botaoEditUsuario() throws IOException, ClassNotFoundException {
-        new GerenciarFornecedor().show(false, true, tbView.getSelectionModel().getSelectedItem().getId());
+        new GerenciarUsuario().show(false, true, tbView.getSelectionModel().getSelectedItem().getId());
     }
 
     public void botaoViewUsuario() throws IOException, ClassNotFoundException {
-        new GerenciarFornecedor().show(true, false, tbView.getSelectionModel().getSelectedItem().getId());
+        new GerenciarUsuario().show(true, false, tbView.getSelectionModel().getSelectedItem().getId());
     }
 
     public void botaoVoltar() throws IOException {

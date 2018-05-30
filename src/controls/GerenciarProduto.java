@@ -139,6 +139,7 @@ public class GerenciarProduto implements Initializable {
                         return new GerenciarProduto();
                     }
                 });
+        primaryStage.setTitle("ControlX - Gerenciar Produto");
         Main.stage.hide();
         Main.stage = primaryStage;
         primaryStage.setScene(new Scene(root.load(), primaryStage.getWidth(), primaryStage.getHeight()));
@@ -153,6 +154,7 @@ public class GerenciarProduto implements Initializable {
         root.setControllerFactory(c -> {
                 return new GerenciarProduto();
         });
+        primaryStage.setTitle("ControlX - Adicionar Produto");
         Main.stage.hide();
         Main.stage = primaryStage;
         primaryStage.setScene(new Scene(root.load(), primaryStage.getWidth(), primaryStage.getHeight()));

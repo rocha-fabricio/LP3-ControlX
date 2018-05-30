@@ -1,9 +1,11 @@
 package controls;
 
+import DAO.UsuarioDAO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -23,6 +25,7 @@ public class Login implements Initializable {
     private PasswordField txtPassword;
 
     private static Usuario user;
+    private UsuarioDAO udao = new UsuarioDAO();
 
     public static Usuario getUser() {
         return user;
@@ -31,6 +34,8 @@ public class Login implements Initializable {
     @Override
         public void initialize(URL location, ResourceBundle resources) {
             user = new Usuario();
+            txtLogin.setText("admin");
+            txtPassword.setText("admin");
         }
 
         public void show(Stage primaryStage) throws IOException {
@@ -62,8 +67,19 @@ public class Login implements Initializable {
     }
 
         @FXML
-        public void logar() throws IOException {
-            new MenuPrincipal().show();
+        public void logar() throws IOException, ClassNotFoundException {
+            if (udao.checkLogin(txtLogin.getText(), txtPassword.getText())){
+                user = udao.read(txtLogin.getText());
+                new MenuPrincipal().show();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("ControlX - Aviso");
+                alert.setHeaderText("Login");
+                alert.setContentText("Login ou senha inválidos!");
+
+                alert.showAndWait();
+            }
+
         }
 
 
