@@ -56,7 +56,7 @@ CREATE TABLE produtos (
 	bairro varchar(64),
 	cidade varchar(64),
 	estado varchar(64),
-	cargo varchar(32),
+	cargo int,
 	login varchar(32),
 	senha varchar(32),
 	deleted_at date DEFAULT NULL,
@@ -109,24 +109,24 @@ CREATE TABLE produtos (
 
 
 INSERT INTO usuario(nome, cpf, sexo, dataNasc, tel1, tel2, cep, num, rua, comp, bairro, cidade, estado, cargo, login, senha) 
-	values ('Gustavo Nunes','46760818806','M','1997-09-24','1633667070','0','13563340',666,'Rua Albino Triques','','Parque Santa Felícia Jardim','São Carlos','SP','Administrador','gnunesinfo','gnunesinfo');
+	values ('Gustavo Nunes','46760818806','M','1997-09-24','1633667070','0','13563340',666,'Rua Albino Triques','','Parque Santa Felícia Jardim','São Carlos','SP',0,'gnunesinfo','gnunesinfo');
 	
 
 INSERT INTO usuario(nome, cpf, sexo, dataNasc, tel1, tel2, cep, num, rua, comp, bairro, cidade, estado, cargo, login, senha) 
-	values ('Carlos Silva','44691492844','M','1996-12-06','1633661367','16982472564','13573059',882,'Rua Joaquim Garcia de Oliveira ','','Cidade Aracy ','São Carlos','SP','Administrador','csilva','csilva');
+	values ('Carlos Silva','44691492844','M','1996-12-06','1633661367','16982472564','13573059',882,'Rua Joaquim Garcia de Oliveira ','','Cidade Aracy ','São Carlos','SP',0,'csilva','csilva');
 	
 	
 INSERT INTO usuario(nome, cpf, sexo, dataNasc, tel1, tel2, cep, num, rua, comp, bairro, cidade, estado, cargo, login, senha) 
-	values ('Administrador','31313131313','M','1990-10-21','1633667070','16988536978','23065190',562,'Rua Dezoito','','Paciência','Rio de Janeiro','RJ','Administrador','admin','admin');
+	values ('Administrador','31313131313','M','1990-10-21','1633667070','16988536978','23065190',562,'Rua Dezoito','','Paciência','Rio de Janeiro','RJ',0,'admin','admin');
 
 INSERT INTO usuario(nome, cpf, sexo, dataNasc, tel1, tel2, cep, num, rua, comp, bairro, cidade, estado, cargo, login, senha) 
-	values ('Rochelle Fernandez','74598861067','F','1987-05-12','1633665897','0','72903088',12,'Quadra Quadra 169','','Parque Estrela Dalva XVII','Santo Antônio do Descoberto','GO','Caixa','caixa','caixa');
+	values ('Rochelle Fernandez','74598861067','F','1987-05-12','1633665897','0','72903088',12,'Quadra Quadra 169','','Parque Estrela Dalva XVII','Santo Antônio do Descoberto','GO',3,'caixa','caixa');
 	
 INSERT INTO usuario(nome, cpf, sexo, dataNasc, tel1, tel2, cep, num, rua, comp, bairro, cidade, estado, cargo, login, senha) 
-	values ('Alice Amanda dos Santos','26871795154','F','1987-06-05','6326791147','63986377616','77060828',1258,'Alameda Mato Grosso','','Distrito Industrial de Taquaralto','Palmas','TO','Supervisor','supervisor','supervisor');
+	values ('Alice Amanda dos Santos','26871795154','F','1987-06-05','6326791147','63986377616','77060828',1258,'Alameda Mato Grosso','','Distrito Industrial de Taquaralto','Palmas','TO',1,'supervisor','supervisor');
 	
 INSERT INTO usuario(nome, cpf, sexo, dataNasc, tel1, tel2, cep, num, rua, comp, bairro, cidade, estado, cargo, login, senha) 
-	values ('Carolina Sophia Mirella Souza','79868891284','F','1992-11-22','6525239048','65995260440','78008135',778,'Rua Professor João Félix','','Baú','Cuiabá','MT','Auxiliar de Almoxarifado','almox','almox');
+	values ('Carolina Sophia Mirella Souza','79868891284','F','1992-11-22','6525239048','65995260440','78008135',778,'Rua Professor João Félix','','Baú','Cuiabá','MT',2,'almox','almox');
 
 	
 
