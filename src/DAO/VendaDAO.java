@@ -35,8 +35,9 @@ public class VendaDAO {
         return venda;
     }
 
-    public void vender(Venda v) throws ClassNotFoundException {
+    public boolean vender(Venda v) throws ClassNotFoundException {
 
+        boolean sucess = false;
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
 
@@ -64,8 +65,6 @@ public class VendaDAO {
                 if (quantidade.contains(","))
                     quantidade = quantidade.replace(",", ".");
 
-                System.out.println("DENTRO DO VENDER: V ID:" + getIdVenda()+" P ID: " + p.getId() +" P QTD: " + p.getQtd() +" P PRC " + p.getPreco());
-
                 st = conn.prepareStatement("INSERT INTO produtos_venda (idVenda, idProduto, qtdProduto, precoUnProduto) " +
                         "VALUES (?, ?, ?, ?);");
                 st.setInt(1, getIdVenda());
@@ -76,11 +75,14 @@ public class VendaDAO {
                 st.executeUpdate();
                 ConnectionFactory.closeConnection(conn, st);
             }
+            sucess = true;
         } catch (SQLException e) {
             e.printStackTrace();
+            sucess = false;
         } finally {
             ConnectionFactory.closeConnection(con, stmt);
         }
+        return sucess;
 
     }
 
@@ -96,8 +98,6 @@ public class VendaDAO {
             String quantidade = String.valueOf(p.getQtd());
             if (quantidade.contains(","))
                 quantidade = quantidade.replace(",", ".");
-
-            System.out.println("DENTRO DO ADD VENDA: V ID:" + idVenda+" P ID: " + p.getId() +"P QTD: " + p.getQtd() +"P PRC " + p.getPreco());
 
             st = con.prepareStatement("INSERT INTO produtos_venda (idVenda, idProduto, qtdProduto, precoUnProduto) " +
                         "VALUES (?, ?, ?, ?);");

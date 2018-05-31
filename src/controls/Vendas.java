@@ -74,6 +74,7 @@ public class Vendas implements Initializable{
             getUser();
             produtos.clear();
             txPrecoTotal.clear();
+            precoTotal = 0;
         }catch (Exception e) {
             e.printStackTrace();
         }
@@ -159,30 +160,43 @@ public class Vendas implements Initializable{
     public void addProds()throws ClassNotFoundException {
         //Dando cast do objeto Produto selecionado na ListView
         Produto pro = (Produto) lvProdutos.getSelectionModel().getSelectedItem();
-        for (Produto p: produtos) {
+        for (Produto p : produtos) {
             if (p.getId() == pro.getId()) { //Se o produto ja tiver adicionado na lista, cancelar
                 Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("ControlX - Produto duplicado1");
-                alert.setHeaderText("Produto duplicado2");
+                alert.setTitle("ControlX - Produto duplicado");
+                alert.setHeaderText("Produto já adicionado na venda");
                 alert.setContentText("Esse produto já está adicionado ao carrinho de venda, operação cancelada!");
 
                 alert.showAndWait();
                 return;
             }
         }
+        if (Double.parseDouble(txQtdVenda.getText()) > pro.getQtd()) {//Se qtdVenda > qtdEstoque
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ControlX - Quantidade inválida");
+            alert.setHeaderText("Impossível vender " + txQtdVenda.getText() + " " + pro.getTipoUn() + " do produto");
+            alert.setContentText("Por favor verifique se a quantidade de venda está \n disponível no estoque");
+
+            alert.showAndWait();
+            return;
+        }
         //Lista estática produtos terá como qtd a quantidade de produto que foi vendida
         pro.setQtd(Double.parseDouble(txQtdVenda.getText()));
         //Adicionando o produto selecionado a lista
         produtos.add(pro);
+        refreshTable();
 
+    }
+
+    public void refreshTable(){
         tbProdutos.getItems().clear();
         tbProdutos.getColumns().clear();
 
-        ObservableList<Produto> prods = FXCollections.observableArrayList();
+        ObservableList<Produto> prod = FXCollections.observableArrayList();
 
         for (Produto p : produtos) { //Para cada produto presente na lista estática
             //Adicionamos na observable list
-            prods.add(new Produto(p.getId(), p.getNome(), p.getPreco(), p.getQtd(), p.getTipoUn(), p.getCat()));
+            prod.add(new Produto(p.getId(), p.getNome(), p.getPreco(), p.getQtd(), p.getTipoUn(), p.getCat()));
         }
 
         TableColumn<Produto, String> idColumn = new TableColumn<>("ID");
@@ -202,25 +216,36 @@ public class Vendas implements Initializable{
         qtdColumn.setCellValueFactory(new PropertyValueFactory<>("qtd"));
 
 
-        tbProdutos.setItems(prods);
+        tbProdutos.setItems(prod);
 
         tbProdutos.getColumns().addAll(idColumn, nomeColumn, precoColumn, qtdColumn);
         clearFields();
-        //DecimalFormat df = new DecimalFormat("#0.00");
+        DecimalFormat df = new DecimalFormat("#0.00");
+        precoTotal = 0;
         for(Produto p: produtos){
             precoTotal += (p.getQtd()*p.getPreco());
         }
-        txPrecoTotal.setText(String.valueOf(precoTotal));//df.format(precoTotal)));
+        txPrecoTotal.setText(String.valueOf(df.format(precoTotal)));
     }
+
 
     public void clearTable(){
         produtos.clear();
         precoTotal = 0;
         txPrecoTotal.setText(String.valueOf(precoTotal));
-        tbProdutos.getItems().clear();
-        tbProdutos.getColumns().clear();
-
+        refreshTable();
+        atvBotaoAdd();
     }
+
+    public void removeItem() throws ClassNotFoundException {
+        Produto p = pDAO.read(tbProdutos.getSelectionModel().getSelectedItem());
+        for(Produto prods: produtos){
+            if (prods.getId() == p.getId())
+                produtos.remove(prods);
+        }
+        refreshTable();
+    }
+
     public void atvBotaoAdd(){
         if(txNome.getText().isEmpty() || txPrecoVenda.getText().isEmpty() ||
                 txPrecoVenda.getText().isEmpty() || txPrecoUn.getText().isEmpty() ||
@@ -229,8 +254,16 @@ public class Vendas implements Initializable{
         } else {
             btAdicionar.setDisable(false);
         }
+        if(produtos.isEmpty()){
+            btFinalizar.setDisable(true);
+            btRemover.setDisable(true);
+        }
+        else {
+            btFinalizar.setDisable(false);
+            btRemover.setDisable(false);
+        }
     }
-    public void finalizarCompra() throws ClassNotFoundException, IOException {
+    public void finalizarVenda() throws ClassNotFoundException, IOException {
         Venda venda = new Venda();
         venda.setProdutos(produtos);
         Date data = new Date(System.currentTimeMillis());
@@ -239,15 +272,19 @@ public class Vendas implements Initializable{
         //txPrecoTotal.setText(String.valueOf(df.format(precoTotal)));
         venda.setValor(precoTotal);
         venda.setUsuario(Login.getUser());
-        vDAO.vender(venda);
-        boolean sucess = true;
+        boolean sucess = vDAO.vender(venda);
+        for(Produto p: produtos){
+            Produto pEstoque = pDAO.read(p.getId());
+            pEstoque.setQtd(pEstoque.getQtd() - p.getQtd());
+            pDAO.up(pEstoque);
+        }
         if(sucess){
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("ControlX - Venda Concluída");
             alert.setHeaderText("Produtos vendidos com sucesso");
-            alert.setContentText("A venda foi finalizada com sucesso! Cheque o histórico para mais detalhes.");
+            alert.setContentText("A venda foi finalizada com sucesso! \nCheque o histórico para mais detalhes.");
             alert.showAndWait();
-            new MenuPrincipal().show();
+            new Vendas().show();
 
         }
         else{

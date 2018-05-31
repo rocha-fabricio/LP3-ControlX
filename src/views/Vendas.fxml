@@ -67,9 +67,9 @@
       </Pane>
       <Pane layoutX="345.0" layoutY="490.0" prefHeight="25.0" prefWidth="398.0" AnchorPane.bottomAnchor="16.0">
          <children>
-            <Button fx:id="btFinalizar" layoutX="325.0" mnemonicParsing="false" onAction="#finalizarCompra" text="Finalizar" />
+            <Button fx:id="btFinalizar" layoutX="325.0" mnemonicParsing="false" onAction="#finalizarVenda" text="Finalizar" />
             <Button fx:id="btLimparVenda" mnemonicParsing="false" onAction="#clearTable" text="Limpar" />
-            <Button fx:id="btRemover" layoutX="61.0" mnemonicParsing="false" text="Remover" />
+            <Button fx:id="btRemover" layoutX="61.0" mnemonicParsing="false" onAction="#removeItem" text="Remover" />
          </children>
          <effect>
             <Blend />
