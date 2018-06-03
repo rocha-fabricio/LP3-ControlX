@@ -25,6 +25,11 @@ ControlX  ->  Sistema de controle de Estoque, Compra e Venda
       sudo apt-get install oracle-java10-set-default
  
  //
+ 
+ ##  -  MySql Connector
+      - mysql:mysql-connector-java:5.1.40
+ 
+ //
 
 ### - classe PRODUTO
 
