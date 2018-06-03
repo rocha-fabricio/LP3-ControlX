@@ -154,6 +154,7 @@ public class Vendas implements Initializable{
         txQtdEstoque.clear();
         txQtdVenda.clear();
         atvBotaoAdd();
+        lvProdutos.setItems(null);
     }
 
 
@@ -191,6 +192,7 @@ public class Vendas implements Initializable{
     public void refreshTable(){
         tbProdutos.getItems().clear();
         tbProdutos.getColumns().clear();
+        lvProdutos.setItems(null);
 
         ObservableList<Produto> prod = FXCollections.observableArrayList();
 
