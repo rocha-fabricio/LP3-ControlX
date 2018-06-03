@@ -62,4 +62,11 @@ public class Venda {
     public Venda(){
 
     }
+    //-------x----------------x--------
+    public Venda(int id, Usuario usuario, double valor, Date data) {
+        this.id = id;
+        this.usuario = usuario;
+        this.valor = valor;
+        this.data = data;
+    }
 }

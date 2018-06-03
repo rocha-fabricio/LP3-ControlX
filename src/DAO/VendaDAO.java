@@ -13,27 +13,14 @@ import java.util.ArrayList;
 import java.text.DateFormat;
 import java.util.List;
 
-public class VendaDAO {
-    static List<Venda> vendas = new ArrayList<Venda>();
 
-    public Venda read(int v){
-        Venda venda = new Venda();
-        venda.setId(v);
-        for(Venda x : vendas)
-        {
-            if(x.getId() == v)
-            {
-                venda.setData(x.getData());
-                venda.setProdutos(x.getProdutos());
-                venda.setValor(x.getValor());
-                venda.setUsuario(x.getUsuario());
-                return venda;
-            }
-            else
-                return null;
-        }
-        return venda;
-    }
+public class VendaDAO {
+
+    private UsuarioDAO uDAO = new UsuarioDAO();
+
+    //public Venda read(int v){
+    //    return
+    //}
 
     public boolean vender(Venda v) throws ClassNotFoundException {
 
@@ -86,34 +73,6 @@ public class VendaDAO {
 
     }
 
-    public void addProdVenda(Produto p, int idVenda) throws ClassNotFoundException, SQLException {
-        Connection con = ConnectionFactory.getConnection();
-        PreparedStatement st = null;
-
-        try {
-            String preco = String.valueOf(p.getPreco());
-            if (preco.contains(","))
-                preco = preco.replace(",", ".");
-
-            String quantidade = String.valueOf(p.getQtd());
-            if (quantidade.contains(","))
-                quantidade = quantidade.replace(",", ".");
-
-            st = con.prepareStatement("INSERT INTO produtos_venda (idVenda, idProduto, qtdProduto, precoUnProduto) " +
-                        "VALUES (?, ?, ?, ?);");
-                st.setInt(1, idVenda);
-                st.setInt(2, p.getId());
-                st.setString(3, quantidade);
-                st.setString(4, preco);
-
-               st.executeUpdate();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            ConnectionFactory.closeConnection(con, st);
-        }
-    }
 
     public int getIdVenda() throws ClassNotFoundException, SQLException {
 
@@ -135,22 +94,34 @@ public class VendaDAO {
     public void up(Venda v){
 
     }
-    public void listAll() {
-        if(vendas.size() > 0)
-            for(Venda v : vendas){
-                System.out.println(
-                        "ID: " + v.getId() +
-                                " || Valor: R$" + v.getValor() +
-                                " || Data: " + v.getData() +
-                                "\nProdutos:");
-                for(Produto p : v.getProdutos())
-                    System.out.print(p.getNome() + "(" + p.getQtd() +" " + p.getTipoUn() + ") - ");
-                System.out.println("\n------------------------------");
+    public List<Venda> listAll() throws ClassNotFoundException {
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<Venda> lista = new ArrayList<>();
 
+        try {
+            stmt = con.prepareStatement("SELECT * FROM vendas;");
+            rs = stmt.executeQuery();
+
+            while (rs.next()){
+                Venda vd = new Venda();
+                vd.setId(rs.getInt("id"));
+                vd.setUsuario(uDAO.read(rs.getInt("idUsuario")));
+                vd.setValor(rs.getDouble("valor"));
+                vd.setData(rs.getDate("dataVenda"));
+                lista.add(vd);
             }
-        else
-            System.out.println("Nenhuma venda feita.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+
+        }
+        return lista;
+
     }
+
     public void del(Venda v){   // ou pelo id, public void del(int id)
 
     }

@@ -24,7 +24,7 @@
             <Button id="bt-compras" fx:id="btCompras" layoutX="135.0" layoutY="51.0" mnemonicParsing="false" onMouseClicked="#btCompras" prefHeight="30.0" prefWidth="122.0" text="Comprar" />
             <Button id="bt-funcionario" fx:id="btFuncionarios" layoutX="270.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#botaoFuncionarios" prefHeight="30.0" prefWidth="122.0" text="Usuários" />
             <Button id="bt-venda" fx:id="btVender" layoutY="51.0" mnemonicParsing="false" onAction="#btVendas" prefHeight="30.0" prefWidth="122.0" text="Vender" />
-            <Button id="bt-historico" fx:id="btHistoricos" layoutX="270.0" layoutY="51.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="122.0" text="Históricos" />
+            <Button id="bt-historico" fx:id="btHistoricos" layoutX="270.0" layoutY="51.0" mnemonicParsing="false" onMouseClicked="#botaoHistorico" prefHeight="30.0" prefWidth="122.0" text="Históricos" />
          </children>
          <effect>
             <Blend />

@@ -79,4 +79,7 @@ public class MenuPrincipal implements Initializable
     public void botaoFuncionarios() throws IOException {
         new Usuarios().show();
     }
+    public void botaoHistorico() throws IOException{
+        new Historico().show();
+    }
 }
