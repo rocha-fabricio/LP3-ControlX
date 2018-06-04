@@ -17,8 +17,10 @@ import models.Produto;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -31,7 +33,7 @@ public class NovaCompra implements Initializable {
     private TextField txNome;
 
     @FXML
-    private ComboBox<Produto> cbPesquisar;
+    private TextField txPesquisar;
 
     @FXML
     private Label lbNome;
@@ -90,22 +92,27 @@ public class NovaCompra implements Initializable {
     @FXML
     private DatePicker dtEntrega;
 
+    @FXML
+    javafx.scene.control.ListView lvProdutos;
+
     Produto AOO = new Produto();
     CompraDAO cdao = new CompraDAO();
+
+    static List<Produto> produtos = new ArrayList<>();
+    static double precoTotal = 0 ;
 
     boolean view = false;
     int id;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        try {
-            if(view){
-                visualizarCompra();
-            }else {
-                cbPesquisar.setValue(AOO);
-                autoFill();
-            }
-        } catch (ClassNotFoundException e) {
+        try{
+            atvBotaoAdd();
+            getUser();
+            produtos.clear();
+            txPrecoTotal.clear();
+            precoTotal = 0;
+        }catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -117,6 +124,10 @@ public class NovaCompra implements Initializable {
     NovaCompra(boolean view, int id){
         this.view = view;
         this.id = id;
+    }
+
+    public void getUser(){
+        txVendedor.setText(Login.getUser().getNome());
     }
 
     public void show() throws IOException {
@@ -151,11 +162,11 @@ public class NovaCompra implements Initializable {
 
     public void visualizarCompra() throws ClassNotFoundException {
         btRemover.setDisable(true);
-        btAdicionar.setDisable(true);
+
         btRemover.setDisable(true);
         btFinalizar.setDisable(true);
         btLimparText.setDisable(true);
-        cbPesquisar.setDisable(true);
+        txPesquisar.setDisable(true);
 
         dtEntrega.setEditable(false);
         txPrecoTotal.setEditable(false);
@@ -203,45 +214,104 @@ public class NovaCompra implements Initializable {
         new Compras().show();
     }
 
-    public void autoFill() throws ClassNotFoundException {
-        ObservableList<Produto> produtos = FXCollections.observableArrayList();
-
-        cbPesquisar.getItems().removeAll();
-        if (
-                cbPesquisar.getSelectionModel().getSelectedItem() == null) {
-            for (Produto p : pDAO.listAll()) {
-                produtos.add(p);
-            }
-            cbPesquisar.setItems(produtos);
-            System.out.println("IF");
-
-        } else {
-            String pesquisa = cbPesquisar.getValue().toString();
-            for (Produto p : pDAO.listAllByName(pesquisa)) {
-                produtos.add(p);
-            }
-            cbPesquisar.setItems(produtos);
-            cbPesquisar.show();
-            System.out.println("ELSE");
+    public void autoComplete() throws ClassNotFoundException {
+        String pesquisa = txPesquisar.getText();
+        ObservableList<Produto> prods = FXCollections.observableArrayList();
+        for (Produto p : pDAO.listAllByName(pesquisa)) {
+            prods.add(p);
         }
+        lvProdutos.setItems(prods);
+    }
+    public void fillFields(){
+        Produto p = (Produto) lvProdutos.getSelectionModel().getSelectedItem();
+        txId.setText(String.valueOf(p.getId()));
+        txNome.setText(p.getNome());
+        txQtdEstoque.setText(String.valueOf(p.getQtd()) + " " + p.getTipoUn());
+        txPrecoUn.setText(String.valueOf("R$ " + p.getPreco()));
+        txPrecoCompra.setText(String.valueOf("R$ " + p.getPreco()));
+    }
+    public void clearFields(){
+        txNome.clear();
+        txId.clear();
+        txPesquisar.clear();
+        txPrecoUn.clear();
+        txPrecoCompra.clear();
+        txQtdEstoque.clear();
+        txQtdCompra.clear();
+        atvBotaoAdd();
+        lvProdutos.setItems(null);
+    }
+
+    public void addProds()throws ClassNotFoundException {
+        //Dando cast do objeto Produto selecionado na ListView
+        Produto pro = (Produto) lvProdutos.getSelectionModel().getSelectedItem();
+        for (Produto p : produtos) {
+            if (p.getId() == pro.getId()) { //Se o produto ja tiver adicionado na lista, cancelar
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("ControlX - Produto duplicado");
+                alert.setHeaderText("Produto já adicionado na venda");
+                alert.setContentText("Esse produto já está adicionado ao carrinho de venda, operação cancelada!");
+
+                alert.showAndWait();
+                return;
+            }
+        }
+        if (Double.parseDouble(txQtdCompra.getText()) > pro.getQtd()) {//Se qtdVenda > qtdEstoque
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ControlX - Quantidade inválida");
+            alert.setHeaderText("Impossível vender " + txQtdCompra.getText() + " " + pro.getTipoUn() + " do produto");
+            alert.setContentText("Por favor verifique se a quantidade de venda está \n disponível no estoque");
+
+            alert.showAndWait();
+            return;
+        }
+        //Lista estática produtos terá como qtd a quantidade de produto que foi vendida
+        pro.setQtd(Double.parseDouble(txQtdCompra.getText()));
+        //Adicionando o produto selecionado a lista
+        produtos.add(pro);
+        refreshTable();
 
     }
 
-    public void showProd() {
-        try {
-            Produto prd = (Produto) cbPesquisar.getValue();
-            //txId.setText(Integer.toString(prd.getId()));
-            System.out.println("SHOW PROD");
-            txId.setText(String.valueOf(prd.getId()));
-            txNome.setText(prd.getNome());
-            txPrecoUn.setText(String.valueOf(prd.getPreco()));
-            txQtdEstoque.setText(String.valueOf(prd.getQtd()));
+    public void refreshTable(){
+        tbProdutos.getItems().clear();
+        tbProdutos.getColumns().clear();
+        lvProdutos.setItems(null);
 
-            System.out.println("TRY");
-        } catch (Exception e) {
+        ObservableList<Produto> prod = FXCollections.observableArrayList();
 
+        for (Produto p : produtos) { //Para cada produto presente na lista estática
+            //Adicionamos na observable list
+            prod.add(new Produto(p.getId(), p.getNome(), p.getPreco(), p.getQtd(), p.getTipoUn(), p.getCat()));
         }
 
+        TableColumn<Produto, String> idColumn = new TableColumn<>("ID");
+        idColumn.setMinWidth(30);
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+
+        TableColumn<Produto, String> nomeColumn = new TableColumn<>("Nome");
+        nomeColumn.setMinWidth(150);
+        nomeColumn.setCellValueFactory(new PropertyValueFactory<>("nome"));
+
+        TableColumn<Produto, String> precoColumn = new TableColumn<>("Preço (R$)");
+        precoColumn.setMinWidth(50);
+        precoColumn.setCellValueFactory(new PropertyValueFactory<>("preco"));
+
+        TableColumn<Produto, String> qtdColumn = new TableColumn<>("Qtd de Venda");
+        qtdColumn.setMinWidth(50);
+        qtdColumn.setCellValueFactory(new PropertyValueFactory<>("qtd"));
+
+
+        tbProdutos.setItems(prod);
+
+        tbProdutos.getColumns().addAll(idColumn, nomeColumn, precoColumn, qtdColumn);
+        clearFields();
+        DecimalFormat df = new DecimalFormat("#0.00");
+        precoTotal = 0;
+        for(Produto p: produtos){
+            precoTotal += (p.getQtd()*p.getPreco());
+        }
+        txPrecoTotal.setText(String.valueOf(df.format(precoTotal)));
     }
 
     public void comprar() throws ClassNotFoundException {
@@ -255,18 +325,31 @@ public class NovaCompra implements Initializable {
         }else {
 
             Compra c = new Compra();
+            c.setProdutos(produtos);
             c.setUsuario(Login.getUser());
-            c.setValor(Double.parseDouble(txPrecoTotal.getText()));
+            c.setValor(precoTotal);
 
-            Date data = new Date();
+            Date data = new Date(System.currentTimeMillis());
             SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
             formatador.format(data);
             c.setData(data);
 
-            Date dataE = new Date(dtEntrega.getValue().toString());
-            c.setDataEntrega(dataE);
+            //Date dataE = dtEntrega.getValue();
+            c.setDataEntrega(data);
+
+            for(Produto p: produtos){
+                Produto pEstoque = pDAO.read(p.getId());
+                pEstoque.setQtd(pEstoque.getQtd() + p.getQtd());
+                pDAO.up(pEstoque);
+            }
 
             cdao.comprar(c);
         }
     }
+
+    public void atvBotaoAdd(){
+
+    }
+
+
 }

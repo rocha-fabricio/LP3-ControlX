@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
@@ -10,35 +14,28 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="528.0" prefWidth="759.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controls.NovaCompra">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="528.0" prefWidth="759.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controls.NovaCompra">
    <children>
-      <Pane layoutX="28.0" layoutY="64.0" prefHeight="286.0" prefWidth="297.0" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="70.0">
+      <Pane layoutX="19.0" layoutY="174.0" prefHeight="286.0" prefWidth="297.0" AnchorPane.leftAnchor="19.0" AnchorPane.topAnchor="174.0">
          <children>
-            <TextField fx:id="txNome" editable="false" layoutY="27.0" prefHeight="26.0" prefWidth="200.0" />
-            <Label fx:id="lbNome" layoutY="10.0" text="Nome" />
-            <TextField fx:id="txId" editable="false" layoutX="232.0" layoutY="27.0" prefHeight="26.0" prefWidth="52.0" />
-            <Label layoutX="234.0" layoutY="10.0" text="ID" />
-            <TextField fx:id="txQtdEstoque" editable="false" layoutY="74.0" prefHeight="26.0" prefWidth="112.0" />
-            <Label layoutY="56.0" text="Qtd. Estoque" />
-            <Label layoutX="140.0" layoutY="56.0" text="Preço Unitário" />
-            <TextField fx:id="txPrecoUn" editable="false" layoutX="140.0" layoutY="74.0" prefHeight="26.0" prefWidth="146.0" />
-            <TextField fx:id="txQtdCompra" layoutY="120.0" prefHeight="26.0" prefWidth="112.0" promptText="Inserir quant." />
-            <TextField fx:id="txPrecoCompra" layoutX="139.0" layoutY="120.0" prefHeight="26.0" prefWidth="146.0" />
-            <Label layoutY="103.0" text="Qtd. a Comprar" />
-            <Label layoutX="140.0" layoutY="103.0" text="Preço da Compra" />
-            <Button fx:id="btAdicionar" layoutX="217.0" layoutY="158.0" mnemonicParsing="false" text="Adicionar" />
-            <Button fx:id="btLimparText" layoutX="139.0" layoutY="158.0" mnemonicParsing="false" text="Limpar" />
-            <DatePicker fx:id="dtEntrega" layoutX="40.0" layoutY="240.0" />
-            <Label layoutX="55.0" layoutY="224.0" text="Data estimada de entrega" />
-         </children>
-         <effect>
-            <Blend />
-         </effect>
-      </Pane>
-      <Pane fx:id="pnPesquisar" layoutX="26.0" layoutY="14.0" prefHeight="37.0" prefWidth="720.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="30.0">
-         <children>
-            <Label fx:id="lbPesquisar" layoutY="10.0" text="Pesquisar produto:" />
-            <ComboBox fx:id="cbPesquisar" editable="true" layoutX="138.0" layoutY="6.0" onHidden="#showProd" onKeyReleased="#autoFill" prefHeight="25.0" prefWidth="589.0" promptText="TODOS" />
+            <TextField fx:id="txNome" editable="false" layoutX="6.0" layoutY="23.0" prefHeight="26.0" prefWidth="200.0" />
+            <Label fx:id="lbNome" layoutX="6.0" layoutY="6.0" text="Nome" />
+            <TextField fx:id="txId" editable="false" layoutX="238.0" layoutY="23.0" prefHeight="26.0" prefWidth="52.0" />
+            <Label layoutX="240.0" layoutY="6.0" text="ID" />
+            <TextField fx:id="txQtdEstoque" editable="false" layoutX="6.0" layoutY="70.0" prefHeight="26.0" prefWidth="112.0" />
+            <Label layoutX="6.0" layoutY="52.0" text="Qtd. Estoque" />
+            <Label layoutX="146.0" layoutY="52.0" text="Preço Unitário" />
+            <TextField fx:id="txPrecoUn" editable="false" layoutX="146.0" layoutY="70.0" prefHeight="26.0" prefWidth="146.0" />
+            <TextField fx:id="txQtdCompra" layoutX="6.0" layoutY="116.0" prefHeight="26.0" prefWidth="112.0" promptText="Inserir quant." />
+            <TextField fx:id="txPrecoCompra" layoutX="145.0" layoutY="116.0" prefHeight="26.0" prefWidth="146.0" />
+            <Label layoutX="6.0" layoutY="99.0" text="Qtd. a Comprar" />
+            <Label layoutX="146.0" layoutY="99.0" text="Preço da Compra" />
+            <Button fx:id="btAdicionar" layoutX="223.0" layoutY="154.0" mnemonicParsing="false" onAction="#addProds" text="Adicionar" />
+            <Button fx:id="btLimparText" layoutX="145.0" layoutY="154.0" mnemonicParsing="false" onAction="#clearFields" text="Limpar" />
+            <DatePicker fx:id="dtEntrega" layoutX="9.0" layoutY="203.0" />
+            <Label layoutX="9.0" layoutY="187.0" text="Data estimada de entrega" />
+            <TextField fx:id="txPrecoTotal" layoutX="11.0" layoutY="255.0" prefHeight="26.0" prefWidth="146.0" />
+            <Label layoutX="11.0" layoutY="239.0" text="Valor total" />
          </children>
          <effect>
             <Blend />
@@ -47,17 +44,16 @@
       <Pane layoutX="345.0" layoutY="70.0" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="345.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="70.0">
          <children>
             <TableView fx:id="tbProdutos" layoutY="26.0" prefHeight="385.0" prefWidth="398.0" />
-            <Label fx:id="lbCarrinho" layoutY="6.0" text="Carrinho de Compras" />
+            <Label fx:id="lbCarrinho" layoutY="6.0" text="Lista de Pedido" />
          </children>
          <effect>
             <Blend />
          </effect>
       </Pane>
-      <Pane layoutX="14.0" layoutY="425.0" prefHeight="103.0" prefWidth="297.0" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="16.0">
+      <Pane layoutX="16.0" layoutY="455.0" prefHeight="61.0" prefWidth="306.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="16.0">
          <children>
-            <Label fx:id="lbVendedor" layoutY="14.0" text="Usuario" />
-            <TextField fx:id="txVendedor" editable="false" layoutY="31.0" prefHeight="25.0" prefWidth="261.0" />
-            <Button fx:id="btVoltar" layoutY="77.0" mnemonicParsing="false" onMouseClicked="#botaoVoltar" text="Voltar" />
+            <Label fx:id="lbVendedor" layoutX="14.0" layoutY="10.0" text="Usuario" />
+            <TextField fx:id="txVendedor" editable="false" layoutX="14.0" layoutY="27.0" prefHeight="25.0" prefWidth="209.0" />
          </children>
          <effect>
             <Blend />
@@ -66,14 +62,23 @@
       <Pane layoutX="345.0" layoutY="490.0" prefHeight="25.0" prefWidth="398.0" AnchorPane.bottomAnchor="16.0">
          <children>
             <Button fx:id="btFinalizar" layoutX="325.0" mnemonicParsing="false" onMouseClicked="#comprar" text="Finalizar" />
-            <Button fx:id="btLimparVenda" mnemonicParsing="false" text="Limpar" />
-            <Button fx:id="btRemover" layoutX="63.0" mnemonicParsing="false" text="Remover" />
+            <Button fx:id="btLimparVenda" layoutX="124.0" mnemonicParsing="false" text="Limpar" />
+            <Button fx:id="btRemover" layoutX="197.0" mnemonicParsing="false" text="Remover" />
+            <Button fx:id="btVoltar" layoutX="16.0" mnemonicParsing="false" onMouseClicked="#botaoVoltar" text="Voltar" />
          </children>
          <effect>
             <Blend />
          </effect>
       </Pane>
-      <TextField fx:id="txPrecoTotal" layoutX="77.0" layoutY="383.0" prefHeight="26.0" prefWidth="146.0" />
-      <Label layoutX="116.0" layoutY="367.0" text="Valor total" />
+      <ListView fx:id="lvProdutos" layoutX="26.0" layoutY="68.0" onContextMenuRequested="#fillFields" onInputMethodTextChanged="#fillFields" onMouseClicked="#fillFields" prefHeight="107.0" prefWidth="297.0" />
+      <Pane layoutX="21.0" layoutY="14.0" prefHeight="37.0" prefWidth="720.0">
+         <children>
+            <Label fx:id="lbPesquisar" layoutY="10.0" text="Pesquisar produto:" />
+            <TextField fx:id="txPesquisar" layoutX="126.0" layoutY="6.0" onInputMethodTextChanged="#autoComplete" onKeyPressed="#autoComplete" prefHeight="26.0" prefWidth="599.0" promptText="Digite o Nome ou ID do produto..." />
+         </children>
+         <effect>
+            <Blend />
+         </effect>
+      </Pane>
    </children>
 </AnchorPane>

@@ -69,7 +69,7 @@
          <children>
             <Button fx:id="btFinalizar" layoutX="325.0" mnemonicParsing="false" onAction="#finalizarVenda" text="Finalizar" />
             <Button fx:id="btLimparVenda" mnemonicParsing="false" onAction="#clearTable" text="Limpar" />
-            <Button fx:id="btRemover" layoutX="61.0" mnemonicParsing="false" onAction="#removeItem" text="Remover" />
+            <Button fx:id="btRemover" layoutX="77.0" mnemonicParsing="false" onAction="#removeItem" text="Remover" />
          </children>
          <effect>
             <Blend />
