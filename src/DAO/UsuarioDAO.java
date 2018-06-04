@@ -414,16 +414,15 @@ public class UsuarioDAO {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        boolean check = false;
+        boolean check = true;
 
         try {
-            stmt = con.prepareStatement("SELECT * "+
-                    " FROM usuario WHERE login = ?;");
+            stmt = con.prepareStatement("SELECT * FROM usuario WHERE login = ?;");
             stmt.setString(1, login);
             rs = stmt.executeQuery();
 
             if (rs.next()) {
-               check = true;
+               check = false;
             }
         } catch (SQLException e) {
             e.printStackTrace();

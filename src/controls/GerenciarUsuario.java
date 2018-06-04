@@ -73,7 +73,10 @@ public class GerenciarUsuario implements Initializable {
     private TextField txLogin;
 
     @FXML
-    private TextField txSenha;
+    private PasswordField txSenha;
+
+    @FXML
+    private Button btVerifLogin;
 
     @FXML
     private Label lbUsuario;
@@ -91,6 +94,7 @@ public class GerenciarUsuario implements Initializable {
     boolean edit = false;
     boolean view = false;
     String login;
+    boolean checklogin = false;
     UsuarioDAO udao = new UsuarioDAO();
 
     GerenciarUsuario(boolean view, boolean edit, int id){
@@ -106,12 +110,16 @@ public class GerenciarUsuario implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            lbUsuario.setVisible(false);
             ativarBotaoSalvar();
-            preencher();
             iniCombobox();
+            if (edit || view){
+            preencher();
+            }
             if (view){
                 visualizar();
+            }
+            if (!edit && !view){
+                txId.setText(Integer.toString(udao.idAutoIncrement()));
             }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -122,12 +130,7 @@ public class GerenciarUsuario implements Initializable {
         Stage primaryStage = new Stage();
         FXMLLoader root = new FXMLLoader(getClass().getResource("/views/GerenciarUsuario.fxml"));
         root.setControllerFactory(c -> {
-            try {
-                return new GerenciarProduto(view, edit, id);
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-                return new GerenciarProduto();
-            }
+            return new GerenciarUsuario(view, edit, id);
         });
         primaryStage.setTitle("ControlX - Gerenciar Usuário");
         Main.stage.hide();
@@ -154,14 +157,19 @@ public class GerenciarUsuario implements Initializable {
     }
 
     public void verificaLogin() throws ClassNotFoundException {
-        lbUsuario.setVisible(true);
-        if (udao.verificaLogin(txLogin.getText()) || udao.verificaLogin(login)){
+        if (udao.verificaLogin(txLogin.getText())){
             lbUsuario.setTextFill(Color.GREEN);
             lbUsuario.setText("Login disponivel!");
+            checklogin = true;
+            ativarBotaoSalvar();
+            System.out.println("TRUE");
+
         } else if (!udao.verificaLogin(txLogin.getText())){
             lbUsuario.setTextFill(Color.RED);
             lbUsuario.setText("Login em uso!");
-            btSalvar.setDisable(true);
+            checklogin = false;
+            ativarBotaoSalvar();
+            System.out.println("FALSE");
         }
     }
 
@@ -196,7 +204,7 @@ public class GerenciarUsuario implements Initializable {
         }
         txLogin.setText(u.getLogin());
         txSenha.setText(u.getSenha());
-        login = txLogin.getText();
+        login = u.getLogin();
     }
 
     public void visualizar(){
@@ -217,17 +225,19 @@ public class GerenciarUsuario implements Initializable {
         cbCargo.setDisable(false);
         txLogin.setEditable(false);
         txSenha.setEditable(false);
+        btVerifLogin.setVisible(false);
         btSalvar.setVisible(false);
         btCancelar.setText("Voltar");
     }
 
     public void ativarBotaoSalvar(){
-        if(txNome.getText().isEmpty() || txCpf.getText().isEmpty() || !Sexo.getSelectedToggle().isSelected() ||
+        if(txNome.getText().isEmpty() || txCpf.getText().isEmpty() ||
                 txTel1.getText().isEmpty() || txTel2.getText().isEmpty() ||
                 txCep.getText().isEmpty() || txNum.getText().isEmpty() || txRua.getText().isEmpty() ||
-                txComp.getText().isEmpty() || txBairro.getText().isEmpty() || txCidade.getText().isEmpty() ||
-                txEstado.getText().isEmpty() || cbCargo.getValue().equals("<Selecione>") || txLogin.getText().isEmpty() ||
-                txSenha.getText().isEmpty() || dtDataNasc.getValue().equals("")){
+                txBairro.getText().isEmpty() || txCidade.getText().isEmpty() ||
+                txEstado.getText().isEmpty() || cbCargo.getValue().equals("<Selecione>") ||
+                txLogin.getText().isEmpty() || txSenha.getText().isEmpty() ||
+                dtDataNasc.getValue().equals("") || !checklogin){
 
             btSalvar.setDisable(true);
         } else {
