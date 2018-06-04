@@ -76,9 +76,6 @@ public class GerenciarUsuario implements Initializable {
     private PasswordField txSenha;
 
     @FXML
-    private Button btVerifLogin;
-
-    @FXML
     private Label lbUsuario;
 
     @FXML
@@ -93,7 +90,6 @@ public class GerenciarUsuario implements Initializable {
     int id;
     boolean edit = false;
     boolean view = false;
-    String login;
     boolean checklogin = false;
     UsuarioDAO udao = new UsuarioDAO();
 
@@ -162,14 +158,12 @@ public class GerenciarUsuario implements Initializable {
             lbUsuario.setText("Login disponivel!");
             checklogin = true;
             ativarBotaoSalvar();
-            System.out.println("TRUE");
 
         } else if (!udao.verificaLogin(txLogin.getText())){
             lbUsuario.setTextFill(Color.RED);
             lbUsuario.setText("Login em uso!");
             checklogin = false;
             ativarBotaoSalvar();
-            System.out.println("FALSE");
         }
     }
 
@@ -204,7 +198,6 @@ public class GerenciarUsuario implements Initializable {
         }
         txLogin.setText(u.getLogin());
         txSenha.setText(u.getSenha());
-        login = u.getLogin();
     }
 
     public void visualizar(){
@@ -225,7 +218,6 @@ public class GerenciarUsuario implements Initializable {
         cbCargo.setDisable(false);
         txLogin.setEditable(false);
         txSenha.setEditable(false);
-        btVerifLogin.setVisible(false);
         btSalvar.setVisible(false);
         btCancelar.setText("Voltar");
     }
