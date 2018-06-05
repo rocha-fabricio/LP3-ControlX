@@ -117,7 +117,21 @@ public class Usuarios implements Initializable {
     }
 
     public void botaoEditUsuario() throws IOException, ClassNotFoundException {
-        new GerenciarUsuario().show(false, true, tbView.getSelectionModel().getSelectedItem().getId());
+        if(Login.getUser().getCargo() == 1){
+            if (tbView.getSelectionModel().getSelectedItem().getCargo() == 0 ||
+                    tbView.getSelectionModel().getSelectedItem().getCargo() == 1){
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("ControlX - Aviso");
+                alert.setHeaderText("Acesso negado");
+                alert.setContentText("Você não tem permissão para editar\n um Admin/Supervisor.");
+
+                alert.showAndWait();
+            } else {
+                new GerenciarUsuario().show(false, true, tbView.getSelectionModel().getSelectedItem().getId());
+            }
+        } else {
+            new GerenciarUsuario().show(false, true, tbView.getSelectionModel().getSelectedItem().getId());
+        }
     }
 
     public void botaoViewUsuario() throws IOException, ClassNotFoundException {
@@ -144,9 +158,14 @@ public class Usuarios implements Initializable {
 
     public void verificaSelecao(){
         if (tbView.isFocused()){
-            btRemove.setDisable(false);
             btEdit.setDisable(false);
             btView.setDisable(false);
+            if (Login.getUser().getCargo() == 1){
+                btRemove.setDisable(true);
+            }else{
+                btRemove.setDisable(false);
+            }
+
         } else {
             btRemove.setDisable(true);
             btEdit.setDisable(true);

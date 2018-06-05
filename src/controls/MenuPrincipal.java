@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
@@ -23,13 +24,38 @@ public class MenuPrincipal implements Initializable
     private Label lbCargo;
     @FXML
     private Label lbDate;
+    @FXML
+    private Button btProdutos;
+    @FXML
+    private Button btFornecedores;
+    @FXML
+    private Button btCompras;
+    @FXML
+    private Button btUsuarios;
+    @FXML
+    private Button btVender;
+    @FXML
+    private Button btHistoricos;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        verifCargo();
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date data = new Date(System.currentTimeMillis());
         lbDate.setText(String.valueOf(dateFormat.format(data)));
         usuario();
+    }
+
+    public void verifCargo(){
+        if(Login.getUser().getCargo() == 2){ //ALMOXARIFE
+            btUsuarios.setDisable(true);
+            btVender.setDisable(true);
+
+        } else if(Login.getUser().getCargo() == 3){ //CAIXA
+            btUsuarios.setDisable(true);
+            btCompras.setDisable(true);
+            btFornecedores.setDisable(true);
+        }
     }
 
     public void usuario(){

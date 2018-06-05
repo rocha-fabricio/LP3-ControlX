@@ -12,7 +12,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import models.Venda;
-import models.Compra;
 
 import java.io.IOException;
 import java.net.URL;
@@ -41,6 +40,11 @@ public class Historico implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try{
+            if(Login.getUser().getCargo() == 2){
+                tpVenda.setDisable(true);
+            } else if(Login.getUser().getCargo() == 3){
+                tpCompra.setDisable(true);
+            }
             ObservableList<String> datas = FXCollections.observableArrayList("Hoje", "Ultimos 7 dias", "Ultimo mês","Todas");
             cbFiltro.setItems(datas);
             cbFiltro.setValue("Todas");

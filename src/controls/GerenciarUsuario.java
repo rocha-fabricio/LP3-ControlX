@@ -238,9 +238,17 @@ public class GerenciarUsuario implements Initializable {
     }
 
     public void iniCombobox(){
-        ObservableList<String> cargo = FXCollections.observableArrayList(
+        if(Login.getUser().getCargo() == 1) {
+            ObservableList<String> cargo = FXCollections.observableArrayList(
+                    "Almoxarife", "Caixa");
+            cbCargo.setItems(cargo);
+        } else {
+
+            ObservableList<String> cargo = FXCollections.observableArrayList(
                 "Administrador", "Supervisor", "Almoxarife", "Caixa");
-        cbCargo.setItems(cargo);
+            cbCargo.setItems(cargo);
+        }
+
         cbCargo.setValue("<Selecione>");
     }
 

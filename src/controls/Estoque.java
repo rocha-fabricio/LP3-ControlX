@@ -1,7 +1,6 @@
 package controls;
 
 import DAO.CategoriaDAO;
-import DAO.FornecedorDAO;
 import DAO.ProdutoDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,7 +17,9 @@ import models.Produto;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
+import java.util.ResourceBundle;
 
 public class Estoque implements Initializable {
 
@@ -40,6 +41,8 @@ public class Estoque implements Initializable {
     private Button btView;
     @FXML
     private Button btCategorias;
+    @FXML
+    private Button btAdd;
 
     private ProdutoDAO pdao = new ProdutoDAO();
     private CategoriaDAO cdao = new CategoriaDAO();
@@ -47,6 +50,10 @@ public class Estoque implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
+            if(Login.getUser().getCargo() == 3){
+                btAdd.setDisable(true);
+                btCategorias.setDisable(true);
+            }
             listView(pdao.listAll());
             iniComboBox();
             verificaSelecao();
@@ -182,9 +189,15 @@ public class Estoque implements Initializable {
 
     public void verificaSelecao(){
         if (tbView.isFocused()){
-            btRemove.setDisable(false);
-            btEdit.setDisable(false);
             btView.setDisable(false);
+            if(Login.getUser().getCargo() == 3){
+                btAdd.setDisable(true);
+                btRemove.setDisable(true);
+                btEdit.setDisable(true);
+            } else {
+                btRemove.setDisable(false);
+                btEdit.setDisable(false);
+            }
         } else {
             btRemove.setDisable(true);
             btEdit.setDisable(true);
