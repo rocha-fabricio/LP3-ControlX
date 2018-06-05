@@ -19,7 +19,9 @@ public class CompraDAO {
     ProdutoDAO pdao = new ProdutoDAO();
     UsuarioDAO udao = new UsuarioDAO();
 
-    public void comprar(Compra c) throws ClassNotFoundException {
+    public boolean comprar(Compra c) throws ClassNotFoundException {
+
+        boolean sucess = false;
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -39,22 +41,54 @@ public class CompraDAO {
 
             stmt.executeUpdate();
 
-            for (Produto p : c.getProdutos()){
-                stmt = con.prepareStatement("INSERT INTO produtos_compra (idCompra, idProduto, qtdProduto, precoUnProduto) " +
+            for (Produto p: c.getProdutos()) {
+
+                PreparedStatement st = null;
+                Connection conn = ConnectionFactory.getConnection();
+
+                String preco = String.valueOf(p.getPreco());
+                if (preco.contains(","))
+                    preco = preco.replace(",", ".");
+
+                String quantidade = String.valueOf(p.getQtd());
+                if (quantidade.contains(","))
+                    quantidade = quantidade.replace(",", ".");
+
+                st = conn.prepareStatement("INSERT INTO produtos_compra (idCompra, idProduto, qtdProduto, precoUnProduto) " +
                         "VALUES (?, ?, ?, ?);");
-                stmt.setInt(1, c.getId());
-                stmt.setInt(2, p.getId());
-                stmt.setDouble(3, p.getQtd());
-                stmt.setDouble(4, p.getPreco());
-                stmt.executeUpdate();
+                st.setInt(1, getIdCompra());
+                st.setInt(2, p.getId());
+                st.setString(3, quantidade);
+                st.setString(4, preco);
+
+                st.executeUpdate();
+                ConnectionFactory.closeConnection(conn, st);
             }
-
-
+            sucess = true;
         } catch (SQLException e) {
             e.printStackTrace();
+            sucess = false;
         } finally {
             ConnectionFactory.closeConnection(con, stmt);
         }
+        return sucess;
+
+    }
+
+    public int getIdCompra() throws ClassNotFoundException, SQLException {
+
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        stmt = con.prepareStatement("SELECT `AUTO_INCREMENT` FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'controlx' AND TABLE_NAME = 'compras'");
+        rs = stmt.executeQuery();
+        if (rs.next()) {
+            int id = (rs.getInt("AUTO_INCREMENT"));
+            return (id - 1);
+        }
+        else
+            return 9999;
 
     }
 
@@ -94,18 +128,9 @@ public class CompraDAO {
                 compra.setUsuario(udao.read(rs.getInt("idUsuario")));
                 compra.setValor(rs.getDouble("valor"));
                 compra.setStatus(rs.getInt("status"));
-
-                String dcompra = dateFormat.format(rs.getDate("dataCompra"));
-                Date datac = new Date(dcompra);
-                compra.setData(datac);
-
-                String dentrega = dateFormat.format(rs.getDate("dataEntrega"));
-                Date datae = new Date(dentrega);
-                compra.setDataEntrega(datae);
-
-                String dfinal = dateFormat.format(rs.getDate("dataFinal"));
-                Date dataf = new Date(dfinal);
-                compra.setDataFinal(dataf);
+                compra.setData(rs.getDate("dataCompra"));
+                compra.setDataEntrega(rs.getDate("dataEntrega"));
+                compra.setDataFinal(rs.getDate("dataFinal"));
             }
 
             //Produtos da Compra
@@ -150,17 +175,11 @@ public class CompraDAO {
                 compra.setValor(rs.getDouble("valor"));
                 compra.setStatus(rs.getInt("status"));
 
-                String dcompra = dateFormat.format(rs.getDate("dataCompra"));
-                Date datac = new Date(dcompra);
-                compra.setData(datac);
+                compra.setData(rs.getDate("dataCompra"));
 
-                String dentrega = dateFormat.format(rs.getDate("dataEntrega"));
-                Date datae = new Date(dentrega);
-                compra.setDataEntrega(datae);
+                compra.setDataEntrega(rs.getDate("dataEntrega"));
 
-                String dfinal = dateFormat.format(rs.getDate("dataFinal"));
-                Date dataf = new Date(dfinal);
-                compra.setDataFinal(dataf);
+                compra.setDataFinal(rs.getDate("dataFinal"));
             }
 
             //Produtos da Compra
@@ -206,17 +225,12 @@ public class CompraDAO {
                 compra.setValor(rs.getDouble("valor"));
                 compra.setStatus(rs.getInt("status"));
 
-                String dcompra = dateFormat.format(rs.getDate("dataCompra"));
-                Date datac = new Date(dcompra);
-                compra.setData(datac);
+                compra.setData(rs.getDate("dataCompra"));
 
-                String dentrega = dateFormat.format(rs.getDate("dataEntrega"));
-                Date datae = new Date(dentrega);
-                compra.setDataEntrega(datae);
+                compra.setDataEntrega(rs.getDate("dataEntrega"));
 
-                String dfinal = dateFormat.format(rs.getDate("dataFinal"));
-                Date dataf = new Date(dfinal);
-                compra.setDataFinal(dataf);
+                compra.setDataFinal(rs.getDate("dataFinal"));
+
                 lista.add(compra);
             }
         } catch (SQLException e) {
@@ -235,7 +249,7 @@ public class CompraDAO {
         PreparedStatement stmt = null;
         ResultSet rs = null;
         List<Produto> lista = new ArrayList<>();
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        //DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
 
         try {

@@ -16,23 +16,23 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="528.0" prefWidth="759.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controls.NovaCompra">
    <children>
-      <Pane layoutX="19.0" layoutY="174.0" prefHeight="286.0" prefWidth="297.0" AnchorPane.leftAnchor="19.0" AnchorPane.topAnchor="174.0">
+      <Pane layoutX="19.0" layoutY="174.0" prefHeight="286.0" prefWidth="306.0" AnchorPane.leftAnchor="19.0" AnchorPane.topAnchor="174.0">
          <children>
-            <TextField fx:id="txNome" editable="false" layoutX="6.0" layoutY="23.0" prefHeight="26.0" prefWidth="200.0" />
+            <TextField fx:id="txNome" editable="false" layoutX="6.0" layoutY="23.0" onInputMethodTextChanged="#atvBotaoAdd" onKeyReleased="#atvBotaoAdd" prefHeight="26.0" prefWidth="200.0" />
             <Label fx:id="lbNome" layoutX="6.0" layoutY="6.0" text="Nome" />
-            <TextField fx:id="txId" editable="false" layoutX="238.0" layoutY="23.0" prefHeight="26.0" prefWidth="52.0" />
+            <TextField fx:id="txId" editable="false" layoutX="238.0" layoutY="23.0" onInputMethodTextChanged="#atvBotaoAdd" onKeyReleased="#atvBotaoAdd" prefHeight="26.0" prefWidth="52.0" />
             <Label layoutX="240.0" layoutY="6.0" text="ID" />
-            <TextField fx:id="txQtdEstoque" editable="false" layoutX="6.0" layoutY="70.0" prefHeight="26.0" prefWidth="112.0" />
+            <TextField fx:id="txQtdEstoque" editable="false" layoutX="6.0" layoutY="70.0" onInputMethodTextChanged="#atvBotaoAdd" onKeyReleased="#atvBotaoAdd" prefHeight="26.0" prefWidth="112.0" />
             <Label layoutX="6.0" layoutY="52.0" text="Qtd. Estoque" />
             <Label layoutX="146.0" layoutY="52.0" text="Preço Unitário" />
-            <TextField fx:id="txPrecoUn" editable="false" layoutX="146.0" layoutY="70.0" prefHeight="26.0" prefWidth="146.0" />
-            <TextField fx:id="txQtdCompra" layoutX="6.0" layoutY="116.0" prefHeight="26.0" prefWidth="112.0" promptText="Inserir quant." />
-            <TextField fx:id="txPrecoCompra" layoutX="145.0" layoutY="116.0" prefHeight="26.0" prefWidth="146.0" />
+            <TextField fx:id="txPrecoUn" editable="false" layoutX="146.0" layoutY="70.0" onInputMethodTextChanged="#atvBotaoAdd" onKeyReleased="#atvBotaoAdd" prefHeight="26.0" prefWidth="146.0" />
+            <TextField fx:id="txQtdCompra" layoutX="6.0" layoutY="116.0" onInputMethodTextChanged="#atvBotaoAdd" onKeyReleased="#atvBotaoAdd" prefHeight="26.0" prefWidth="112.0" promptText="Inserir quant." />
+            <TextField fx:id="txPrecoCompra" layoutX="145.0" layoutY="116.0" onInputMethodTextChanged="#atvBotaoAdd" onKeyReleased="#atvBotaoAdd" prefHeight="26.0" prefWidth="146.0" promptText="Insira o preço" />
             <Label layoutX="6.0" layoutY="99.0" text="Qtd. a Comprar" />
             <Label layoutX="146.0" layoutY="99.0" text="Preço da Compra" />
-            <Button fx:id="btAdicionar" layoutX="223.0" layoutY="154.0" mnemonicParsing="false" onAction="#addProds" text="Adicionar" />
-            <Button fx:id="btLimparText" layoutX="145.0" layoutY="154.0" mnemonicParsing="false" onAction="#clearFields" text="Limpar" />
-            <DatePicker fx:id="dtEntrega" layoutX="9.0" layoutY="203.0" />
+            <Button fx:id="btAdicionar" layoutX="211.0" layoutY="154.0" mnemonicParsing="false" onAction="#addProds" text="Adicionar" />
+            <Button fx:id="btLimparText" layoutX="144.0" layoutY="154.0" mnemonicParsing="false" onAction="#clearFields" text="Limpar" />
+            <DatePicker fx:id="dtEntrega" editable="false" layoutX="9.0" layoutY="203.0" onInputMethodTextChanged="#atvBotaoAdd" promptText="Data da entrega" showWeekNumbers="true" />
             <Label layoutX="9.0" layoutY="187.0" text="Data estimada de entrega" />
             <TextField fx:id="txPrecoTotal" layoutX="11.0" layoutY="255.0" prefHeight="26.0" prefWidth="146.0" />
             <Label layoutX="11.0" layoutY="239.0" text="Valor total" />

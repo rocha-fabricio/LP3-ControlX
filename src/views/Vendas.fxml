@@ -30,8 +30,8 @@
             <Label layoutX="140.0" layoutY="103.0" text="Preço Venda" />
             <Button fx:id="btAdicionar" layoutX="217.0" layoutY="158.0" mnemonicParsing="false" onAction="#addProds" text="Adicionar" />
             <Button fx:id="btLimparText" layoutX="139.0" layoutY="158.0" mnemonicParsing="false" onAction="#clearFields" text="Limpar" />
-            <Label layoutX="74.0" layoutY="194.0" text="Valor Total" />
-            <TextField fx:id="txPrecoTotal" layoutX="74.0" layoutY="210.0" />
+            <Label layoutY="194.0" text="Valor Total" />
+            <TextField fx:id="txPrecoTotal" layoutY="210.0" />
          </children>
          <effect>
             <Blend />

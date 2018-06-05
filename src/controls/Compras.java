@@ -25,20 +25,17 @@ import java.util.ResourceBundle;
 public class Compras implements Initializable {
 
     @FXML
-    private TableView<Compra> tbCFinalizadas;
-    @FXML
     private TableView<Compra> tbCPendentes;
     @FXML
     private Button btVisualizar;
     @FXML
-    private Button btFinalizar;
+    private Button btVoltar;
 
     CompraDAO cdao = new CompraDAO();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            listViewFinalizadas(cdao.listAll());
             listViewPendentes(cdao.listAll());
             verificaSelecao();
         } catch (ClassNotFoundException e) {
@@ -61,39 +58,6 @@ public class Compras implements Initializable {
         primaryStage.show();
     }
 
-    public void listViewFinalizadas(List<Compra> compras) throws ClassNotFoundException {
-        //---------- Compras Finalizadas ---------
-
-        tbCFinalizadas.getItems().clear();
-        tbCFinalizadas.getColumns().clear();
-
-        ObservableList<Compra> lista = FXCollections.observableArrayList();
-
-        for (Compra c : compras) {
-            if (c.getStatus() == 1) {
-                lista.add(new Compra(c.getId(), c.getUsuario(), c.getValor(), c.getProdutos(), c.getStatus(), c.getData(), c.getDataEntrega(), c.getDataFinal()));
-            }
-        }
-
-        TableColumn<Compra, Integer> idColumn = new TableColumn<>("ID");
-        idColumn.setMinWidth(50);
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-
-        TableColumn<Compra, Usuario> usuarioColumn = new TableColumn<>("Usuario");
-        usuarioColumn.setMinWidth(120);
-        usuarioColumn.setCellValueFactory(new PropertyValueFactory<>("usuario"));
-
-        TableColumn<Compra, Integer> valorColumn = new TableColumn<>("Valor total");
-        valorColumn.setMinWidth(100);
-        valorColumn.setCellValueFactory(new PropertyValueFactory<>("valor"));
-
-        TableColumn<Compra, String> dataColumn = new TableColumn<>("Entregue em");
-        dataColumn.setMinWidth(100);
-        dataColumn.setCellValueFactory(new PropertyValueFactory<>("dataFinal"));
-
-        tbCFinalizadas.setItems(lista);
-        tbCFinalizadas.getColumns().addAll(idColumn, usuarioColumn, valorColumn, dataColumn);
-    }
 
     public void listViewPendentes(List<Compra> compras) throws ClassNotFoundException {
         //---------- Compras Pendentes ---------
@@ -113,15 +77,15 @@ public class Compras implements Initializable {
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
 
         TableColumn<Compra, Usuario> usuarioColumn = new TableColumn<>("Usuario");
-        usuarioColumn.setMinWidth(120);
+        usuarioColumn.setMinWidth(200);
         usuarioColumn.setCellValueFactory(new PropertyValueFactory<>("usuario"));
 
         TableColumn<Compra, Integer> valorColumn = new TableColumn<>("Valor total");
         valorColumn.setMinWidth(100);
         valorColumn.setCellValueFactory(new PropertyValueFactory<>("valor"));
 
-        TableColumn<Compra, Date> dataColumn = new TableColumn<>("Previsão:");
-        dataColumn.setMinWidth(100);
+        TableColumn<Compra, Date> dataColumn = new TableColumn<>("Previsão");
+        dataColumn.setMinWidth(120);
         dataColumn.setCellValueFactory(new PropertyValueFactory<>("dataEntrega"));
 
         tbCPendentes.setItems(lista);
@@ -129,16 +93,16 @@ public class Compras implements Initializable {
     }
 
     public void verificaSelecao(){
-        if (tbCPendentes.isFocused() || tbCFinalizadas.isFocused()){
+        if (tbCPendentes.isFocused()){
             btVisualizar.setDisable(false);
         } else {
             btVisualizar.setDisable(true);
         }
 
         if (tbCPendentes.isFocused()){
-            btFinalizar.setDisable(false);
+            btVisualizar.setDisable(false);
         } else {
-            btFinalizar.setDisable(true);
+            btVisualizar.setDisable(true);
         }
     }
 
@@ -151,19 +115,10 @@ public class Compras implements Initializable {
     }
 
     public void botaoVisualizar() throws IOException {
-        if(tbCPendentes.isFocused()) {
+        if (tbCPendentes.isFocused()) {
             new NovaCompra().show(true, tbCPendentes.getSelectionModel().getSelectedItem().getId());
-        } else if (tbCFinalizadas.isFocused()){
-            new NovaCompra().show(true, tbCFinalizadas.getSelectionModel().getSelectedItem().getId());
-        }
-    }
 
-    public void botaoFinalizar() throws ClassNotFoundException {
-        Compra c = cdao.read(tbCPendentes.getSelectionModel().getSelectedItem().getId());
-        cdao.up(c);
-        listViewPendentes(cdao.listAll());
-        listViewFinalizadas(cdao.listAll());
-        verificaSelecao();
+        }
     }
 
 }

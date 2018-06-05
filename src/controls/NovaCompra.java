@@ -20,10 +20,7 @@ import java.net.URL;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class NovaCompra implements Initializable {
 
@@ -95,9 +92,7 @@ public class NovaCompra implements Initializable {
     @FXML
     javafx.scene.control.ListView lvProdutos;
 
-    Produto AOO = new Produto();
     CompraDAO cdao = new CompraDAO();
-
     static List<Produto> produtos = new ArrayList<>();
     static double precoTotal = 0 ;
 
@@ -109,7 +104,6 @@ public class NovaCompra implements Initializable {
         try{
             atvBotaoAdd();
             getUser();
-            produtos.clear();
             txPrecoTotal.clear();
             precoTotal = 0;
         }catch (Exception e) {
@@ -162,7 +156,6 @@ public class NovaCompra implements Initializable {
 
     public void visualizarCompra() throws ClassNotFoundException {
         btRemover.setDisable(true);
-
         btRemover.setDisable(true);
         btFinalizar.setDisable(true);
         btLimparText.setDisable(true);
@@ -256,20 +249,37 @@ public class NovaCompra implements Initializable {
                 return;
             }
         }
-        if (Double.parseDouble(txQtdCompra.getText()) > pro.getQtd()) {//Se qtdVenda > qtdEstoque
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("ControlX - Quantidade inválida");
-            alert.setHeaderText("Impossível vender " + txQtdCompra.getText() + " " + pro.getTipoUn() + " do produto");
-            alert.setContentText("Por favor verifique se a quantidade de venda está \n disponível no estoque");
+        if (Double.parseDouble(txPrecoCompra.getText()) > pro.getPreco()) {//Se Preço compra for maior que preço venda
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("ControlX - Aviso");
+            alert.setResizable(false);
+            alert.setHeaderText("Perda de lucro detectada");
+            alert.setContentText("Você está comprando por um preço maior do que o de venda, deseja continuar?");
+            alert.getButtonTypes();
 
-            alert.showAndWait();
-            return;
+            Optional<ButtonType> result = alert.showAndWait();
+            if(!result.isPresent())
+                return;
+            else if(result.get() == ButtonType.OK) {
+                //Lista estática produtos terá como qtd a quantidade de produto que foi vendida
+                pro.setQtd(Double.parseDouble(txQtdCompra.getText()));
+                pro.setPreco(Double.parseDouble(txPrecoCompra.getText()));
+                //Adicionando o produto selecionado a lista
+                produtos.add(pro);
+                refreshTable();
+                return;
+            }
+            else if(result.get() == ButtonType.CANCEL)
+                return;
+
         }
         //Lista estática produtos terá como qtd a quantidade de produto que foi vendida
         pro.setQtd(Double.parseDouble(txQtdCompra.getText()));
+        pro.setPreco(Double.parseDouble(txPrecoCompra.getText()));
         //Adicionando o produto selecionado a lista
         produtos.add(pro);
         refreshTable();
+
 
     }
 
@@ -297,7 +307,7 @@ public class NovaCompra implements Initializable {
         precoColumn.setMinWidth(50);
         precoColumn.setCellValueFactory(new PropertyValueFactory<>("preco"));
 
-        TableColumn<Produto, String> qtdColumn = new TableColumn<>("Qtd de Venda");
+        TableColumn<Produto, String> qtdColumn = new TableColumn<>("Qtd de Compra");
         qtdColumn.setMinWidth(50);
         qtdColumn.setCellValueFactory(new PropertyValueFactory<>("qtd"));
 
@@ -314,7 +324,7 @@ public class NovaCompra implements Initializable {
         txPrecoTotal.setText(String.valueOf(df.format(precoTotal)));
     }
 
-    public void comprar() throws ClassNotFoundException {
+    public void comprar() throws ClassNotFoundException, IOException {
         if(tbProdutos.getItems().isEmpty()){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("ControlX - Aviso");
@@ -329,26 +339,56 @@ public class NovaCompra implements Initializable {
             c.setUsuario(Login.getUser());
             c.setValor(precoTotal);
 
-            Date data = new Date(System.currentTimeMillis());
-            SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
-            formatador.format(data);
-            c.setData(data);
+            //Date data = new Date(System.currentTimeMillis());
+            //SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
+            //formatador.format(data);
+            c.setData(new Date(System.currentTimeMillis()));
 
             //Date dataE = dtEntrega.getValue();
-            c.setDataEntrega(data);
-
+            c.setDataEntrega(java.sql.Date.valueOf(dtEntrega.getValue()));
+            /*
             for(Produto p: produtos){
                 Produto pEstoque = pDAO.read(p.getId());
                 pEstoque.setQtd(pEstoque.getQtd() + p.getQtd());
                 pDAO.up(pEstoque);
             }
+            */
 
-            cdao.comprar(c);
+            boolean sucess = cdao.comprar(c);
+            if(sucess){
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("ControlX - Compra Concluída");
+                alert.setHeaderText("Compra agendada com sucesso");
+                alert.setContentText("A compra foi agendada com sucesso! \nCheque o histórico para mais detalhes.");
+                alert.showAndWait();
+                new Compras().show();
+
+            }
+            else{
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("ControlX - Compra Malsucedida");
+                alert.setHeaderText("Algo deu errado");
+                alert.setContentText("Um erro inesperado aconteceu! A Compra não foi finalizada.");
+                alert.showAndWait();
+            }
         }
     }
 
     public void atvBotaoAdd(){
-
+        if(txNome.getText().isEmpty() || txPrecoCompra.getText().isEmpty() || txPrecoUn.getText().isEmpty() ||
+                txQtdEstoque.getText().isEmpty() || txQtdCompra.getText().isEmpty() || txId.getText().isEmpty()){
+            btAdicionar.setDisable(true);
+        } else {
+            btAdicionar.setDisable(false);
+        }
+        if(produtos.isEmpty() || dtEntrega.getValue() == null){
+            btFinalizar.setDisable(true);
+            btRemover.setDisable(true);
+        }
+        else {
+            btFinalizar.setDisable(false);
+            btRemover.setDisable(false);
+        }
     }
 
 
