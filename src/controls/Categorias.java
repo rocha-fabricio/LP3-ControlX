@@ -10,7 +10,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import models.Categoria;
 
@@ -132,7 +131,7 @@ public class Categorias implements Initializable {
     }
 
     public void verificaSelecao(){
-        if (tbView.isFocused()){
+        if (!tbView.getSelectionModel().isEmpty()){
             btRemove.setDisable(false);
             btEdit.setDisable(false);
             btView.setDisable(false);

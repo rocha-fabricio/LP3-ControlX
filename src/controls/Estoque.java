@@ -188,7 +188,7 @@ public class Estoque implements Initializable {
     }
 
     public void verificaSelecao(){
-        if (tbView.isFocused()){
+        if (!tbView.getSelectionModel().isEmpty()){
             btView.setDisable(false);
             if(Login.getUser().getCargo() == 3){
                 btAdd.setDisable(true);

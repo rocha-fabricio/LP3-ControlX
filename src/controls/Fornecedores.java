@@ -158,7 +158,7 @@ public class Fornecedores implements Initializable {
     }
 
     public void verificaSelecao(){
-        if (tbView.isFocused()){
+        if (!tbView.getSelectionModel().isEmpty()){
             btRemove.setDisable(false);
             btEdit.setDisable(false);
             btView.setDisable(false);

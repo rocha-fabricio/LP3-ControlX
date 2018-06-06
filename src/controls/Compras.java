@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -38,6 +39,7 @@ public class Compras implements Initializable {
         try {
             listViewPendentes(cdao.listAll());
             verificaSelecao();
+            verificaData();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -93,7 +95,7 @@ public class Compras implements Initializable {
     }
 
     public void verificaSelecao(){
-        if (tbCPendentes.isFocused()){
+        if (!tbCPendentes.getSelectionModel().isEmpty()){
             btVisualizar.setDisable(false);
         } else {
             btVisualizar.setDisable(true);
@@ -104,6 +106,26 @@ public class Compras implements Initializable {
         } else {
             btVisualizar.setDisable(true);
         }
+    }
+
+    public void verificaData(){
+        Date data = new Date(System.currentTimeMillis());
+        tbCPendentes.setRowFactory(tv -> {
+            return new TableRow<Compra>() {
+                @Override
+                public void updateItem(Compra c, boolean empty) {
+                    super.updateItem(c, empty) ;
+                    if (c == null) {
+                        setStyle("");
+                    } else if (c.getDataEntrega().before(data)) {
+                        setStyle("-fx-text-background-color: #AAA;");
+                        //setStyle("-fx-background-color: #0080FF;");
+                    } else {
+                        //setStyle("-fx-background-color: #0080FF;");
+                    }
+                }
+            };
+        });
     }
 
     public void botaoVoltar() throws IOException {

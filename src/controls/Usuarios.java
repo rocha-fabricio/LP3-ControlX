@@ -157,7 +157,7 @@ public class Usuarios implements Initializable {
     }
 
     public void verificaSelecao(){
-        if (tbView.isFocused()){
+        if (!tbView.getSelectionModel().isEmpty()){
             btEdit.setDisable(false);
             btView.setDisable(false);
             if (Login.getUser().getCargo() == 1){

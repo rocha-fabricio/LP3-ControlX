@@ -18,7 +18,6 @@ import models.Produto;
 import java.io.IOException;
 import java.net.URL;
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -171,6 +170,7 @@ public class NovaCompra implements Initializable {
         txPrecoTotal.setText(Double.toString(c.getValor()));
         txVendedor.setText(c.getUsuario().getNome());
     }
+
 
     public void listView(List <Produto> prods){
         tbProdutos.getItems().clear();
