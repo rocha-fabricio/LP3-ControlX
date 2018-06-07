@@ -105,6 +105,9 @@ public class NovaCompra implements Initializable {
             getUser();
             txPrecoTotal.clear();
             precoTotal = 0;
+            if(view){
+                visualizarCompra();
+            }
         }catch (Exception e) {
             e.printStackTrace();
         }
@@ -158,6 +161,7 @@ public class NovaCompra implements Initializable {
         btRemover.setDisable(true);
         btFinalizar.setDisable(true);
         btLimparText.setDisable(true);
+        btLimparVenda.setDisable(true);
         txPesquisar.setDisable(true);
 
         dtEntrega.setEditable(false);
@@ -279,8 +283,6 @@ public class NovaCompra implements Initializable {
         //Adicionando o produto selecionado a lista
         produtos.add(pro);
         refreshTable();
-
-
     }
 
     public void refreshTable(){
