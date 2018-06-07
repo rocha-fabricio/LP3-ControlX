@@ -96,7 +96,7 @@ public class NovaCompra implements Initializable {
     static double precoTotal = 0 ;
 
     boolean view = false;
-    int id;
+    Compra compra = new Compra();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -117,9 +117,9 @@ public class NovaCompra implements Initializable {
 
     }
 
-    NovaCompra(boolean view, int id){
+    NovaCompra(boolean view, Compra c){
         this.view = view;
-        this.id = id;
+        this.compra = compra;
     }
 
     public void getUser(){
@@ -141,11 +141,11 @@ public class NovaCompra implements Initializable {
         primaryStage.show();
     }
 
-    public void show(boolean view, int id) throws IOException {
+    public void show(boolean view, Compra compra) throws IOException {
         Stage primaryStage = new Stage();
         FXMLLoader root = new FXMLLoader(getClass().getResource("/views/NovaCompra.fxml"));
         root.setControllerFactory(c -> {
-            return new NovaCompra(view, id);
+            return new NovaCompra(view, compra);
         });
         primaryStage.setTitle("ControlX - Visualizar Compra");
         Main.stage.hide();
@@ -168,11 +168,11 @@ public class NovaCompra implements Initializable {
         txPrecoTotal.setEditable(false);
         txVendedor.setEditable(false);
 
-        listView(cdao.listProdsCompra(id));
-        Compra c = cdao.read(id);
-        dtEntrega.setValue(LocalDate.parse(c.getDataEntrega().toString()));
-        txPrecoTotal.setText(Double.toString(c.getValor()));
-        txVendedor.setText(c.getUsuario().getNome());
+        listView(compra.getProdutos());
+
+        dtEntrega.setValue(LocalDate.parse(compra.getDataEntrega().toString()));
+        txPrecoTotal.setText(Double.toString(compra.getValor()));
+        txVendedor.setText(compra.getUsuario().getNome());
     }
 
 

@@ -137,7 +137,8 @@ public class Compras implements Initializable {
     }
 
     public void botaoVisualizar() throws IOException {
-        new NovaCompra().show(true, tbCPendentes.getSelectionModel().getSelectedItem().getId());
+
+        new NovaCompra().show(true, tbCPendentes.getSelectionModel().getSelectedItem());
     }
 
 }
