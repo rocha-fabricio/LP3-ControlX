@@ -1,6 +1,7 @@
 package controls;
 
 import DAO.CompraDAO;
+import DAO.ProdutoDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -33,6 +34,7 @@ public class Compras implements Initializable {
     private Button btVoltar;
 
     CompraDAO cdao = new CompraDAO();
+    ProdutoDAO pdao = new ProdutoDAO();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -62,7 +64,7 @@ public class Compras implements Initializable {
 
 
     public void listViewPendentes(List<Compra> compras) throws ClassNotFoundException {
-        //---------- Compras Pendentes ---------
+        //---------- Compras Pendentes ---------//
 
         tbCPendentes.getItems().clear();
         tbCPendentes.getColumns().clear();
@@ -136,9 +138,10 @@ public class Compras implements Initializable {
         new NovaCompra().show();
     }
 
-    public void botaoVisualizar() throws IOException {
-
-        new NovaCompra().show(true, tbCPendentes.getSelectionModel().getSelectedItem());
+    public void botaoVisualizar() throws IOException, ClassNotFoundException {
+        Compra cc = new Compra();
+        cc =  cdao.read(tbCPendentes.getSelectionModel().getSelectedItem().getId());
+        new NovaCompra().show(true, cc);
     }
 
 }
