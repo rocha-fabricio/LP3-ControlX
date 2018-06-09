@@ -9,7 +9,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
+import java.text.Format;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -92,22 +94,29 @@ public class CompraDAO {
 
     }
 
-    public void up(Compra c) throws ClassNotFoundException {
+    public boolean up(Compra c) throws ClassNotFoundException {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String dcompra = dateFormat.format(c.getDataFinal());
+        boolean sucess = false;
 
         try {
-            stmt = con.prepareStatement("UPDATE compras SET status = ? WHERE id = ?;");
+            stmt = con.prepareStatement("UPDATE compras SET status = ?, dataFinal = ? WHERE id = ?;");
             stmt.setInt(1, c.getStatus());
-            stmt.setInt(2, c.getId());
+            stmt.setDate(2, java.sql.Date.valueOf(dcompra));
+            stmt.setInt(3, c.getId());
 
             stmt.executeUpdate();
-
+            sucess = true;
         } catch (SQLException e) {
             e.printStackTrace();
+            sucess = false;
         } finally {
             ConnectionFactory.closeConnection(con, stmt);
         }
+
+        return sucess;
     }
 
     public Compra read(Compra c) throws ClassNotFoundException {
@@ -180,6 +189,8 @@ public class CompraDAO {
                 compra.setDataEntrega(rs.getDate("dataEntrega"));
 
                 compra.setDataFinal(rs.getDate("dataFinal"));
+
+
             }
 
             //Produtos da Compra

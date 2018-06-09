@@ -1,6 +1,7 @@
 package controls;
 
 import DAO.CompraDAO;
+import DAO.ProdutoDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -33,6 +34,7 @@ public class Compras implements Initializable {
     private Button btVoltar;
 
     CompraDAO cdao = new CompraDAO();
+    ProdutoDAO pdao = new ProdutoDAO();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -62,7 +64,7 @@ public class Compras implements Initializable {
 
 
     public void listViewPendentes(List<Compra> compras) throws ClassNotFoundException {
-        //---------- Compras Pendentes ---------
+        //---------- Compras Pendentes ---------//
 
         tbCPendentes.getItems().clear();
         tbCPendentes.getColumns().clear();
@@ -71,7 +73,7 @@ public class Compras implements Initializable {
 
         for (Compra c : compras) {
             if (c.getStatus() == 0)
-                lista.add(new Compra(c.getId(), c.getUsuario(), c.getValor(), c.getProdutos(), c.getStatus(), c.getData(), c.getDataEntrega(), c.getDataFinal()));
+                lista.add(new Compra(c.getId(), c.getUsuario(), c.getValor(), c.getProdutos(), c.getStatus(), c.getDataEntrega(), c.getDataEntrega(), c.getDataFinal()));
         }
 
         TableColumn<Compra, String> idColumn = new TableColumn<>("ID");
@@ -91,6 +93,21 @@ public class Compras implements Initializable {
         dataColumn.setCellValueFactory(new PropertyValueFactory<>("dataEntrega"));
 
         tbCPendentes.setItems(lista);
+        Date data = new Date(System.currentTimeMillis());
+        for (Compra c : compras) {
+            if (c.getDataEntrega().before(data)) {
+                idColumn.setStyle("-fx-text-background-color: blue; -fx-selection-bar-non-focused: salmon;");
+                usuarioColumn.setStyle("-fx-text-background-color: blue; -fx-selection-bar-non-focused: salmon;");
+                valorColumn.setStyle("-fx-text-background-color: blue; -fx-selection-bar-non-focused: salmon;");
+                dataColumn.setStyle("-fx-text-background-color: blue; -fx-selection-bar-non-focused: salmon;");
+            }else{
+                idColumn.setStyle("-fx-text-background-color: red; -fx-selection-bar-non-focused: salmon;");
+                usuarioColumn.setStyle("-fx-text-background-color: red; -fx-selection-bar-non-focused: salmon;");
+                valorColumn.setStyle("-fx-text-background-color: red; -fx-selection-bar-non-focused: salmon;");
+                dataColumn.setStyle("-fx-text-background-color: red; -fx-selection-bar-non-focused: salmon;");
+            }
+        }
+
         tbCPendentes.getColumns().addAll(idColumn, usuarioColumn, valorColumn, dataColumn);
     }
 
@@ -136,9 +153,10 @@ public class Compras implements Initializable {
         new NovaCompra().show();
     }
 
-    public void botaoVisualizar() throws IOException {
-
-        new NovaCompra().show(true, tbCPendentes.getSelectionModel().getSelectedItem());
+    public void botaoVisualizar() throws IOException, ClassNotFoundException {
+        Compra cc = new Compra();
+        cc =  cdao.read(tbCPendentes.getSelectionModel().getSelectedItem().getId());
+        new NovaCompra().show(true, cc);
     }
 
 }
