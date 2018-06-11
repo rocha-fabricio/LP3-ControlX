@@ -62,8 +62,8 @@
       <Pane layoutX="345.0" layoutY="490.0" prefHeight="25.0" prefWidth="398.0" AnchorPane.bottomAnchor="16.0">
          <children>
             <Button fx:id="btFinalizar" layoutX="295.0" mnemonicParsing="false" onMouseClicked="#comprar" text="Registrar Pedido" />
-            <Button fx:id="btLimparVenda" layoutX="124.0" mnemonicParsing="false" text="Limpar" />
-            <Button fx:id="btRemover" layoutX="197.0" mnemonicParsing="false" text="Remover" />
+            <Button fx:id="btLimparVenda" layoutX="124.0" mnemonicParsing="false" onMouseClicked="#clearTable" text="Limpar" />
+            <Button fx:id="btRemover" layoutX="197.0" mnemonicParsing="false" onMouseClicked="#removeItem" text="Remover" />
             <Button fx:id="btVoltar" mnemonicParsing="false" onMouseClicked="#botaoVoltar" text="Voltar" />
          </children>
          <effect>

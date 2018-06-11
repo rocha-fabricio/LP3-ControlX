@@ -389,15 +389,33 @@ public class NovaCompra implements Initializable {
         }
         if (produtos.isEmpty() || dtEntrega.getValue() == null) {
             btFinalizar.setDisable(true);
-            btRemover.setDisable(true);
         } else {
             btFinalizar.setDisable(false);
-            btRemover.setDisable(false);
         }
+        if (produtos.isEmpty())
+            btRemover.setDisable(true);
+        else
+            btRemover.setDisable(false);
     }else{
-
+        ///
+    }
     }
 
+    public void clearTable(){
+        produtos.clear();
+        precoTotal = 0;
+        txPrecoTotal.setText(String.valueOf(precoTotal));
+        refreshTable();
+        atvBotaoAdd();
+    }
+
+    public void removeItem() throws ClassNotFoundException {
+        Produto p = pDAO.read(tbProdutos.getSelectionModel().getSelectedItem());
+        for(Produto prods: produtos){
+            if (prods.getId() == p.getId())
+                produtos.remove(prods);
+        }
+        refreshTable();
     }
 
 

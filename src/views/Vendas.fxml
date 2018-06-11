@@ -48,7 +48,7 @@
       </Pane>
       <Pane layoutX="345.0" layoutY="57.0" prefHeight="423.0" prefWidth="398.0" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="345.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="57.0">
          <children>
-            <TableView fx:id="tbProdutos" layoutY="27.0" prefHeight="359.0" prefWidth="398.0" />
+            <TableView fx:id="tbProdutos" layoutY="27.0" prefHeight="398.0" prefWidth="398.0" />
             <Label fx:id="lbCarrinho" layoutX="5.0" layoutY="10.0" text="Carrinho de Venda" />
          </children>
          <effect>
