@@ -16,26 +16,35 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="187.0" prefWidth="263.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controls.Login">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="187.0" prefWidth="312.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controls.Login">
    <children>
-      <Pane layoutX="12.0" layoutY="6.0" prefHeight="155.0" prefWidth="246.0" AnchorPane.bottomAnchor="26.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="6.0">
+      <Pane layoutX="12.0" layoutY="6.0" prefHeight="155.0" prefWidth="246.0" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="16.0">
          <children>
-            <ImageView fitHeight="155.0" fitWidth="169.0" layoutX="34.0" layoutY="5.0" opacity="0.21" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="187.0" fitWidth="178.0" layoutX="51.0" layoutY="-11.0" opacity="0.21" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/controlx.png" />
                </image>
             </ImageView>
-            <Label id="lbLogin" layoutY="34.0" text="Login" />
-            <TextField fx:id="txtLogin" alignment="CENTER" layoutY="51.0" prefHeight="25.0" prefWidth="240.0" promptText="Digite seu login">
+            <Label id="lbLogin" layoutY="26.0" text="Login">
+               <font>
+                  <Font size="15.0" />
+               </font></Label>
+            <TextField fx:id="txtLogin" alignment="CENTER" layoutY="45.0" prefHeight="25.0" prefWidth="280.0" promptText="Digite seu login">
                <cursor>
                   <Cursor fx:constant="TEXT" />
                </cursor></TextField>
-            <Label id="lbSenha" layoutY="82.0" text="Senha" />
-            <PasswordField fx:id="txtPassword" alignment="CENTER" layoutY="100.0" prefHeight="25.0" prefWidth="240.0" promptText="Digite sua senha">
+            <Label id="lbSenha" layoutY="76.0" text="Senha">
+               <font>
+                  <Font size="15.0" />
+               </font></Label>
+            <PasswordField fx:id="txtPassword" alignment="CENTER" layoutY="94.0" prefHeight="25.0" prefWidth="280.0" promptText="Digite sua senha">
                <cursor>
                   <Cursor fx:constant="TEXT" />
                </cursor></PasswordField>
-            <Button id="btEntrar" fx:id="btEntrar" layoutX="83.0" layoutY="129.0" mnemonicParsing="false" onAction="#logar" text="Entrar" />
+            <Button id="btEntrar" fx:id="btEntrar" layoutX="103.0" layoutY="127.0" mnemonicParsing="false" onAction="#logar" text="Entrar">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font></Button>
          </children>
          <effect>
             <Blend />

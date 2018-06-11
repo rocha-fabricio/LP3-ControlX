@@ -14,7 +14,7 @@
                   <TableView fx:id="tbCompras" layoutX="136.0" layoutY="158.0" prefHeight="212.0" prefWidth="607.0" AnchorPane.bottomAnchor="64.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="48.0" />
                   <Pane layoutX="166.0" layoutY="260.0" prefHeight="32.0" prefWidth="607.0" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0">
                      <children>
-                        <Button fx:id="btDetalhesCompra" layoutX="545.0" layoutY="4.0" mnemonicParsing="false" onMouseClicked="#visualizarCompra" text="Detalhes" />
+                        <Button fx:id="btDetalhesCompra" layoutX="531.0" layoutY="4.0" mnemonicParsing="false" onMouseClicked="#visualizarCompra" text="Detalhes" />
                         <Button fx:id="btVoltarCompras" layoutY="4.0" mnemonicParsing="false" onAction="#botaoVoltar" text="Voltar" />
                      </children>
                   </Pane>
@@ -31,7 +31,7 @@
                   <TableView fx:id="tbVendas" layoutX="56.0" layoutY="58.0" prefHeight="209.0" prefWidth="607.0" AnchorPane.bottomAnchor="64.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="48.0" />
                   <Pane layoutX="172.0" layoutY="290.0" prefHeight="32.0" prefWidth="607.0" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0">
                      <children>
-                        <Button fx:id="btDetalhesVenda" layoutX="545.0" layoutY="4.0" mnemonicParsing="false" text="Detalhes" />
+                        <Button fx:id="btDetalhesVenda" layoutX="531.0" layoutY="4.0" mnemonicParsing="false" text="Detalhes" />
                         <Button fx:id="btVoltarVendas" layoutY="4.0" mnemonicParsing="false" onAction="#botaoVoltar" text="Voltar" />
                      </children>
                      <effect>

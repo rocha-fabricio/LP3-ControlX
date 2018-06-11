@@ -224,7 +224,7 @@ public class GerenciarUsuario implements Initializable {
 
     public void ativarBotaoSalvar(){
         if(txNome.getText().isEmpty() || txCpf.getText().isEmpty() ||
-                txTel1.getText().isEmpty() || txTel2.getText().isEmpty() ||
+                txTel1.getText().isEmpty() ||
                 txCep.getText().isEmpty() || txNum.getText().isEmpty() || txRua.getText().isEmpty() ||
                 txBairro.getText().isEmpty() || txCidade.getText().isEmpty() ||
                 txEstado.getText().isEmpty() || cbCargo.getValue().equals("<Selecione>") ||
@@ -267,7 +267,10 @@ public class GerenciarUsuario implements Initializable {
         }
         u.setDataNasc(Date.valueOf(dtDataNasc.getValue()));
         u.setTelefone1(txTel1.getText());
-        u.setTelefone2(txTel2.getText());
+        if(txTel2.getText() != "")
+            u.setTelefone2(txTel2.getText());
+        else
+            u.setTelefone2("0");
         u.setCep(txCep.getText());
         u.setNum(Integer.parseInt(txNum.getText()));
         u.setRua(txRua.getText());

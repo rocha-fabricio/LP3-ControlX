@@ -61,9 +61,9 @@
       </Pane>
       <Pane layoutX="345.0" layoutY="490.0" prefHeight="25.0" prefWidth="398.0" AnchorPane.bottomAnchor="16.0">
          <children>
-            <Button fx:id="btFinalizar" layoutX="295.0" mnemonicParsing="false" onMouseClicked="#comprar" text="Registrar Pedido" />
-            <Button fx:id="btLimparVenda" layoutX="124.0" mnemonicParsing="false" onMouseClicked="#clearTable" text="Limpar" />
-            <Button fx:id="btRemover" layoutX="197.0" mnemonicParsing="false" onMouseClicked="#removeItem" text="Remover" />
+            <Button fx:id="btFinalizar" layoutX="269.0" mnemonicParsing="false" onMouseClicked="#comprar" text="Registrar Pedido" />
+            <Button fx:id="btLimparVenda" layoutX="98.0" mnemonicParsing="false" onMouseClicked="#clearTable" text="Limpar" />
+            <Button fx:id="btRemover" layoutX="175.0" mnemonicParsing="false" onMouseClicked="#removeItem" text="Remover" />
             <Button fx:id="btVoltar" mnemonicParsing="false" onMouseClicked="#botaoVoltar" text="Voltar" />
          </children>
          <effect>
@@ -73,7 +73,7 @@
       <ListView fx:id="lvProdutos" layoutX="26.0" layoutY="68.0" onContextMenuRequested="#fillFields" onInputMethodTextChanged="#fillFields" onMouseClicked="#fillFields" prefHeight="107.0" prefWidth="297.0" />
       <Pane layoutX="21.0" layoutY="14.0" prefHeight="37.0" prefWidth="720.0">
          <children>
-            <Label fx:id="lbPesquisar" layoutY="10.0" text="Pesquisar produto:" />
+            <Label fx:id="lbPesquisar" layoutY="11.0" text="Pesquisar produto:" />
             <TextField fx:id="txPesquisar" layoutX="126.0" layoutY="6.0" onInputMethodTextChanged="#autoComplete" onKeyPressed="#autoComplete" prefHeight="26.0" prefWidth="599.0" promptText="Digite o Nome ou ID do produto..." />
          </children>
          <effect>

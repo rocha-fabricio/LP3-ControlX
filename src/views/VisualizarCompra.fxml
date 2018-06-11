@@ -20,7 +20,7 @@
         <AnchorPane layoutX="11.0" layoutY="558.0" prefHeight="25.0" prefWidth="472.0" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0">
             <children>
                 <Button fx:id="btVoltar" layoutY="2.0" mnemonicParsing="false" onAction="#botaoVoltar" onMouseClicked="#botaoVoltar" text="Voltar" />
-                <Button fx:id="btVisualizar" layoutX="384.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#botaoFinalizar" prefHeight="25.0" prefWidth="100.0" text="Finalizar Pedido" />
+                <Button fx:id="btVisualizar" layoutX="355.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#botaoFinalizar" prefHeight="25.0" prefWidth="129.0" text="Finalizar Pedido" />
             </children>
         </AnchorPane>
         <Label layoutX="16.0" layoutY="64.0" text="Usuário " AnchorPane.leftAnchor="16.0">
@@ -35,8 +35,8 @@
         </Label>
         <TextField fx:id="txId" alignment="CENTER" editable="false" layoutX="433.53125" layoutY="35.0" prefHeight="25.0" prefWidth="149.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="35.0" />
         <TextField fx:id="txUsuario" editable="false" layoutX="16.0" layoutY="81.0" prefHeight="25.0" prefWidth="321.0" AnchorPane.leftAnchor="16.0" />
-        <TextField fx:id="txDataPedido" editable="false" layoutX="14.0" layoutY="35.0" />
-        <TextField fx:id="txDataPrevista" editable="false" layoutX="187.0" layoutY="35.0" />
+        <TextField fx:id="txDataPedido" editable="false" layoutX="14.0" layoutY="35.0" prefHeight="25.0" prefWidth="149.0" />
+        <TextField fx:id="txDataPrevista" editable="false" layoutX="187.0" layoutY="35.0" prefHeight="25.0" prefWidth="148.0" />
         <Label layoutX="187.0" layoutY="16.0" text="Entrega prevista para" AnchorPane.topAnchor="16.0">
             <font>
                 <Font name="System Bold" size="12.0" />
@@ -47,7 +47,7 @@
                 <Font name="System Bold" size="12.0" />
             </font>
         </Label>
-        <Label layoutX="351.0" layoutY="64.0" text="Valor Total" AnchorPane.rightAnchor="102.0">
+        <Label layoutX="351.0" layoutY="64.0" text="Valor Total" AnchorPane.rightAnchor="90.0">
             <font>
                 <Font name="System Bold" size="12.0" />
             </font>
