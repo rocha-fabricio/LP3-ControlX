@@ -1,5 +1,6 @@
 package controls;
 
+import DAO.CompraDAO;
 import DAO.VendaDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import models.Compra;
 import models.Venda;
 
 import java.io.IOException;
@@ -20,23 +22,41 @@ import java.util.ResourceBundle;
 public class Historico implements Initializable {
 
     @FXML
-    Button btVoltar;
+    private TableView<Compra> tbCompras;
+
     @FXML
-    Button btDetalhes;
+    private ChoiceBox cbFiltro;
+
     @FXML
-    ChoiceBox cbFiltro;
+    private TabPane tpPane;
+
     @FXML
-    Tab tpCompra;
+    private TableView<Venda> tbVendas;
+
     @FXML
-    Tab tpVenda;
+    private Tab tpCompra;
+
     @FXML
-    TableView tbVendas;
+    private ChoiceBox cbFiltroCompra;
+
     @FXML
-    TableView tbCompras;
+    private Button btDetalhesVenda;
+
     @FXML
-    TabPane tpPane;
+    private Button btVoltarVendas;
+
+    @FXML
+    private Button btDetalhesCompra;
+
+    @FXML
+    private Tab tpVenda;
+
+    @FXML
+    private Button btVoltarCompras;
 
     VendaDAO vDAO = new VendaDAO();
+    CompraDAO cDAO = new CompraDAO();
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try{
@@ -48,6 +68,8 @@ public class Historico implements Initializable {
             ObservableList<String> datas = FXCollections.observableArrayList("Hoje", "Ultimos 7 dias", "Ultimo mês","Todas");
             cbFiltro.setItems(datas);
             cbFiltro.setValue("Todas");
+            cbFiltroCompra.setItems(datas);
+            cbFiltroCompra.setValue("Todas");
             fillTables();
 
         }catch (Exception e) {
@@ -72,10 +94,11 @@ public class Historico implements Initializable {
     }
 
     public void fillTables() throws ClassNotFoundException {
+        //Table VENDA
+
         tbVendas.getItems().clear();
         tbVendas.getColumns().clear();
-        //tbCompras.getItems().clear();
-        //tbCompras.getColumns().clear();
+
 
         ObservableList<Venda> vendas = FXCollections.observableArrayList();
 
@@ -84,28 +107,68 @@ public class Historico implements Initializable {
         }
 
         TableColumn<Venda, String> idColumn = new TableColumn<>("ID");
-        idColumn.setMinWidth(30);
+        idColumn.setMinWidth(50);
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
 
         TableColumn<Venda, String> nomeColumn = new TableColumn<>("Usuário");
-        nomeColumn.setMinWidth(150);
+        nomeColumn.setMinWidth(200);
         nomeColumn.setCellValueFactory(new PropertyValueFactory<>("usuario"));
 
         TableColumn<Venda, String> precoColumn = new TableColumn<>("Total (R$)");
         precoColumn.setMinWidth(50);
         precoColumn.setCellValueFactory(new PropertyValueFactory<>("valor"));
 
-        TableColumn<Venda, String> qtdColumn = new TableColumn<>("Data");
-        qtdColumn.setMinWidth(50);
-        qtdColumn.setCellValueFactory(new PropertyValueFactory<>("data"));
+        TableColumn<Venda, String> dataColumn = new TableColumn<>("Data");
+        dataColumn.setMinWidth(50);
+        dataColumn.setCellValueFactory(new PropertyValueFactory<>("data"));
 
 
         tbVendas.setItems(vendas);
+        tbVendas.getColumns().addAll(idColumn, nomeColumn, precoColumn, dataColumn);
 
-        tbVendas.getColumns().addAll(idColumn, nomeColumn, precoColumn, qtdColumn);
+        //TABLE COMPRA ----------------------------------------- x -----------------------------------------
+
+        tbCompras.getItems().clear();
+        tbCompras.getColumns().clear();
+
+        ObservableList<Compra> compras = FXCollections.observableArrayList();
+
+        for (Compra c: cDAO.listAll()) {
+            if(c.getStatus() == 1 )
+                compras.add(new Compra(c.getId(), c.getUsuario(), c.getValor(), c.getProdutos(), c.getStatus(), c.getData(), c.getDataEntrega(), c.getDataFinal()));
+        }
+
+        TableColumn<Compra, String> cidColumn = new TableColumn<>("ID");
+        cidColumn.setMinWidth(50);
+        cidColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+
+        TableColumn<Compra, String> cnomeColumn = new TableColumn<>("Usuário");
+        cnomeColumn.setMinWidth(200);
+        cnomeColumn.setCellValueFactory(new PropertyValueFactory<>("usuario"));
+
+        TableColumn<Compra, String> cprecoColumn = new TableColumn<>("Total (R$)");
+        cprecoColumn.setMinWidth(50);
+        cprecoColumn.setCellValueFactory(new PropertyValueFactory<>("valor"));
+
+        TableColumn<Compra, String> cdataColumn = new TableColumn<>("Data Pedido");
+        cdataColumn.setMinWidth(50);
+        cdataColumn.setCellValueFactory(new PropertyValueFactory<>("data"));
+
+        TableColumn<Compra, String> cdataFinalColumn = new TableColumn<>("Data Pedido Finalizado");
+        cdataFinalColumn.setMinWidth(50);
+        cdataFinalColumn.setCellValueFactory(new PropertyValueFactory<>("dataFinal"));
+
+
+        tbCompras.setItems(compras);
+        tbCompras.getColumns().addAll(cidColumn, cnomeColumn, cprecoColumn, cdataColumn, cdataFinalColumn);
     }
 
     public void botaoVoltar() throws IOException {
         new MenuPrincipal().show();
+    }
+
+    public void visualizarCompra() throws ClassNotFoundException, IOException {
+        Compra cc =  cDAO.read(tbCompras.getSelectionModel().getSelectedItem().getId());
+        new VisualizarCompra().show(cc, true);
     }
 }

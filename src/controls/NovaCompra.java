@@ -104,6 +104,7 @@ public class NovaCompra implements Initializable {
             atvBotaoAdd();
             txPrecoTotal.clear();
             precoTotal = 0;
+            produtos.clear();
             if(view){
                 visualizarCompra();
             }

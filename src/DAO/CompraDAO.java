@@ -135,6 +135,7 @@ public class CompraDAO {
             if (rs.next()) {
                 compra.setId(rs.getInt("id"));
                 compra.setUsuario(udao.read(rs.getInt("idUsuario")));
+                compra.setStatus(rs.getInt("status"));
                 compra.setValor(rs.getDouble("valor"));
                 compra.setStatus(rs.getInt("status"));
                 compra.setData(rs.getDate("dataCompra"));

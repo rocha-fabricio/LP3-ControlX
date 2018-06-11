@@ -154,9 +154,9 @@ public class Compras implements Initializable {
     }
 
     public void botaoVisualizar() throws IOException, ClassNotFoundException {
-        Compra cc = new Compra();
-        cc =  cdao.read(tbCPendentes.getSelectionModel().getSelectedItem().getId());
-        new NovaCompra().show(true, cc);
+        Compra cc =  cdao.read(tbCPendentes.getSelectionModel().getSelectedItem().getId());
+        //new NovaCompra().show(true, cc);
+        new VisualizarCompra().show(cc, false);
     }
 
 }
