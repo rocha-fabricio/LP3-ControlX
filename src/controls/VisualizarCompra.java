@@ -130,6 +130,7 @@ public class VisualizarCompra implements Initializable{
             for(Produto p: compra.getProdutos()){
                 Produto pEstoque = pdao.read(p.getId());
                 pEstoque.setQtd(pEstoque.getQtd() + p.getQtd());
+                pEstoque.setPreco(p.getPreco());
                 pdao.up(pEstoque);
             }
 
