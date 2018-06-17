@@ -1,0 +1,44 @@
+.corpo{
+    -fx-text-fill: #586662;
+    -fx-font-weight: bold;
+    -fx-font-family: 'System';
+    -fx-border-color: #42f4c5;
+    -fx-background-color: #FFF;
+    -fx-border-radius: 0;
+}
+
+.btn{
+    -fx-text-fill: #586662;
+    -fx-font-weight: bold;
+    -fx-font-family: 'System';
+    -fx-border-color: #42f4c5;
+    -fx-background-color: #FFF;
+    -fx-border-radius: 0;
+}
+
+.btn:hover{
+    -fx-text-fill: #FFF;
+    -fx-font-weight: bold;
+    -fx-border-color: #42f4c5;
+    -fx-background-color: #42f4c5;
+    -fx-border-radius: 0;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 5, 0, 0, 0);
+}
+
+.btn-sair{
+    -fx-text-fill: #f70202;
+    -fx-font-weight: bold;
+    -fx-font-family: 'System';
+    -fx-border-color: #f70202;
+    -fx-background-color: #FFF;
+    -fx-border-radius: 0;
+}
+
+.btn-sair:hover{
+    -fx-text-fill: #FFF;
+    -fx-font-weight: bold;
+    -fx-border-color: #f70202;
+    -fx-background-color: #f70202;
+    -fx-border-radius: 0;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 5, 0, 0, 0);
+}

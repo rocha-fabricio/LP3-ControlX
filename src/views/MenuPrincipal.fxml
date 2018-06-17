@@ -15,31 +15,31 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="286.0" prefWidth="424.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controls.MenuPrincipal">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="286.0" prefWidth="424.0" styleClass="corpo" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controls.MenuPrincipal">
    <children>
-      <Pane layoutX="16.0" layoutY="169.0" prefHeight="87.0" prefWidth="373.0" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0">
+      <Pane layoutX="16.0" layoutY="169.0" prefHeight="87.0" prefWidth="373.0" stylesheets="@../css/style.css" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0">
          <children>
-            <Button id="bt-produto" fx:id="btProdutos" layoutY="14.0" mnemonicParsing="false" onAction="#btProdutos" prefHeight="30.0" prefWidth="122.0" text="Estoque">
+            <Button id="bt-produto" fx:id="btProdutos" layoutY="14.0" mnemonicParsing="false" onAction="#btProdutos" prefHeight="30.0" prefWidth="122.0" styleClass="btn" stylesheets="@/css/style.css" text="Estoque">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font></Button>
-            <Button id="bt-fornecedor" fx:id="btFornecedores" layoutX="135.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#botaoFornecedores" prefHeight="30.0" prefWidth="122.0" text="Fornecedores">
+            <Button id="bt-fornecedor" fx:id="btFornecedores" layoutX="135.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#botaoFornecedores" prefHeight="30.0" prefWidth="122.0" styleClass="btn" stylesheets="@/css/style.css" text="Fornecedores">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font></Button>
-            <Button id="bt-compras" fx:id="btCompras" layoutX="135.0" layoutY="51.0" mnemonicParsing="false" onMouseClicked="#btCompras" prefHeight="30.0" prefWidth="122.0" text="Compras">
+            <Button id="bt-compras" fx:id="btCompras" layoutX="135.0" layoutY="51.0" mnemonicParsing="false" onMouseClicked="#btCompras" prefHeight="30.0" prefWidth="122.0" styleClass="btn" stylesheets="@/css/style.css" text="Compras">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font></Button>
-            <Button id="bt-funcionario" fx:id="btUsuarios" layoutX="270.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#botaoFuncionarios" prefHeight="30.0" prefWidth="122.0" text="Usuários">
+            <Button id="bt-funcionario" fx:id="btUsuarios" layoutX="270.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#botaoFuncionarios" prefHeight="30.0" prefWidth="122.0" styleClass="btn" stylesheets="@/css/style.css" text="Usuários">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font></Button>
-            <Button id="bt-venda" fx:id="btVender" layoutY="51.0" mnemonicParsing="false" onAction="#btVendas" prefHeight="30.0" prefWidth="122.0" text="Vendas">
+            <Button id="bt-venda" fx:id="btVender" layoutY="51.0" mnemonicParsing="false" onAction="#btVendas" prefHeight="30.0" prefWidth="122.0" styleClass="btn" stylesheets="@/css/style.css" text="Vendas">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font></Button>
-            <Button id="bt-historico" fx:id="btHistoricos" layoutX="270.0" layoutY="51.0" mnemonicParsing="false" onMouseClicked="#botaoHistorico" prefHeight="30.0" prefWidth="122.0" text="Históricos">
+            <Button id="bt-historico" fx:id="btHistoricos" layoutX="270.0" layoutY="51.0" mnemonicParsing="false" onMouseClicked="#botaoHistorico" prefHeight="30.0" prefWidth="122.0" styleClass="btn" stylesheets="@/css/style.css" text="Históricos">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font></Button>
@@ -48,7 +48,7 @@
             <Blend />
          </effect>
       </Pane>
-      <Pane layoutX="16.0" layoutY="14.0" prefHeight="163.0" prefWidth="392.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="16.0">
+      <Pane layoutX="16.0" layoutY="14.0" prefHeight="163.0" prefWidth="392.0" stylesheets="@../css/style.css" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="16.0">
          <children>
             <ImageView fitHeight="163.0" fitWidth="172.0" layoutX="221.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -80,7 +80,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Button layoutY="136.0" mnemonicParsing="false" onMouseClicked="#botaoVoltar" prefHeight="20.0" prefWidth="60.0" text="Sair" textFill="RED">
+            <Button layoutY="136.0" mnemonicParsing="false" onMouseClicked="#botaoVoltar" prefHeight="20.0" prefWidth="60.0" styleClass="btn" stylesheets="@/css/style.css" text="Sair" textFill="RED">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
