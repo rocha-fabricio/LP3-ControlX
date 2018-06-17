@@ -109,7 +109,9 @@ public class GerenciarUsuario implements Initializable {
             ativarBotaoSalvar();
             iniCombobox();
             if (edit || view){
-            preencher();
+                preencher();
+                txLogin.setEditable(false);
+                lbUsuario.setDisable(true);
             }
             if (view){
                 visualizar();

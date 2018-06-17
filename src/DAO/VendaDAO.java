@@ -8,9 +8,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.text.DateFormat;
 import java.util.List;
 
 
@@ -124,5 +124,50 @@ public class VendaDAO {
 
     public void del(Venda v){   // ou pelo id, public void del(int id)
 
+    }
+
+    public Venda read(int id) throws ClassNotFoundException {
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Venda venda = new Venda();
+        UsuarioDAO uDAO = new UsuarioDAO();
+        ProdutoDAO pDAO = new ProdutoDAO();
+
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+
+        try {
+            stmt = con.prepareStatement("SELECT * FROM vendas WHERE id = ?");
+            stmt.setInt(1, id);
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                venda.setId(rs.getInt("id"));
+                venda.setUsuario(uDAO.read(rs.getInt("idUsuario")));
+                venda.setValor(rs.getDouble("valor"));
+                venda.setData(rs.getDate("dataVenda"));
+            }
+
+            //Produtos da Compra
+
+            stmt = con.prepareStatement("SELECT * FROM produtos_venda WHERE idVenda = ?");
+            stmt.setInt(1, id);
+            rs = stmt.executeQuery();
+
+            List <Produto> lista = new ArrayList<>();
+            while (rs.next()) {
+                Produto p = pDAO.read(rs.getInt("idProduto"));
+                p.setQtd(rs.getDouble("qtdProduto"));
+                p.setPreco(rs.getDouble("precoUnProduto"));
+                lista.add(p);
+            }
+
+            venda.setProdutos(lista);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+        return venda;
     }
 }

@@ -56,14 +56,25 @@ public class Historico implements Initializable {
 
     VendaDAO vDAO = new VendaDAO();
     CompraDAO cDAO = new CompraDAO();
+    boolean venda = false;
+
+    Historico(){
+
+    }
+
+    Historico(boolean venda){
+        this.venda = venda;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try{
+            verificaSelecao();
             if(Login.getUser().getCargo() == 2){
                 tpVenda.setDisable(true);
             } else if(Login.getUser().getCargo() == 3){
                 tpCompra.setDisable(true);
+                tpPane.getSelectionModel().select(tpVenda);
             }
             ObservableList<String> datas = FXCollections.observableArrayList("Hoje", "Ultimos 7 dias", "Ultimo mês","Todas");
             cbFiltro.setItems(datas);
@@ -71,7 +82,9 @@ public class Historico implements Initializable {
             cbFiltroCompra.setItems(datas);
             cbFiltroCompra.setValue("Todas");
             fillTables();
-
+            if (venda){
+                tpPane.getSelectionModel().select(tpVenda);
+            }
         }catch (Exception e) {
             e.printStackTrace();
         }
@@ -83,6 +96,21 @@ public class Historico implements Initializable {
         FXMLLoader root = new FXMLLoader(getClass().getResource("/views/Historico.fxml"));
         root.setControllerFactory(c -> {
             return new Historico();
+        });
+        primaryStage.setTitle("ControlX - Histórico");
+        Main.stage.hide();
+        Main.stage = primaryStage;
+        primaryStage.setScene(new Scene(root.load(), primaryStage.getWidth(), primaryStage.getHeight()));
+        primaryStage.setResizable(false);
+        Main.stage.getIcons().add(new Image("images/controlx.png"));
+        primaryStage.show();
+    }
+
+    public void showVenda(boolean venda) throws IOException {
+        Stage primaryStage = new Stage();
+        FXMLLoader root = new FXMLLoader(getClass().getResource("/views/Historico.fxml"));
+        root.setControllerFactory(c -> {
+            return new Historico(venda);
         });
         primaryStage.setTitle("ControlX - Histórico");
         Main.stage.hide();
@@ -170,5 +198,24 @@ public class Historico implements Initializable {
     public void visualizarCompra() throws ClassNotFoundException, IOException {
         Compra cc =  cDAO.read(tbCompras.getSelectionModel().getSelectedItem().getId());
         new VisualizarCompra().show(cc, true);
+    }
+
+    public void visualizarVenda() throws ClassNotFoundException, IOException {
+        Venda vv = vDAO.read(tbVendas.getSelectionModel().getSelectedItem().getId());
+        new VisualizarVenda().show(vv);
+    }
+
+    public void verificaSelecao(){
+        if(!tbCompras.getSelectionModel().isEmpty()){
+            btDetalhesCompra.setDisable(false);
+        } else {
+            btDetalhesCompra.setDisable(true);
+        }
+
+        if(!tbVendas.getSelectionModel().isEmpty()){
+            btDetalhesVenda.setDisable(false);
+        } else {
+            btDetalhesVenda.setDisable(true);
+        }
     }
 }
