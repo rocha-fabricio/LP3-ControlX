@@ -25,7 +25,7 @@
                   <Image url="@../images/controlx.png" />
                </image>
             </ImageView>
-            <Label id="lbLogin" layoutY="24.0" text="Login">
+            <Label id="lbLogin" layoutY="24.0" text="Login" textFill="#586662">
                <font>
                   <Font size="15.0" />
                </font></Label>
@@ -33,7 +33,7 @@
                <cursor>
                   <Cursor fx:constant="TEXT" />
                </cursor></TextField>
-            <Label id="lbSenha" layoutY="74.0" text="Senha">
+            <Label id="lbSenha" layoutY="74.0" text="Senha" textFill="#586662">
                <font>
                   <Font size="15.0" />
                </font></Label>
@@ -43,7 +43,7 @@
                </cursor></PasswordField>
             <Button id="btEntrar" fx:id="btEntrar" layoutX="103.0" layoutY="127.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#logar" styleClass="btn-login" stylesheets="@../css/style.css" text="Entrar">
                <font>
-                  <Font name="System Bold" size="15.0" />
+                  <Font name="System Bold" size="13.0" />
                </font></Button>
          </children>
          <effect>
