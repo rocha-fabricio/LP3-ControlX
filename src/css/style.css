@@ -17,12 +17,54 @@
 }
 
 .btn:hover{
+    -fx-width: auto;
+    -fx-height: auto;
     -fx-text-fill: #FFF;
     -fx-font-weight: bold;
     -fx-border-color: #42f4c5;
     -fx-background-color: #42f4c5;
     -fx-border-radius: 0;
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 5, 0, 0, 0);
+}
+
+.btn-login{
+    -fx-min-width: 66px;
+    -fx-min-height: 25px;
+    -fx-text-fill: #586662;
+    -fx-font-weight: bold;
+    -fx-font-family: 'System';
+    -fx-border-color: #42f4c5;
+    -fx-background-color: #FFF;
+    -fx-border-radius: 0;
+}
+
+.btn-login:hover{
+    -fx-min-width: 66px;
+    -fx-min-height: 25px;
+    -fx-text-fill: #FFF;
+    -fx-font-weight: bold;
+    -fx-border-color: #42f4c5;
+    -fx-background-color: #42f4c5;
+    -fx-border-radius: 0;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 5, 0, 0, 0);
+    -fx-font-size: 15px;
+}
+
+
+.text-login{
+    -fx-text-fill: #586662;
+    -fx-font-weight: bold;
+    -fx-border-color: #42f4c5;
+    -fx-background-color: #FFF;
+    -fx-border-radius: 0;
+}
+
+.text-login:focused{
+    -fx-text-fill: #FFF;
+    -fx-font-weight: bold;
+    -fx-border-color: #42f4c5;
+    -fx-background-color: #42f4c5;
+    -fx-border-radius: 0;
 }
 
 .btn-sair{
@@ -32,6 +74,7 @@
     -fx-border-color: #f70202;
     -fx-background-color: #FFF;
     -fx-border-radius: 0;
+    -fx-font-size: 12px;
 }
 
 .btn-sair:hover{

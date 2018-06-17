@@ -80,11 +80,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Button layoutY="136.0" mnemonicParsing="false" onMouseClicked="#botaoVoltar" prefHeight="20.0" prefWidth="60.0" styleClass="btn" stylesheets="@/css/style.css" text="Sair" textFill="RED">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Button>
+            <Button layoutY="136.0" mnemonicParsing="false" onMouseClicked="#botaoVoltar" prefHeight="20.0" prefWidth="60.0" styleClass="btn-sair" stylesheets="@/css/style.css" text="Sair" />
          </children>
          <effect>
             <Blend />
