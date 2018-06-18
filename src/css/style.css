@@ -60,10 +60,10 @@
 }
 
 .text-login:focused{
-    -fx-text-fill: #FFF;
+    -fx-text-fill: #42f4c5;
     -fx-font-weight: bold;
-    -fx-border-color: #42f4c5;
-    -fx-background-color: #42f4c5;
+    -fx-border-width: 0 0 2 0; -fx-border-color:#42f4c5;
+    -fx-background-color: #FFF;
     -fx-border-radius: 0;
 }
 
