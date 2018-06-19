@@ -190,6 +190,38 @@ public class ProdutoDAO {
         return prod;
     }
 
+
+    public Produto readAll(int id) throws ClassNotFoundException {
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Produto prod = new Produto();
+
+        try {
+            stmt = con.prepareStatement("SELECT id, nome, preco, qntd, tipoUn," +
+                    " estoqueMin, idFornecedor, idCategoria" +
+                    " FROM produtos WHERE id = ? ;");
+            stmt.setInt(1, id);
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                prod.setId(rs.getInt("id"));
+                prod.setNome(rs.getString("nome"));
+                prod.setPreco(rs.getDouble("preco"));
+                prod.setQtd(rs.getDouble("qntd"));
+                prod.setTipoUn(rs.getString("tipoUn"));
+                prod.setEstoqueMin(rs.getDouble("estoqueMin"));
+                prod.setForn(fornDAO.read(rs.getInt("idFornecedor")));
+                prod.setCat(catDAO.read(rs.getInt("idCategoria")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+        return prod;
+    }
+
     public List<Produto> listAllByForn(Fornecedor f) throws ClassNotFoundException {
 
         Connection con = ConnectionFactory.getConnection();

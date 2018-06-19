@@ -1,6 +1,7 @@
 package DAO;
 
 import connection.ConnectionFactory;
+import models.Categoria;
 import models.Compra;
 import models.Produto;
 
@@ -20,6 +21,8 @@ public class CompraDAO {
 
     ProdutoDAO pdao = new ProdutoDAO();
     UsuarioDAO udao = new UsuarioDAO();
+    FornecedorDAO fornDAO = new FornecedorDAO();
+    CategoriaDAO catDAO = new CategoriaDAO();
 
     public boolean comprar(Compra c) throws ClassNotFoundException {
 
@@ -151,9 +154,10 @@ public class CompraDAO {
 
                 List <Produto> lista = new ArrayList<>();
                 while (rs.next()) {
-                    Produto p = pdao.read(rs.getInt("idProduto"));
+                    Produto p = pdao.readAll(rs.getInt("idProduto"));
                     p.setQtd(rs.getDouble("qtdProduto"));
                     p.setPreco(rs.getDouble("precoUnProduto"));
+
                     lista.add(p);
                 }
 
@@ -202,9 +206,10 @@ public class CompraDAO {
 
             List <Produto> lista = new ArrayList<>();
             while (rs.next()) {
-                Produto p = pdao.read(rs.getInt("idProduto"));
+                Produto p = pdao.readAll(rs.getInt("idProduto"));
                 p.setQtd(rs.getDouble("qtdProduto"));
                 p.setPreco(rs.getDouble("precoUnProduto"));
+
                 lista.add(p);
             }
 
@@ -270,9 +275,10 @@ public class CompraDAO {
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-                Produto p = pdao.read(rs.getInt("idProduto"));
+                Produto p = pdao.readAll(rs.getInt("idProduto"));
                 p.setQtd(rs.getDouble("qtdProduto"));
                 p.setPreco(rs.getDouble("precoUnProduto"));
+
                 lista.add(p);
             }
         } catch (SQLException e) {

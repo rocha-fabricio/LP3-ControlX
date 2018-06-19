@@ -17,6 +17,9 @@ import java.util.List;
 public class VendaDAO {
 
     private UsuarioDAO uDAO = new UsuarioDAO();
+    ProdutoDAO pdao = new ProdutoDAO();
+    FornecedorDAO fornDAO = new FornecedorDAO();
+    CategoriaDAO catDAO = new CategoriaDAO();
 
     //public Venda read(int v){
     //    return
@@ -51,6 +54,7 @@ public class VendaDAO {
                 String quantidade = String.valueOf(p.getQtd());
                 if (quantidade.contains(","))
                     quantidade = quantidade.replace(",", ".");
+
 
                 st = conn.prepareStatement("INSERT INTO produtos_venda (idVenda, idProduto, qtdProduto, precoUnProduto) " +
                         "VALUES (?, ?, ?, ?);");
@@ -156,9 +160,10 @@ public class VendaDAO {
 
             List <Produto> lista = new ArrayList<>();
             while (rs.next()) {
-                Produto p = pDAO.read(rs.getInt("idProduto"));
+                Produto p = pdao.readAll(rs.getInt("idProduto"));
                 p.setQtd(rs.getDouble("qtdProduto"));
                 p.setPreco(rs.getDouble("precoUnProduto"));
+
                 lista.add(p);
             }
 
