@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -9,7 +13,7 @@
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="panel" prefHeight="420.0" prefWidth="602.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controls.Categorias">
+<AnchorPane fx:id="panel" prefHeight="420.0" prefWidth="602.0" styleClass="corpo" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controls.Categorias">
    <children>
       <AnchorPane layoutX="14.0" layoutY="93.0" prefHeight="315.0" prefWidth="578.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="93.0">
          <children>
@@ -23,33 +27,33 @@
                   <ToggleGroup fx:id="group" />
                </toggleGroup></RadioButton>
             <RadioButton fx:id="rdNome" layoutX="487.0" layoutY="36.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="75.0" text="Nome" toggleGroup="$group" AnchorPane.rightAnchor="14.0" />
-            <TextField fx:id="txPesquisar" layoutX="74.0" layoutY="20.0" onKeyReleased="#pesquisarCategoria" prefHeight="26.0" prefWidth="400.0" AnchorPane.leftAnchor="74.0" AnchorPane.rightAnchor="102.0" />
+            <TextField fx:id="txPesquisar" layoutX="81.0" layoutY="20.0" onKeyReleased="#pesquisarCategoria" prefHeight="26.0" prefWidth="400.0" styleClass="text-login" AnchorPane.leftAnchor="81.0" AnchorPane.rightAnchor="95.0" />
             <Label fx:id="lbPesquisar" layoutY="25.0" text="Pesquisar:" AnchorPane.leftAnchor="0.0" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="1.0" prefHeight="38.0" prefWidth="576.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button fx:id="btVoltar" layoutX="117.0" layoutY="6.0" mnemonicParsing="false" onMouseClicked="#botaoVoltar" text="Voltar" textAlignment="CENTER">
+            <Button fx:id="btVoltar" layoutX="98.0" layoutY="6.0" mnemonicParsing="false" onMouseClicked="#botaoVoltar" styleClass="btn" text="Voltar" textAlignment="CENTER">
                <cursor>
                   <Cursor fx:constant="CLOSED_HAND" />
                </cursor>
             </Button>
-            <Button fx:id="btAdd" layoutX="178.0" layoutY="6.0" mnemonicParsing="false" onMouseClicked="#botaoAddCategoria" text="Adicionar">
+            <Button fx:id="btAdd" layoutX="168.0" layoutY="6.0" mnemonicParsing="false" onMouseClicked="#botaoAddCategoria" styleClass="btn" text="Adicionar">
                <cursor>
                   <Cursor fx:constant="CLOSED_HAND" />
                </cursor>
             </Button>
-            <Button fx:id="btEdit" layoutX="262.0" layoutY="6.0" mnemonicParsing="false" onMouseClicked="#botaoEditCategoria" text="Editar">
+            <Button fx:id="btEdit" layoutX="263.0" layoutY="6.0" mnemonicParsing="false" onMouseClicked="#botaoEditCategoria" styleClass="btn" text="Editar">
                <cursor>
                   <Cursor fx:constant="CLOSED_HAND" />
                </cursor>
             </Button>
-            <Button fx:id="btRemove" layoutX="323.0" layoutY="6.0" mnemonicParsing="false" onMouseClicked="#botaoRemoveCategoria" text="Remover">
+            <Button fx:id="btRemove" layoutX="333.0" layoutY="6.0" mnemonicParsing="false" onMouseClicked="#botaoRemoveCategoria" styleClass="btn" text="Remover">
                <cursor>
                   <Cursor fx:constant="CLOSED_HAND" />
                </cursor>
             </Button>
-            <Button fx:id="btView" layoutX="404.0" layoutY="6.0" mnemonicParsing="false" onMouseClicked="#botaoViewCategoria" text="Visualizar" />
+            <Button fx:id="btView" layoutX="424.0" layoutY="6.0" mnemonicParsing="false" onMouseClicked="#botaoViewCategoria" styleClass="btn" text="Visualizar" />
          </children>
       </AnchorPane>
    </children>

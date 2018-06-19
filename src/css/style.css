@@ -84,3 +84,43 @@
     -fx-border-radius: 0;
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 5, 0, 0, 0);
 }
+
+.btn-yellow{
+    -fx-text-fill: #586662;
+    -fx-font-weight: bold;
+    -fx-font-family: 'System';
+    -fx-border-color: #f48c42;
+    -fx-background-color: #FFF;
+    -fx-border-radius: 0;
+}
+
+.btn-yellow:hover{
+    -fx-width: auto;
+    -fx-height: auto;
+    -fx-text-fill: #FFF;
+    -fx-font-weight: bold;
+    -fx-border-color: #f48c42;
+    -fx-background-color: #f48c42;
+    -fx-border-radius: 0;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 5, 0, 0, 0);
+}
+
+.text-yellow{
+    -fx-width: auto;
+    -fx-height: auto;
+    -fx-text-fill: #FFF;
+    -fx-font-weight: bold;
+    -fx-border-color: #f48c42;
+    -fx-background-color: #f48c42;
+    -fx-border-radius: 0;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 5, 0, 0, 0);
+}
+
+.corpo-yellow{
+    -fx-text-fill: #586662;
+    -fx-font-weight: bold;
+    -fx-font-family: 'System';
+    -fx-border-color: #f48c42;
+    -fx-background-color: #FFF;
+    -fx-border-radius: 0;
+}
