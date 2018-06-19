@@ -195,7 +195,6 @@ public class CompraDAO {
 
                 compra.setDataFinal(rs.getDate("dataFinal"));
 
-
             }
 
             //Produtos da Compra
